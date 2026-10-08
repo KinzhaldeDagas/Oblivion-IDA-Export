@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x56B9C1",
-    "line": "mov     bl, [esp+4+arg_0]",
+    "line": "mov     bl, [esp+4+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x56B9D1",
-    "line": "push    offset sub_56B820; void (__thiscall *)(void *)",
+    "line": "push    offset BSTECreateTask_Dtor; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56B9E8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x56B9F8",
-    "line": "call    sub_56B820",
+    "line": "call    BSTECreateTask_Dtor; [Verified] BSTECreateTask destructor decrements/releases its NiTimeController slot at +0x0C, then chains to NiRefObject destruction. Field +0x08 remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x56BA03",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

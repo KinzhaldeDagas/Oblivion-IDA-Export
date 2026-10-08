@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56CDE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified default restore constructor for type ID 1: installs BSTempEffectGeometryDecal vtable and initializes its geometry/decal pointers and state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56CE0D",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x56CE12",
-    "line": "push    ebx; int",
+    "line": "push    ebx; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56CE13",
-    "line": "call    BSTempEff_constr",
+    "line": "call    BSTempEffect_Constructor; Verified default restore constructor installs BSTempEffectGeometryDecal vtable and zeros decal data/output/source refs, failure byte, and initializeCallbackDone through BSTempEffect base construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -334,5 +334,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BDA30",
+    "line": "mov     ecx, [ebp-10h]; self",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA33",
+    "line": "jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA38",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA3B",
+    "line": "add     ecx, 1Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA3E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA43",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA46",
+    "line": "add     ecx, 2Ch ; ','; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA49",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA4E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA51",
+    "line": "add     ecx, 30h ; '0'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA54",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA59",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BDA5D",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA60",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA63",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BDA65",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA6A",
+    "line": "mov     eax, offset stru_AE734C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA6F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,0 +1,72 @@
+{
+  "address_comment_regular": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7EE4F0",
+      "0x7EE5D0"
+    ],
+    [
+      "0x9CFBF0",
+      "0x9CFC2C"
+    ]
+  ],
+  "folder": "1BSShaderLightingProperty@@UAE@XZ__7EE4F0",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 7,
+    "callers_count": 12,
+    "chunks_sha256": "89e99f6b05548b86e166f66dc9ed47ccbafaec0ceb2b5a16ad2c7f84492d7d22",
+    "comment_regular": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
+    "comment_repeatable": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
+    "data_refs_count": 2,
+    "display_name": "??1BSShaderLightingProperty@@UAE@XZ",
+    "end_ea": "0x7EE5D0",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "??1BSShaderLightingProperty@@UAE@XZ",
+    "segment": ".text",
+    "sha256": "e50a2f08bdb3b8b08dc46de5d948d2bfc247f3a47862bd15d2367ee8248635e6",
+    "size": 224,
+    "start_ea": "0x7EE4F0",
+    "total_chunk_size": 284,
+    "type": "void __thiscall(BSShaderLightingPropertyLayout_t *this)",
+    "xrefs_from_count": 97,
+    "xrefs_to_count": 12
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x7EE4F0",
+      "regular": "[Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x7EE533",
+      "regular": "[Verified] BSShaderLightingProperty destructor drains the decal list at +0x80 until its item count at +0x8C reaches zero, then destroys the list.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7EE573",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7EE5AD",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x9CFBF0",
+      "regular": "this",
+      "repeatable": ""
+    }
+  ]
+}

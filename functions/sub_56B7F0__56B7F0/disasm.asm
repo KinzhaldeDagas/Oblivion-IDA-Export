@@ -1,4 +1,4 @@
-0x56B7F0: push    esi
+0x56B7F0: push    esi; [Verified] BSTECreateTask constructor initializes a 0x10-byte NiTask-derived object, sets +0x08 to zero and installs the BSTECreateTask vtable. It initializes the NiTimeController slot at +0x0C to null; BSTempEffectGeometryDecal_StartOrQueueCreateTask stores its effect pointer there.
 0x56B7F1: mov     esi, ecx
 0x56B7F3: call    NiObject_constr
 0x56B7F8: xor     eax, eax

@@ -1,13 +1,14 @@
-void __cdecl sub_56BAF0(NiD3DPass *a2)
+// [Verified] Pushes a completed BSTECreateTask back onto the shared free-item stack under unk_B3A600 critical section.
+void __cdecl BSTECreateTaskPool_Push(BSTECreateTask_Layout_t *task)
 {
   DWORD CurrentThreadId; // eax
 
-  EnterCriticalSection(&stru_B3A600);
-  CurrentThreadId = GetCurrentThreadId();
-  ++dword_B3A67C;
-  dword_B3A678 = CurrentThreadId;
-  sub_73A5E0(&dword_B12B9C, &a2);
-  if ( dword_B3A67C-- == 1 )
-    dword_B3A678 = 0;
-  LeaveCriticalSection(&stru_B3A600);
+  EnterCriticalSection(&unk_B3A600); /*0x56baf5*/
+  CurrentThreadId = GetCurrentThreadId(); /*0x56bafb*/
+  ++unk_B3A67C; /*0x56bb01*/
+  unk_B3A678 = CurrentThreadId; /*0x56bb0c*/
+  sub_73A5E0(&dword_B12B9C, (NiD3DPass **)&task); /*0x56bb1f*/
+  if ( unk_B3A67C-- == 1 ) /*0x56bb24*/
+    unk_B3A678 = 0; /*0x56bb2d*/
+  LeaveCriticalSection(&unk_B3A600); /*0x56bb3c*/
 }

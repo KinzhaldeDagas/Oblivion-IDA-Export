@@ -1,4 +1,4 @@
-0x701AD0: mov     ecx, ds:0B3F940h
+0x701AD0: mov     ecx, ds:0B3F940h; 3DTheft decode 2026-05-16: if manager exists, calls manager vfunc +0x60 with args (1, manager+0x19C, 0, 0), then clears byte +0x1B0. manager+0x19C is the observed embedded signal-task argument.
 0x701AD6: test    ecx, ecx
 0x701AD8: jz      short locret_701AFB
 0x701ADA: mov     eax, [ecx]

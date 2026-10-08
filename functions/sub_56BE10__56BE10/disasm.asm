@@ -1,9 +1,9 @@
-0x56BE10: fld     [esp+arg_0]
+0x56BE10: fld     [esp+arg_0]; [Verified] BSTempEffectDecal_Update delegates lifetime to BSTempEffect_Update and writes elapsedSeconds/durationSeconds to DECAL_DATA.fadeProgress_40.
 0x56BE14: push    esi
 0x56BE15: push    ecx
-0x56BE16: fstp    [esp+8+var_8]; float
+0x56BE16: fstp    [esp+8+deltaSeconds]; deltaSeconds
 0x56BE19: mov     esi, ecx
-0x56BE1B: call    sub_56BC70
+0x56BE1B: call    BSTempEffect_Update; BloodOnDeath decode 2026-05-30: fallback decal update delegates to BSTempEffect_Update, then writes elapsed/duration to decal data +0x40 as fade progress.
 0x56BE20: fld     dword ptr [esi+10h]
 0x56BE23: fdiv    dword ptr [esi+8]
 0x56BE26: mov     ecx, [esi+18h]

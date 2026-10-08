@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56BE50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Verified] BSTempEffectDecal_Ctor registers its DECAL_DATA payload with the BSShaderLightingProperty held at payload+0x48 by calling BSShaderLightingProperty_AddDecalData. The same property/payload pair is later unregistered by the destructor.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56BE8A",
-    "line": "mov     eax, [esp+108h+arg_0]",
+    "line": "mov     eax, [esp+108h+parentCell]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x56BE92",
-    "line": "fstp    [esp+10Ch+var_10C]; float",
+    "line": "fstp    [esp+10Ch+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x56BE95",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56BE96",
-    "line": "call    BSTempEff_constr",
+    "line": "call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x56BE9B",
-    "line": "mov     eax, [esp+108h+arg_8]",
+    "line": "mov     eax, [esp+108h+decalData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x56BEBE",
-    "line": "mov     ebp, [esp+108h+arg_C]",
+    "line": "mov     ebp, [esp+108h+sourceData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x56BF00",
-    "line": "fld     [esp+118h+arg_10]",
+    "line": "fld     [esp+118h+a6]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x56BF1D",
-    "line": "fld     [esp+124h+arg_14]",
+    "line": "fld     [esp+124h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x56BF2E",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x56BF38",
-    "line": "fld     [esp+12Ch+arg_18]",
+    "line": "fld     [esp+12Ch+a8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x56BF67",
-    "line": "lea     eax, [esp+114h+var_30]",
+    "line": "lea     eax, [esp+114h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x56BF74",
-    "line": "fld     [esp+118h+arg_2C]",
+    "line": "fld     [esp+118h+a13]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x56BF7D",
-    "line": "fstp    [esp+118h+var_10C]; float",
+    "line": "fstp    [esp+118h+durationSeconds]; angleZ",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x56BF86",
-    "line": "lea     edi, [esp+118h+var_9C]",
+    "line": "lea     edi, [esp+118h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -487,49 +487,49 @@
   },
   {
     "ea": "0x56BF8F",
-    "line": "lea     ecx, [esp+10Ch+var_78]",
+    "line": "lea     ecx, [esp+10Ch+var_78]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x56BF96",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; BloodOnDeath decode 2026-05-30: fallback decal applies a random rotation matrix from the final ctor arg; this is not a size/count control.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x56BF9B",
-    "line": "lea     ecx, [esp+108h+var_9C]",
+    "line": "lea     ecx, [esp+108h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56BF9F",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56BFA0",
-    "line": "lea     edx, [esp+10Ch+var_30]",
+    "line": "lea     edx, [esp+10Ch+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x56BFA7",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56BFA8",
-    "line": "lea     ecx, [esp+110h+var_78]",
+    "line": "lea     ecx, [esp+110h+var_78]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x56BFAF",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,19 +673,19 @@
   },
   {
     "ea": "0x56BFFE",
-    "line": "mov     ecx, [eax+48h]",
+    "line": "mov     ecx, [eax+48h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x56C001",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56C002",
-    "line": "call    sub_7EE3E0",
+    "line": "call    BSShaderLightingProperty_AddDecalData; [Verified] Appends DECAL_DATA* to this BSShaderLightingProperty's list at +0x80: allocates a node through the list allocator vfunc, stores data at node+8, links at tail, and increments numItems at +0x8C. Resets the base BSShaderProperty cached render-pass state at +0x24. Called by BSTempEffectDecal_Ctor, BSTempEffectDecal_LoadGame, and BSTempEffectGeometryDecal_BuildGeneratedGeometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -748,5 +748,59 @@
     "line": "retn    30h ; '0'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD990",
+    "line": "mov     ecx, [ebp-0C4h]; self",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD996",
+    "line": "jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD99B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD99F",
+    "line": "lea     eax, [edx-0F8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD9A5",
+    "line": "mov     ecx, [edx-0FCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD9AB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD9AD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD9B2",
+    "line": "mov     eax, offset stru_AE72B0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD9B7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

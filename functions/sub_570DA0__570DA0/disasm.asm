@@ -1,30 +1,30 @@
-0x570DA0: sub     esp, 34h
+0x570DA0: sub     esp, 34h; Verified: saves base temp-effect state and particle model path/transform/position/scale; includes optional controller-state chunk.
 0x570DA3: push    ebp
 0x570DA4: push    esi
 0x570DA5: mov     esi, ecx
 0x570DA7: mov     ecx, ds:0B33B00h
-0x570DAD: mov     [esp+3Ch+var_24], 0
+0x570DAD: mov     [esp+3Ch+source], 0
 0x570DB5: mov     ebp, [ecx+14h]
 0x570DB8: push    edi
 0x570DB9: mov     [esp+40h+var_2C], 0
-0x570DC1: call    sub_45A170
+0x570DC1: call    TESSaveLoadGame_UseSaveGameBlocks
 0x570DC6: test    al, al
 0x570DC8: jz      short loc_570DFD
-0x570DCA: mov     ecx, ds:0B33B00h
-0x570DD0: push    4; Size
+0x570DCA: mov     ecx, ds:0B33B00h; self
+0x570DD0: push    4; byteCount
 0x570DD2: lea     eax, [esp+44h+Src]
-0x570DD6: push    eax; Src
+0x570DD6: push    eax; source
 0x570DD7: mov     [esp+48h+Src], 4B4F4C42h
 0x570DDF: call    SaveLoad_SaveData
-0x570DE4: mov     ecx, ds:0B33B00h
+0x570DE4: mov     ecx, ds:0B33B00h; self
 0x570DEA: mov     edx, [ecx+14h]
-0x570DED: push    2; Size
-0x570DEF: lea     eax, [esp+44h+var_24]
-0x570DF3: push    eax; Src
+0x570DED: push    2; byteCount
+0x570DEF: lea     eax, [esp+44h+source]
+0x570DF3: push    eax; source
 0x570DF4: mov     [esp+48h+var_2C], edx
 0x570DF8: call    SaveLoad_SaveData
-0x570DFD: mov     ecx, esi
-0x570DFF: call    sub_56BD80
+0x570DFD: mov     ecx, esi; self
+0x570DFF: call    BSTempEffect_SaveGame; Verified base save path writes duration, elapsed and owning-cell FormID (0 when absent). Derived particle save delegates here.
 0x570E04: mov     eax, [esi+1Ch]
 0x570E07: lea     edx, [eax+1]
 0x570E0A: lea     ebx, [ebx+0]
@@ -32,48 +32,48 @@
 0x570E12: add     eax, 1
 0x570E15: test    cl, cl
 0x570E17: jnz     short loc_570E10
-0x570E19: push    1; Size
+0x570E19: push    1; byteCount
 0x570E1B: lea     ecx, [esp+44h+var_31]
 0x570E1F: sub     eax, edx
-0x570E21: push    ecx; Src
-0x570E22: mov     ecx, ds:0B33B00h
+0x570E21: push    ecx; source
+0x570E22: mov     ecx, ds:0B33B00h; self
 0x570E28: mov     [esp+48h+var_31], al
 0x570E2C: call    SaveLoad_SaveData
 0x570E31: movzx   edx, [esp+40h+var_31]
 0x570E36: mov     eax, [esi+1Ch]
-0x570E39: mov     ecx, ds:0B33B00h
-0x570E3F: push    edx; Size
-0x570E40: push    eax; Src
+0x570E39: mov     ecx, ds:0B33B00h; self
+0x570E3F: push    edx; byteCount
+0x570E40: push    eax; source
 0x570E41: call    SaveLoad_SaveData
 0x570E46: mov     ecx, [esi+18h]
 0x570E49: add     ecx, 30h ; '0'
 0x570E4C: push    ecx
 0x570E4D: lea     ecx, [esp+44h+var_10]
 0x570E51: call    sub_7150F0
-0x570E56: mov     ecx, ds:0B33B00h
-0x570E5C: push    10h; Size
+0x570E56: mov     ecx, ds:0B33B00h; self
+0x570E5C: push    10h; byteCount
 0x570E5E: lea     edx, [esp+44h+var_10]
-0x570E62: push    edx; Src
+0x570E62: push    edx; source
 0x570E63: call    SaveLoad_SaveData
 0x570E68: mov     eax, [esi+18h]
 0x570E6B: mov     ecx, [eax+54h]
 0x570E6E: mov     [esp+40h+var_1C], ecx
 0x570E72: mov     edx, [eax+58h]
-0x570E75: push    0Ch; Size
+0x570E75: push    0Ch; byteCount
 0x570E77: lea     ecx, [esp+44h+var_1C]
 0x570E7B: mov     [esp+44h+var_18], edx
 0x570E7F: mov     eax, [eax+5Ch]
-0x570E82: push    ecx; Src
-0x570E83: mov     ecx, ds:0B33B00h
+0x570E82: push    ecx; source
+0x570E83: mov     ecx, ds:0B33B00h; self
 0x570E89: mov     [esp+48h+var_14], eax
 0x570E8D: call    SaveLoad_SaveData
 0x570E92: mov     edx, [esi+18h]
 0x570E95: fld     dword ptr [edx+60h]
-0x570E98: mov     ecx, ds:0B33B00h
-0x570E9E: push    4; Size
+0x570E98: mov     ecx, ds:0B33B00h; self
+0x570E9E: push    4; byteCount
 0x570EA0: fstp    [esp+44h+var_20]
 0x570EA4: lea     eax, [esp+44h+var_20]
-0x570EA8: push    eax; Src
+0x570EA8: push    eax; source
 0x570EA9: call    SaveLoad_SaveData
 0x570EAE: mov     ecx, [esi+18h]
 0x570EB1: mov     [esp+40h+var_30], 0
@@ -103,10 +103,10 @@
 0x570EF4: movzx   ecx, ax
 0x570EF7: add     esp, 4
 0x570EFA: mov     [esp+40h+var_30], ecx
-0x570EFE: mov     ecx, ds:0B33B00h
-0x570F04: push    2; Size
+0x570EFE: mov     ecx, ds:0B33B00h; self
+0x570F04: push    2; byteCount
 0x570F06: lea     edx, [esp+44h+var_30]
-0x570F0A: push    edx; Src
+0x570F0A: push    edx; source
 0x570F0B: call    SaveLoad_SaveData
 0x570F10: cmp     word ptr [esp+40h+var_30], 0
 0x570F16: jz      short loc_570F2B
@@ -125,7 +125,7 @@
 0x570F44: jz      short loc_570F88
 0x570F46: mov     eax, [edi]
 0x570F48: push    eax; a1
-0x570F49: call    TESForm_LookupByFormID
+0x570F49: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x570F4E: mov     ecx, [edi+5]
 0x570F51: mov     edx, [eax]
 0x570F53: add     esp, 4
@@ -154,7 +154,7 @@
 0x570F9A: call    sub_40FEC0
 0x570F9F: add     esp, 10h
 0x570FA2: mov     ecx, ds:0B33B00h
-0x570FA8: call    sub_45A170
+0x570FA8: call    TESSaveLoadGame_UseSaveGameBlocks
 0x570FAD: test    al, al
 0x570FAF: jz      short loc_570FE4
 0x570FB1: mov     edx, ds:0B33B00h

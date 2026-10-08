@@ -1,4 +1,5 @@
-BSStringT *sub_9FABE0()
+// Verified (Oblivion RTTI): initializes NiRTTI_BSTempEffect with no parent.
+NiRTTI *NiRTTI_BSTempEffect_Initialize()
 {
-  return sub_70E220(&stru_B3A680, "BSTempEffect", 0);
+  return NiRTTI_Constructor(&NiRTTI_BSTempEffect, "BSTempEffect", 0); /*0x9fabf1*/
 }

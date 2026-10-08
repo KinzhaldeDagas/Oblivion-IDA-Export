@@ -1,4 +1,4 @@
-0x56BC50: fldz
+0x56BC50: fldz; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
 0x56BC52: xor     eax, eax
 0x56BC54: fst     dword ptr [ecx+8]
 0x56BC57: mov     dword ptr [ecx], offset ??_7BSTempEffect@@6B@; const BSTempEffect::`vftable'

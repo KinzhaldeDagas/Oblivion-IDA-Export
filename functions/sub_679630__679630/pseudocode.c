@@ -1,129 +1,125 @@
-__int16 __thiscall sub_679630(char *this)
+// [Verified] ActorProcessManager_SaveTempEffects walks active and extended effect lists, skips effects whose virtual IsSaveable returns false, writes each saveable effect's one-byte GetTypeID, then calls SaveGame and increments the count. Thus fallback decals may persist without a target reference, while generated-geometry decals require a valid target reference and 3D.
+UInt16 __thiscall ActorProcessManager_SaveTempEffects(ActorProcessManager *self)
 {
-  TESSaveLoad *v2; // ecx
-  _WORD *v3; // eax
-  int *v4; // edi
+  TESSaveLoadGame_SerializationView *v2; // ecx
+  unsigned __int8 *bufferCursor; // eax
+  int *p_activeTempEffects; // edi
   int v5; // ebx
   int v6; // esi
   void (__thiscall ***v7)(_DWORD, int); // ebp
   char v8; // al
-  TESSaveLoad *v9; // ecx
-  int *v10; // ebp
+  TESSaveLoadGame_SerializationView *v9; // ecx
+  int *p_extendedTempEffects; // ebp
   int v11; // ebx
   int v12; // esi
-  char *v13; // edi
-  __int16 result; // ax
+  ActorProcessManager *v13; // edi
+  UInt16 result; // ax
   char v15; // al
-  TESSaveLoad *v16; // ecx
-  size_t v17; // [esp-4h] [ebp-2Ch]
-  size_t v18; // [esp-4h] [ebp-2Ch]
-  char v19; // [esp+12h] [ebp-16h]
-  char v20; // [esp+13h] [ebp-15h] BYREF
-  int v21; // [esp+14h] [ebp-14h]
+  TESSaveLoadGame_SerializationView *v16; // ecx
+  char source_2; // [esp+12h] [ebp-16h]
+  char source_3; // [esp+13h] [ebp-15h] BYREF
+  int v19; // [esp+14h] [ebp-14h]
   int Src; // [esp+18h] [ebp-10h] BYREF
-  _WORD *v23; // [esp+1Ch] [ebp-Ch]
-  int v24; // [esp+20h] [ebp-8h] BYREF
-  char *v25; // [esp+24h] [ebp-4h] BYREF
+  unsigned __int8 *v21; // [esp+1Ch] [ebp-Ch]
+  int v22; // [esp+20h] [ebp-8h] BYREF
+  ActorProcessManager *v23; // [esp+24h] [ebp-4h] BYREF
 
-  v2 = SaveLoad_CurrentSavegame;
-  Src = 0;
-  v3 = (_WORD *)v2->unk000[5];
-  LODWORD(v17) = 2;
-  v25 = this;
-  v21 = 0;
-  v23 = v3;
-  SaveLoad_SaveData((int)v2, &Src, v17);
-  v4 = (int *)(this + 0x40);
-  if ( v4 )
+  v2 = g_TESSaveLoadGame; /*0x679639*/
+  Src = 0; /*0x679641*/
+  bufferCursor = v2->bufferCursor; /*0x679645*/
+  v23 = self; /*0x67964f*/
+  v19 = 0; /*0x679653*/
+  v21 = bufferCursor; /*0x679657*/
+  SaveLoad_SaveData(v2, &Src, 2u); /*0x67965b*/
+  p_activeTempEffects = (int *)&self->activeTempEffects; /*0x679660*/
+  if ( p_activeTempEffects ) /*0x679665*/
   {
-    v5 = (int)v25;
-    do
+    v5 = (int)v23; /*0x67966b*/
+    do /*0x67972e*/
     {
-      if ( v4[1] || (v21 |= 1u, v5 = 0, v19 = 1, *v4) )
-        v19 = 0;
-      if ( (v21 & 1) != 0 )
+      if ( p_activeTempEffects[1] || (v19 |= 1u, v5 = 0, source_2 = 1, *p_activeTempEffects) ) /*0x67967d*/
+        source_2 = 0; /*0x679686*/
+      if ( (v19 & 1) != 0 ) /*0x679690*/
       {
-        v21 &= ~1u;
-        if ( v5 )
+        v19 &= ~1u; /*0x679692*/
+        if ( v5 ) /*0x679699*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-            (**(void (__thiscall ***)(int, int))v5)(v5, 1);
+          if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) ) /*0x67969f*/
+            (**(void (__thiscall ***)(int, int))v5)(v5, 1); /*0x6796b1*/
         }
       }
-      if ( v19 )
-        break;
-      v6 = *sub_677C70(v4, &v24);
-      if ( v24 )
+      if ( source_2 ) /*0x6796b8*/
+        break; /*0x6796b8*/
+      v6 = *NodeVoid_GetDataAddRef(p_activeTempEffects, &v22); /*0x6796c6*/
+      if ( v22 ) /*0x6796ce*/
       {
-        v7 = (void (__thiscall ***)(_DWORD, int))v24;
-        if ( !InterlockedDecrement((volatile LONG *)(v24 + 4)) )
-          (**v7)(v7, 1);
+        v7 = (void (__thiscall ***)(_DWORD, int))v22; /*0x6796d0*/
+        if ( !InterlockedDecrement((volatile LONG *)(v22 + 4)) ) /*0x6796d6*/
+          (**v7)(v7, 1); /*0x6796ed*/
       }
-      if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v6 + 0x58))(v6) )
+      if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v6 + 0x58))(v6) )// BloodOnDeath decode 2026-05-30: save pass only serializes effects whose virtual +0x58 saveability predicate returns true; invalid trail decals vanish at save time. /*0x6796f6*/
       {
-        v8 = (*(int (__thiscall **)(int))(*(_DWORD *)v6 + 0x54))(v6);
-        LODWORD(v18) = 1;
-        v9 = SaveLoad_CurrentSavegame;
-        v20 = v8;
-        SaveLoad_SaveData((int)v9, &v20, v18);
-        (*(void (__thiscall **)(int))(*(_DWORD *)v6 + 0x60))(v6);
-        ++Src;
+        v8 = (*(int (__thiscall **)(int))(*(_DWORD *)v6 + 0x54))(v6); /*0x679703*/
+        v9 = g_TESSaveLoadGame; /*0x67970c*/
+        source_3 = v8; /*0x679712*/
+        SaveLoad_SaveData(v9, &source_3, 1u); /*0x679716*/
+        (*(void (__thiscall **)(int))(*(_DWORD *)v6 + 0x60))(v6); /*0x679722*/
+        ++Src; /*0x679724*/
       }
-      v4 = (int *)v4[1];
+      p_activeTempEffects = (int *)p_activeTempEffects[1]; /*0x679729*/
     }
-    while ( v4 );
+    while ( p_activeTempEffects ); /*0x67972e*/
   }
-  v10 = (int *)(v25 + 0x48);
-  if ( v25 == (char *)0xFFFFFFB8 )
+  p_extendedTempEffects = (int *)&v23->extendedTempEffects; /*0x679738*/
+  if ( v23 == (ActorProcessManager *)0xFFFFFFB8 ) /*0x67973b*/
   {
-    result = Src;
-    *v23 = Src;
+    result = Src; /*0x679821*/
+    *(_WORD *)v21 = Src; /*0x67982d*/
   }
   else
   {
-    v11 = (int)v25;
-    while ( 1 )
+    v11 = (int)v23; /*0x679741*/
+    while ( 1 ) /*0x679745*/
     {
-      if ( v10[1] || (v21 |= 2u, v11 = 0, v19 = 1, *v10) )
-        v19 = 0;
-      if ( (v21 & 2) != 0 )
+      if ( p_extendedTempEffects[1] || (v19 |= 2u, v11 = 0, source_2 = 1, *p_extendedTempEffects) ) /*0x679752*/
+        source_2 = 0; /*0x67975c*/
+      if ( (v19 & 2) != 0 ) /*0x679766*/
       {
-        v21 &= ~2u;
-        if ( v11 )
+        v19 &= ~2u; /*0x679768*/
+        if ( v11 ) /*0x67976f*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v11 + 4)) )
-            (**(void (__thiscall ***)(int, int))v11)(v11, 1);
+          if ( !InterlockedDecrement((volatile LONG *)(v11 + 4)) ) /*0x679775*/
+            (**(void (__thiscall ***)(int, int))v11)(v11, 1); /*0x679787*/
         }
       }
-      if ( v19 )
-        break;
-      v12 = *sub_677C70(v10, (int *)&v25);
-      if ( v25 )
+      if ( source_2 ) /*0x67978e*/
+        break; /*0x67978e*/
+      v12 = *NodeVoid_GetDataAddRef(p_extendedTempEffects, (int *)&v23); /*0x6797a0*/
+      if ( v23 ) /*0x6797a8*/
       {
-        v13 = v25;
-        if ( !InterlockedDecrement((volatile LONG *)v25 + 1) )
-          (**(void (__thiscall ***)(char *, int))v13)(v13, 1);
+        v13 = v23; /*0x6797aa*/
+        if ( !InterlockedDecrement((volatile LONG *)&v23->middleHighActors.head.node.next) ) /*0x6797b0*/
+          ((void (__thiscall *)(ActorProcessManager *, int))v13->middleHighActors.head.node.data->vtbl)(v13, 1); /*0x6797c6*/
       }
-      result = (*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x58))(v12);
-      if ( (_BYTE)result )
+      result = (*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x58))(v12); /*0x6797cf*/
+      if ( (_BYTE)result ) /*0x6797d3*/
       {
-        v15 = (*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x54))(v12);
-        LODWORD(v18) = 1;
-        v16 = SaveLoad_CurrentSavegame;
-        v20 = v15;
-        SaveLoad_SaveData((int)v16, &v20, v18);
-        result = (*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x60))(v12);
-        ++Src;
+        v15 = (*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x54))(v12); /*0x6797dc*/
+        v16 = g_TESSaveLoadGame; /*0x6797e5*/
+        source_3 = v15; /*0x6797eb*/
+        SaveLoad_SaveData(v16, &source_3, 1u); /*0x6797ef*/
+        result = (*(int (__thiscall **)(int))(*(_DWORD *)v12 + 0x60))(v12); /*0x6797fb*/
+        ++Src; /*0x6797fd*/
       }
-      v10 = (int *)v10[1];
-      if ( !v10 )
+      p_extendedTempEffects = (int *)p_extendedTempEffects[1]; /*0x679802*/
+      if ( !p_extendedTempEffects ) /*0x679807*/
       {
-        *v23 = Src;
-        return result;
+        *(_WORD *)v21 = Src; /*0x679819*/
+        return result; /*0x679820*/
       }
     }
-    result = (__int16)v23;
-    *v23 = Src;
+    result = (unsigned __int16)v21; /*0x67983a*/
+    *(_WORD *)v21 = Src; /*0x679841*/
   }
-  return result;
+  return result; /*0x679816*/
 }

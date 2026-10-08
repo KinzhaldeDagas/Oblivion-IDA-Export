@@ -1,4 +1,4 @@
-BSStringT *sub_9FAC20()
+NiRTTI *NiRTTI_BSTempEffectGeometryDecal_Initialize()
 {
-  return sub_70E220(&stru_B3A694, "BSTempEffectGeometryDecal", (int)&stru_B3A680);
+  return NiRTTI_Constructor(&stru_B3A694, "BSTempEffectGeometryDecal", &stru_B3A680); /*0x9fac34*/
 }

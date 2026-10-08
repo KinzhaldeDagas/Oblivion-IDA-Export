@@ -1,4 +1,4 @@
-BSStringT *sub_9FAC40()
+NiRTTI *NiRTTI_BSTempEffectParticle_Initialize()
 {
-  return sub_70E220(&stru_B3A69C, "BSTempEffectParticle", (int)&stru_B3A680);
+  return NiRTTI_Constructor(&stru_B3A69C, "BSTempEffectParticle", &stru_B3A680); /*0x9fac54*/
 }

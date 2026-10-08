@@ -1,4 +1,4 @@
-0x5707A0: push    0FFFFFFFFh
+0x5707A0: push    0FFFFFFFFh; Verified: releases queued/model references, detaches/releases particle root, then invokes BSTempEffect base destructor.
 0x5707A2: push    offset ??1BSTempEffectParticle@@UAE@XZ_SEH
 0x5707A7: mov     eax, large fs:0
 0x5707AD: push    eax
@@ -84,9 +84,9 @@
 0x57087D: push    1
 0x57087F: mov     ecx, esi
 0x570881: call    eax
-0x570883: mov     ecx, edi
+0x570883: mov     ecx, edi; self
 0x570885: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x57088D: call    BSTempEffect_destr
+0x57088D: call    BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
 0x570892: mov     ecx, dword ptr [esp+24h+var_C]
 0x570896: mov     large fs:0, ecx
 0x57089D: pop     ecx
@@ -95,3 +95,15 @@
 0x5708A0: pop     ebp
 0x5708A1: add     esp, 14h
 0x5708A4: retn
+0x9BDCD0: mov     ecx, [ebp-10h]; self
+0x9BDCD3: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+0x9BDCD8: mov     ecx, [ebp-10h]
+0x9BDCDB: add     ecx, 18h; slot
+0x9BDCDE: jmp     NiPointerSlot_Release
+0x9BDCE3: mov     edx, [esp+arg_4]
+0x9BDCE7: lea     eax, [edx-14h]
+0x9BDCEA: mov     ecx, [edx-18h]
+0x9BDCED: xor     ecx, eax
+0x9BDCEF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDCF4: mov     eax, offset stru_AE754C
+0x9BDCF9: jmp     ___CxxFrameHandler3

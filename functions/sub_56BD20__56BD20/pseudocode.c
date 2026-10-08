@@ -1,4 +1,5 @@
-void *sub_56BD20()
+// Verified (Oblivion): BSTempEffect GetType returns NiRTTI_BSTempEffect.
+NiRTTI *__thiscall BSTempEffect_GetRTTI(BSTempEffect *this)
 {
-  return &unk_B3A680;
+  return &NiRTTI_BSTempEffect; /*0x56bd25*/
 }

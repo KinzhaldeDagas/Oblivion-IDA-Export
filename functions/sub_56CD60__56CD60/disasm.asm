@@ -1,16 +1,16 @@
-0x56CD60: cmp     byte ptr ds:0B3A690h, 0
+0x56CD60: cmp     byte ptr ds:0B3A690h, 0; [Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.
 0x56CD67: push    esi
 0x56CD68: push    edi
 0x56CD69: mov     edi, ecx
 0x56CD6B: jz      short loc_56CD9D
-0x56CD6D: call    sub_56BB90
+0x56CD6D: call    BSTECreateTaskPool_Pop; [Verified] Pops one BSTECreateTask pointer from the protected free-item stack. Its only direct caller is BSTempEffectGeometryDecal_StartOrQueueCreateTask.
 0x56CD72: mov     esi, eax
 0x56CD74: test    esi, esi
 0x56CD76: jz      short loc_56CD9D
 0x56CD78: push    edi; a2
 0x56CD79: mov     ecx, esi; this
 0x56CD7B: call    sub_478300
-0x56CD80: mov     ecx, ds:0B3F940h
+0x56CD80: mov     ecx, ds:0B3F940h; [Verified] g_NiParallelUpdateTaskManager virtual +0x4C receives BSTECreateTask with mode 1. Successful return leaves the task queued; failure takes the task vtable +0x54 BSTECreateTask_ReturnToPool path before synchronous Initialize.
 0x56CD86: mov     eax, [ecx]
 0x56CD88: mov     edx, [eax+4Ch]
 0x56CD8B: push    1

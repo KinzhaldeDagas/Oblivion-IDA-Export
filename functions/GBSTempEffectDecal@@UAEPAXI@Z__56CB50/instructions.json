@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x56CB53",
-    "line": "call    ??1BSTempEffectDecal@@UAE@XZ; BSTempEffectDecal::~BSTempEffectDecal(void)",
+    "line": "call    ??1BSTempEffectDecal@@UAE@XZ; [Verified] BSTempEffectDecal destructor unregisters its DECAL_DATA payload from the target BSShaderLightingProperty list via BSShaderLightingProperty_RemoveDecalData before releasing the target NiProperty at payload+0x48. It then releases the texture/property members and frees the 0x4C DECAL_DATA payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x56CB60",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

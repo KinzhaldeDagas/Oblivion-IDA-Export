@@ -1,52 +1,53 @@
-void __thiscall BSTempEffectParticle::~BSTempEffectParticle(BSTempEffectParticle *this)
+// Verified: releases queued/model references, detaches/releases particle root, then invokes BSTempEffect base destructor.
+void __thiscall BSTempEffectParticle_Destructor(BSTempEffectParticle *self)
 {
-  int v2; // eax
-  int v3; // eax
+  const char *modelPath; // eax
+  NiAVObject *particleNode; // eax
   LONG (__stdcall *v4)(volatile LONG *); // ebp
   void (__thiscall ***v5)(_DWORD, int); // esi
-  int v6; // esi
-  int v7; // esi
+  NiAVObject *v6; // esi
+  NiAVObject *v7; // esi
   _DWORD v8[2]; // [esp+10h] [ebp-14h] BYREF
   int v9; // [esp+20h] [ebp-4h]
 
-  v8[1] = this;
-  *(_DWORD *)this = &BSTempEffectParticle::`vftable';
-  v2 = *((_DWORD *)this + 7);
-  v9 = 1;
-  if ( v2 )
-    QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, v2, 0, 1);
-  v3 = *((_DWORD *)this + 6);
-  v4 = InterlockedDecrement;
-  if ( v3 )
+  v8[1] = self; /*0x5707c8*/
+  self->base.vtable = &BSTempEffectParticle::`vftable'; /*0x5707cc*/
+  modelPath = self->modelPath; /*0x5707d2*/
+  v9 = 1; /*0x5707d7*/
+  if ( modelPath ) /*0x5707df*/
+    QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], (int)modelPath, 0, 1); /*0x5707ec*/
+  particleNode = self->particleNode; /*0x5707f1*/
+  v4 = InterlockedDecrement; /*0x5707f6*/
+  if ( particleNode ) /*0x5707fc*/
   {
-    if ( *(_DWORD *)(v3 + 0x1C) )
+    if ( particleNode->members.m_parent ) /*0x5707fe*/
     {
-      (*(void (__thiscall **)(_DWORD, _DWORD *, _DWORD))(**(_DWORD **)(v3 + 0x1C) + 0x88))(
-        *(_DWORD *)(v3 + 0x1C),
-        v8,
-        *((_DWORD *)this + 6));
-      if ( v8[0] )
+      particleNode->members.m_parent->vtbl->RemoveObject( /*0x570815*/
+        particleNode->members.m_parent,
+        (NiAVObject **)v8,
+        self->particleNode);
+      if ( v8[0] ) /*0x57081d*/
       {
-        v5 = (void (__thiscall ***)(_DWORD, int))v8[0];
-        if ( !v4((volatile LONG *)(v8[0] + 4)) )
-          (**v5)(v5, 1);
+        v5 = (void (__thiscall ***)(_DWORD, int))v8[0]; /*0x57081f*/
+        if ( !v4((volatile LONG *)(v8[0] + 4)) ) /*0x570825*/
+          (**v5)(v5, 1); /*0x570837*/
       }
     }
   }
-  v6 = *((_DWORD *)this + 6);
-  if ( v6 )
+  v6 = self->particleNode; /*0x570839*/
+  if ( v6 ) /*0x57083e*/
   {
-    if ( !v4((volatile LONG *)(v6 + 4)) )
-      (**(void (__thiscall ***)(int, int))v6)(v6, 1);
-    *((_DWORD *)this + 6) = 0;
+    if ( !v4((volatile LONG *)&v6->members) ) /*0x570844*/
+      v6->vtbl->super.super.Destructor((NiRefObject *)v6, 1); /*0x570856*/
+    self->particleNode = 0; /*0x570858*/
   }
-  v7 = *((_DWORD *)this + 6);
-  LOBYTE(v9) = 0;
-  if ( v7 )
+  v7 = self->particleNode; /*0x57085f*/
+  LOBYTE(v9) = 0; /*0x570864*/
+  if ( v7 ) /*0x570869*/
   {
-    if ( !v4((volatile LONG *)(v7 + 4)) )
-      (**(void (__thiscall ***)(int, int))v7)(v7, 1);
+    if ( !v4((volatile LONG *)&v7->members) ) /*0x57086f*/
+      v7->vtbl->super.super.Destructor((NiRefObject *)v7, 1); /*0x570881*/
   }
-  v9 = 0xFFFFFFFF;
-  BSTempEffect_destr(this);
+  v9 = 0xFFFFFFFF; /*0x570885*/
+  BSTempEffect_Destructor(&self->base); /*0x57088d*/
 }

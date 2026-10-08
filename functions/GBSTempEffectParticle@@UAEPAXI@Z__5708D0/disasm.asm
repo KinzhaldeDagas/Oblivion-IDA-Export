@@ -1,10 +1,10 @@
 0x5708D0: push    esi
 0x5708D1: mov     esi, ecx
-0x5708D3: call    ??1BSTempEffectParticle@@UAE@XZ; BSTempEffectParticle::~BSTempEffectParticle(void)
+0x5708D3: call    BSTempEffectParticle_Destructor; Verified: releases queued/model references, detaches/releases particle root, then invokes BSTempEffect base destructor.
 0x5708D8: test    byte ptr [esp+4+arg_0], 1
 0x5708DD: jz      short loc_5708E8
 0x5708DF: push    esi
-0x5708E0: call    FormHeapFree
+0x5708E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5708E5: add     esp, 4
 0x5708E8: mov     eax, esi
 0x5708EA: pop     esi

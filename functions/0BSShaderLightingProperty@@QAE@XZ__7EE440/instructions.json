@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7EE440",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.",
     "mnemonic": "push",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7EE487",
-    "line": "mov     dword ptr [ecx], offset ??_7?$NiTPointerList@PAVShadowSceneLight@@@@6B@; const NiTPointerList<ShadowSceneLight *>::`vftable'",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTPointerList@PAVShadowSceneLight@@@@6B@; MEF PERF 2026-10-07 PASS4: LC-1 layout evidence: constructor initializes raw ShadowSceneLight pointer-list vtable at lighting-property+6C, DWORD count+78 and head+70/tail+74. Cursor+7C initialized separately7EE4AE. These fields lie in lighting extension beyond the existing6Ch BSShaderProperty base; base type was not resized.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7EE49C",
-    "line": "mov     dword ptr [edi], offset ??_7?$NiTPointerList@PAUDECAL_DATA@@@@6B@; const NiTPointerList<DECAL_DATA *>::`vftable'",
+    "line": "mov     dword ptr [edi], offset ??_7?$NiTPointerList@PAUDECAL_DATA@@@@6B@; [Verified] BSShaderLightingProperty constructor initializes a NiTPointerList<DECAL_DATA*> at +0x80: vtable, head, tail and item count (+0x8C). This count drives decal pass batching.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7EE4A7",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7EE4B1",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7EE4B8",
-    "line": "fstp    dword ptr [esi+94h]",
+    "line": "fstp    dword ptr [esi+94h]; OBLIVION AUTHORITY (2026-08-24): BSShaderLightingProperty constructor initializes per-property light dimmer at +0x94 to 1.0f. DrawRenderPass 0x7A9820 passes this scalar into each light constant update.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -280,5 +280,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CFBB0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFBB3",
+    "line": "jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFBB8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFBBB",
+    "line": "add     ecx, 6Ch ; 'l'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFBBE",
+    "line": "jmp     j_??1?$NiTPointerList@PAVShadowSceneLight@@@@UAE@XZ; NiTPointerList<ShadowSceneLight *>::~NiTPointerList<ShadowSceneLight *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFBC3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFBC6",
+    "line": "add     ecx, 80h ; '€'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CFBCC",
+    "line": "jmp     j_??1?$NiTPointerList@PAUDECAL_DATA@@@@UAE@XZ; NiTPointerList<DECAL_DATA *>::~NiTPointerList<DECAL_DATA *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFBD1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CFBD5",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFBD8",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFBDB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CFBDD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFBE2",
+    "line": "mov     eax, offset stru_AF871C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFBE7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

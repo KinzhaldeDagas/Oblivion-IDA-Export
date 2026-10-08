@@ -1,0 +1,192 @@
+{
+  "address_comment_regular": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x679850",
+      "0x679A53"
+    ],
+    [
+      "0x9C48C0",
+      "0x9C4912"
+    ]
+  ],
+  "folder": "sub_679850__679850",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 22,
+    "callers_count": 1,
+    "chunks_sha256": "17184aa876a0480a978347a828d475bc560b730a68f8e25b0e145cd537c45484",
+    "comment_regular": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
+    "comment_repeatable": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
+    "data_refs_count": 5,
+    "display_name": "ActorProcessManager_LoadTempEffects",
+    "end_ea": "0x679A53",
+    "evidence_confidence": "Verified",
+    "flags": 21572,
+    "has_pseudocode": true,
+    "name": "ActorProcessManager_LoadTempEffects",
+    "segment": ".text",
+    "sha256": "dd33fa2946e5d5292c13e7749ee6e7d179ce51366e34c8ef2872656f0a0272ec",
+    "size": 515,
+    "start_ea": "0x679850",
+    "total_chunk_size": 597,
+    "type": "void __thiscall(ActorProcessManager *self)",
+    "xrefs_from_count": 218,
+    "xrefs_to_count": 1
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x679850",
+      "regular": "[Verified] ActorProcessManager_LoadTempEffects reads a UInt16 count and one-byte type tags. Type 0 constructs BSTempEffectDecal; type 1 constructs BSTempEffectGeometryDecal; type 2 constructs BSTempEffectParticle; types 5/6 construct MagicModelHitEffect/MagicShaderHitEffect. Successful virtual LoadGame results are re-registered by GetTypeID. The base BSTempEffect type returns 3 but is not saveable; type 4 has no handler in this switch and its producer/restore role remains Unknown.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x67988E",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x679894",
+      "regular": "byteCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x67989A",
+      "regular": "destination",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798BD",
+      "regular": "byteCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798C3",
+      "regular": "destination",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798C4",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798D4",
+      "regular": "switch 7 cases",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798DD",
+      "regular": "switch jump",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798E4",
+      "regular": "",
+      "repeatable": "jumptable 006798DD case 0"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6798FE",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x679900",
+      "regular": "[Verified] Serialized type 0 allocates 0x1C bytes and calls BSTempEffectDecal_DefaultInit. Type 2 is a separate switch case at 0x679982 and calls BSTempEffectParticle_DefaultInit at 0x6799A0 after allocating 0x20 bytes.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x67991E",
+      "regular": "Verified load dispatcher calls the newly created effect's virtual LoadGame (+0x64), then reads GetTypeID (+0x54) and routes IDs 4..6 to manager +0x48, other supported types including particle 2 to +0x40. Effects returning false are destroyed instead of registered.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x679949",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x67995D",
+      "regular": "",
+      "repeatable": "jumptable 006798DD case 1"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x679977",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x679979",
+      "regular": "Verified type-1 restore initializer installs default geometry-decal state with base.initializeCallbackDone=false, then virtual LoadGame reconstructs the generated mesh through saved data instead of invoking Initialize.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x679980",
+      "regular": "",
+      "repeatable": "jumptable 006798DD case 2"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x67999E",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6799A0",
+      "regular": "Verified BSTempEffectParticle default initialization is selected only for serialized type ID 2; allocation size matches the 0x20-byte Oblivion particle structure.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6799AA",
+      "regular": "",
+      "repeatable": "jumptable 006798DD case 5"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6799D4",
+      "regular": "",
+      "repeatable": "jumptable 006798DD case 6"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x6799FE",
+      "regular": "",
+      "repeatable": "jumptable 006798DD default case, cases 3,4"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x679A11",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x9C48C0",
+      "regular": "",
+      "repeatable": "Microsoft VisualC 2-14/net runtime"
+    }
+  ]
+}

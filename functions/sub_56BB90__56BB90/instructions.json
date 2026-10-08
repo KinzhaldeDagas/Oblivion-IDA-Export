@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56BB90",
-    "line": "push    offset stru_B3A600; lpCriticalSection",
+    "line": "push    offset unk_B3A600; [Verified] Pops one BSTECreateTask pointer from the protected free-item stack. Its only direct caller is BSTempEffectGeometryDecal_StartOrQueueCreateTask.",
     "mnemonic": "push",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x56BBC1",
-    "line": "call    sub_56BA20",
+    "line": "call    BSTECreateTaskPool_AddBlock; [Verified] Grows the BSTECreateTask free-item stack and appends each available 0x10-byte task slot to it; its only caller is BSTECreateTaskPool_Pop when the pool is empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x56BC04",
-    "line": "push    offset stru_B3A600; lpCriticalSection",
+    "line": "push    offset unk_B3A600; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },

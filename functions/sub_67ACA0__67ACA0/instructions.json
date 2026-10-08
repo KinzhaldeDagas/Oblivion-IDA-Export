@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67ACA0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; [Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x67ACD0",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+deltaSeconds]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,25 +235,25 @@
   },
   {
     "ea": "0x67AD10",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67AD14",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67AD15",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67AD17",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x67AD1E",
-    "line": "mov     eax, [esp+20h+var_8]",
+    "line": "mov     eax, [esp+20h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x67AD52",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x67AD5F",
-    "line": "call    eax",
+    "line": "call    eax; BloodOnDeath decode 2026-05-30: primary temp-effect list +0x40 updates ordinary blood decal type 0, geometry decal type 1, and particle type 2 by calling virtual +0x50(effect, deltaSeconds). False return removes the effect.",
     "mnemonic": "call",
     "size": 2
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x67ADBC",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+deltaSeconds]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,25 +751,25 @@
   },
   {
     "ea": "0x67ADF8",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67ADFC",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67ADFD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67ADFF",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x67AE06",
-    "line": "mov     eax, [esp+20h+var_8]",
+    "line": "mov     eax, [esp+20h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x67AE3E",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x67AE4B",
-    "line": "call    eax",
+    "line": "call    eax; BloodOnDeath decode 2026-05-30: secondary temp-effect list +0x48 is for type IDs 4..6 (magic/hit effects), not ordinary blood decals.",
     "mnemonic": "call",
     "size": 2
   },

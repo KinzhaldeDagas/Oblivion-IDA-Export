@@ -1,0 +1,2552 @@
+{
+  "address_comment_regular": "Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7B4920",
+      "0x7B69D7"
+    ]
+  ],
+  "folder": "BSShaderProperty_GetRenderPassName__7B4920",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 417,
+    "callers_count": 3,
+    "chunks_sha256": "f2ec5230ebf1e8947e2e3cde114d42a3d395e348f25c8753d1bf0564edac31ab",
+    "comment_regular": "\n[2026-10-03 frond selector correction] Exact name-query ENTRY is7B4920. loc7B4A20 is only case15 switch arm with cookie/stack epilogue; prior disabled plugin probe wrongly treated it as entry. Case15 returns BSSM_FRONDS; case19 at7B4A70 returns ambient name. Plugin now uses RenderPass selector0F and corrects the still-disabled probe entry.\n\nGeneric shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
+    "comment_repeatable": "Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
+    "data_refs_count": 418,
+    "display_name": "BSShaderProperty_GetRenderPassName",
+    "end_ea": "0x7B69D7",
+    "evidence_confidence": "Unknown",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "BSShaderProperty_GetRenderPassName",
+    "segment": ".text",
+    "sha256": "f2ec5230ebf1e8947e2e3cde114d42a3d395e348f25c8753d1bf0564edac31ab",
+    "size": 8375,
+    "start_ea": "0x7B4920",
+    "total_chunk_size": 8375,
+    "type": "const char *__cdecl(int)",
+    "xrefs_from_count": 3345,
+    "xrefs_to_count": 3
+  },
+  "function_comment_regular": "\n[2026-10-03 frond selector correction] Exact name-query ENTRY is7B4920. loc7B4A20 is only case15 switch arm with cookie/stack epilogue; prior disabled plugin probe wrongly treated it as entry. Case15 returns BSSM_FRONDS; case19 at7B4A70 returns ambient name. Plugin now uses RenderPass selector0F and corrects the still-disabled probe entry.",
+  "function_comment_repeatable": "Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
+  "instruction_comments": [
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4920",
+      "regular": "Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4932",
+      "regular": "switch 419 cases",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B493D",
+      "regular": "switch jump",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4944",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 0"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4958",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 1"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B496C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 2"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4980",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 3"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4994",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 6"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B49A8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 7"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B49BC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 8"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B49D0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 9"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B49E4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 12"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B49F8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 13"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A0C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 14"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A20",
+      "regular": "BSSM_FRONDS string returned by BSShaderProperty_GetRenderPassName case 0x0F. Only string-table evidence; not a frond geometry attachment path.",
+      "repeatable": "jumptable 007B493D case 15"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A34",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 16"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A48",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 17"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A5C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 18"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A70",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 19"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A84",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 20"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4A98",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 21"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4AAC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 22"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4AC0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 23"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4AD4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 24"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4AE8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 25"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4AFC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 26"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B10",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 52"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B24",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 53"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B38",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 27"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B4C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 28"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B60",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 54"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B74",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 55"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B88",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 29"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4B9C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 30"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4BB0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 31"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4BC4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 56"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4BD8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 57"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4BEC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 32"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C00",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 33"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C14",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 34"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C28",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 58"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C3C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 59"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C50",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 60"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C64",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 35"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C78",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 61"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4C8C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 36"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4CA0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 37"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4CB4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 62"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4CC8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 63"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4CDC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 38"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4CF0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 39"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D04",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 64"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D18",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 65"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D2C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 40"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D40",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 68"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D54",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 41"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D68",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 42"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D7C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 66"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4D90",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 67"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4DA4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 43"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4DB8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 44"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4DCC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 45"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4DE0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 69"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4DF4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 70"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E08",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 46"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E1C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 71"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E30",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 47"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E44",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 48"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E58",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 49"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E6C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 50"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E80",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 51"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4E94",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 72"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4EA8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 74"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4EBC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 75"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4ED0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 76"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4EE4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 77"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4EF8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 78"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F0C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 79"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F20",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 80"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F34",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 81"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F48",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 82"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F5C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 83"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F70",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 84"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F84",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 85"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4F98",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 86"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4FAC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 87"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4FC0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 88"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4FD4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 89"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4FE8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 90"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B4FFC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 91"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5010",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 92"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5024",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 93"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5038",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 94"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B504C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 95"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5060",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 96"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5074",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 97"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5088",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 98"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B509C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 99"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B50B0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 100"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B50C4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 101"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B50D8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 102"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B50EC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 103"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5100",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 104"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5114",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 105"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5128",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 106"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B513C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 107"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5150",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 108"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5164",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 109"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5178",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 110"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B518C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 111"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B51A0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 112"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B51B4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 113"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B51C8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 114"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B51DC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 115"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B51F0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 116"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5204",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 117"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5218",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 118"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B522C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 119"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5240",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 120"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5254",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 121"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5268",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 122"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B527C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 123"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5290",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 124"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B52A4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 125"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B52B8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 126"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B52CC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 127"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B52E0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 128"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B52F4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 129"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5308",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 130"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B531C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 131"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5330",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 132"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5344",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 133"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5358",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 134"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B536C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 135"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5380",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 136"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5394",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 137"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B53A8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 138"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B53BC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 139"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B53D0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 140"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B53E4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 141"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B53F8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 142"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B540C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 143"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5420",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 144"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5434",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 145"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5448",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 146"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B545C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 147"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5470",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 148"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5484",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 149"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5498",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 150"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B54AC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 151"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B54C0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 152"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B54D4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 153"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B54E8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 154"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B54FC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 155"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5510",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 156"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5524",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 157"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5538",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 158"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B554C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 159"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5560",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 160"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5574",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 161"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5588",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 162"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B559C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 163"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B55B0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 164"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B55C4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 165"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B55D8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 166"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B55EC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 167"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5600",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 168"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5614",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 169"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5628",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 170"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B563C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 171"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5650",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 172"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5664",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 173"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5678",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 174"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B568C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 175"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B56A0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 176"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B56B4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 177"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B56C8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 178"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B56DC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 179"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B56F0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 180"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5704",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 181"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5718",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 182"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B572C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 183"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5740",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 184"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5754",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 185"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5768",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 186"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B577C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 187"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5790",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 188"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B57A4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 189"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B57B8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 190"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B57CC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 191"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B57E0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 192"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B57F4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 193"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5808",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 194"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B581C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 195"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5830",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 196"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5844",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 197"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5858",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 198"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B586C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 199"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5880",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 200"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5894",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 201"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B58A8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 202"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B58BC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 203"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B58D0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 204"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B58E4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 205"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B58F8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 206"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B590C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 207"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5920",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 208"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5934",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 209"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5948",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 210"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B595C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 211"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5970",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 212"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5984",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 213"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5998",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 214"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B59AC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 215"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B59C0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 216"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B59D4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 217"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B59E8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 218"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B59FC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 219"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A10",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 220"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A24",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 221"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A38",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 222"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A4C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 223"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A60",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 224"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A74",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 225"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A88",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 226"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5A9C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 227"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5AB0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 228"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5AC4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 229"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5AD8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 230"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5AEC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 231"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B00",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 232"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B14",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 233"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B28",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 234"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B3C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 235"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B50",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 236"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B64",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 237"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B78",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 238"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5B8C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 239"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5BA0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 240"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5BB4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 241"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5BC8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 242"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5BDC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 243"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5BF0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 244"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C04",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 245"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C18",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 246"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C2C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 247"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C40",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 248"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C54",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 249"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C68",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 250"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C7C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 251"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5C90",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 252"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5CA4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 253"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5CB8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 254"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5CCC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 255"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5CE0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 256"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5CF4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 257"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D08",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 258"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D1C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 259"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D30",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 260"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D44",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 261"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D58",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 262"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D6C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 263"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D80",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 264"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5D94",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 265"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5DA8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 266"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5DBC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 267"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5DD0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 268"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5DE4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 269"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5DF8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 270"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E0C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 271"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E20",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 272"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E34",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 273"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E48",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 274"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E5C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 277"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E70",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 278"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E84",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 279"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5E98",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 280"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5EAC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 281"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5EC0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 282"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5ED4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 283"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5EE8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 284"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5EFC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 285"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F10",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 286"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F24",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 287"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F38",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 288"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F4C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 289"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F60",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 290"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F74",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 291"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F88",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 292"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5F9C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 293"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5FB0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 294"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5FC4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 295"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5FD8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 296"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B5FEC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 297"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6000",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 73"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6014",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 360"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6028",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 361"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B603C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 362"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6050",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 364"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6064",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 365"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6078",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 366"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B608C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 367"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B60A0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 374"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B60B4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 368"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B60C8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 369"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B60DC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 370"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B60F0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 371"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6104",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 372"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6118",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 363"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B612C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 373"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6140",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 375"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6154",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 376"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6168",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 377"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B617C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 378"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6190",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 379"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B61A4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 298"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B61B8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 4"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B61CC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 5"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B61E0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 301"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B61F4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 302"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6208",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 303"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B621C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 304"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6230",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 305"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6244",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 306"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6258",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 307"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B626C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 308"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6280",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 309"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6294",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 310"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B62A8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 311"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B62BC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 312"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B62D0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 313"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B62E4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 314"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B62F8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 315"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B630C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 316"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6320",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 317"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6334",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 318"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6348",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 319"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B635C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 320"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6370",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 321"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6384",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 322"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6398",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 323"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B63AC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 324"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B63C0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 325"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B63D4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 326"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B63E8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 327"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B63FC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 328"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6410",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 329"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6424",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 330"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6438",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 331"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B644C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 332"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6460",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 333"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6474",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 334"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6488",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 335"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B649C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 336"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B64B0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 337"
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x7B64C4",
+      "regular": "[Verified] BSShaderProperty_GetRenderPassName maps selector 0x152 (338) to BSSM_3XDECAL.",
+      "repeatable": "jumptable 007B493D case 338"
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x7B64D8",
+      "regular": "[Verified] BSShaderProperty_GetRenderPassName maps selector 0x153 (339) to BSSM_3XDECAL_A.",
+      "repeatable": "jumptable 007B493D case 339"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B64EC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 340"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6500",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 341"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6514",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 342"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6528",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 343"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B653C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 344"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6550",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 345"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6564",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 346"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6578",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 347"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B658C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 348"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B65A0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 349"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B65B4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 350"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B65C8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 351"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B65DC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 381"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B65F0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 408"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6604",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 409"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6618",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 410"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B662C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 380"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6640",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 411"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6654",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 405"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6668",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 406"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B667C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 407"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6690",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 382"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B66A4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 383"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B66B8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 384"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B66CC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 385"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B66E0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 386"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B66F4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 387"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6708",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 388"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B671C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 389"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6730",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 390"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6744",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 391"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6758",
+      "regular": "Verified (Oblivion): BSShaderProperty_GetRenderPassName maps render-pass selector 0x18C (396) to the exact name \"BSSM_TEXEFFECT\".",
+      "repeatable": "jumptable 007B493D case 396"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B676C",
+      "regular": "Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18D to \"BSSM_TEXEFFECT_S\". Probable: _S is the controller/skinned geometry pass variant; the selector is chosen from passInfo bit 0x02, set when SetupGeometry sees a non-null geometry controller, and Fallout's analogous helper branches on abSkinned.",
+      "repeatable": "jumptable 007B493D case 397"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6780",
+      "regular": "Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18E (398) to \"BSSM_2x_TEXEFFECT\".",
+      "repeatable": "jumptable 007B493D case 398"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6794",
+      "regular": "Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18F (399) to \"BSSM_2x_TEXEFFECT_S\". Probable: _S is the controller/skinned geometry variant, corroborated by passInfo bit 0x02 selection and Fallout's abSkinned 2x helper.",
+      "repeatable": "jumptable 007B493D case 399"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B67A8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 392"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B67BC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 393"
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x7B67D0",
+      "regular": "[Verified] BSShaderProperty_GetRenderPassName maps selector 0x18A (394) to the exact string BSSM_DECAL.",
+      "repeatable": "jumptable 007B493D case 394"
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x7B67E4",
+      "regular": "[Verified] BSShaderProperty_GetRenderPassName maps selector 0x18B (395) to the exact string BSSM_DECAL_A.",
+      "repeatable": "jumptable 007B493D case 395"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B67F8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 400"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B680C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 401"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6820",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 402"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6834",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 403"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6848",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 404"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B685C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 412"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6870",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 413"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6884",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 414"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6898",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 415"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B68AC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 10"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B68C0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 11"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B68D4",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 416"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B68E8",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 417"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B68FC",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 418"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6910",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 352"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6924",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 353"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6938",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 354"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B694C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 355"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6960",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 356"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6974",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 357"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B6988",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 358"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B699C",
+      "regular": "",
+      "repeatable": "jumptable 007B493D case 359"
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7B69B0",
+      "regular": "",
+      "repeatable": "jumptable 007B493D default case, cases 275,276,299,300"
+    }
+  ]
+}

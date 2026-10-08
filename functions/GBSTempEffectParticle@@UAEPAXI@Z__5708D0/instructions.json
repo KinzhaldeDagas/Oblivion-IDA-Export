@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5708D3",
-    "line": "call    ??1BSTempEffectParticle@@UAE@XZ; BSTempEffectParticle::~BSTempEffectParticle(void)",
+    "line": "call    BSTempEffectParticle_Destructor; Verified: releases queued/model references, detaches/releases particle root, then invokes BSTempEffect base destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x5708E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

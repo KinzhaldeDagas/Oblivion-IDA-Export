@@ -1,9 +1,10 @@
-LONG __thiscall BSTempEffect_destr(_DWORD *this)
+// Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+LONG __thiscall BSTempEffect_Destructor(BSTempEffect *self)
 {
-  *((float *)this + 2) = 0.0;
-  *this = &BSTempEffect::`vftable';
-  *((float *)this + 4) = 0.0;
-  *(this + 3) = 0;
-  *((_BYTE *)this + 0x14) = 0;
-  return NiRefObject_destr(this);
+  self->durationSeconds = 0.0; /*0x56bc54*/
+  self->vtable = &BSTempEffect::`vftable'; /*0x56bc57*/
+  self->elapsedSeconds = 0.0; /*0x56bc5d*/
+  self->parentCell = 0; /*0x56bc60*/
+  self->initializeCallbackDone = 0; /*0x56bc63*/
+  return NiRefObject_destr(self);
 }

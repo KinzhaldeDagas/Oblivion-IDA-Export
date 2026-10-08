@@ -1,4 +1,4 @@
-0x56FB40: push    esi
+0x56FB40: push    esi; Verified BSTempEffectGeometryDecal_Initialize override at vtable +0x4C. It guards repeated live initialization with initializeCallbackDone, checks source/parent refs, obtains sourceGeometry->geomData->m_spAdditionalGeomData, branches on that object's +0x4C bool slot to one of two builders, then marks callback-done and releases transient source refs. LoadGame builds restored geometry through BuildGeneratedGeometry instead of dispatching this Initialize virtual, so this byte is not a general generated-geometry-ready flag.
 0x56FB41: mov     esi, ecx
 0x56FB43: mov     eax, [esi+2Ch]
 0x56FB46: cmp     dword ptr [eax+0B8h], 0
@@ -20,13 +20,13 @@
 0x56FB7C: mov     edx, [eax]
 0x56FB7E: mov     ecx, eax
 0x56FB80: mov     eax, [edx+4Ch]
-0x56FB83: call    eax
+0x56FB83: call    eax; Verified local dataflow: sourceGeometryData is NiGeometryData* and this loads member m_spAdditionalGeomData at object +0x34 as NiAdditionalGeometryData*. It calls that object's virtual +0x4C. The base and BSPackedAdditionalGeometryData vtables return false/true respectively; interpreting this as packed-data or vertex-stream readiness is Probable, exact method semantics Unknown.
 0x56FB85: test    al, al
-0x56FB87: mov     ecx, esi
+0x56FB87: mov     ecx, esi; this
 0x56FB89: jz      short loc_56FB92
-0x56FB8B: call    sub_56D9E0
+0x56FB8B: call    BSTempEffectGeometryDecal_InitializeUsingVertexStreams; Verified vertex-stream builder uses source geometry data, locks/reads/unlocks the vertex stream, constructs clipped decal mesh arrays and hands them to BSTempEffectGeometryDecal_BuildGeneratedGeometry. Called from Initialize only when source additional-data vslot +0x4C returns true.
 0x56FB90: jmp     short loc_56FB97
-0x56FB92: call    sub_56ECD0
+0x56FB92: call    BSTempEffectGeometryDecal_InitializeUsingSkinnedGeometryData; Verified CPU-skinned fallback builder passes sourceGeometry->skinData and NiGeometryData vertex/normal arrays/count to sub_72AF20, then computes/clips decal arrays and calls BSTempEffectGeometryDecal_BuildGeneratedGeometry. Called from Initialize when source additional-data vslot +0x4C returns false.
 0x56FB97: push    ebp
 0x56FB98: mov     ebp, ds:0A2807Ch
 0x56FB9E: push    edi

@@ -1,0 +1,120 @@
+{
+  "address_comment_regular": "[Verified] Appends one 1x decal RenderPass per batch from a DECAL_DATA item count. The count is supplied from BSShaderLightingProperty+0x8C by BSShaderPPLightingProperty_BuildInheritedLightPasses; batch size is OB_ShaderPassControl.decalPassBatchSize. With emitMode==1, creates selector 0x18A/BSSM_DECAL or 0x18B/BSSM_DECAL_A according to useDecalVariantA; otherwise increments the output pass count. `passByte` is forwarded unchanged; its downstream meaning remains Unknown. Fallout uses distinct selectors 0x1FF/0x1FE and has a separate accumulator geometry-group path; direct equivalence is Unknown.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x85A200",
+      "0x85A38B"
+    ],
+    [
+      "0x9D0CA0",
+      "0x9D0CD1"
+    ]
+  ],
+  "folder": "sub_85A200__85A200",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 7,
+    "callers_count": 1,
+    "chunks_sha256": "d959330a25c00bc385700417085f17037005af2bcfccda2955a0543608ddeb51",
+    "comment_regular": "[Verified] Appends one 1x decal RenderPass per batch from a DECAL_DATA item count. The count is supplied from BSShaderLightingProperty+0x8C by BSShaderPPLightingProperty_BuildInheritedLightPasses; batch size is OB_ShaderPassControl.decalPassBatchSize. With emitMode==1, creates selector 0x18A/BSSM_DECAL or 0x18B/BSSM_DECAL_A according to useDecalVariantA; otherwise increments the output pass count. `passByte` is forwarded unchanged; its downstream meaning remains Unknown. Fallout uses distinct selectors 0x1FF/0x1FE and has a separate accumulator geometry-group path; direct equivalence is Unknown.",
+    "comment_repeatable": "[Verified] Appends one 1x decal RenderPass per batch from a DECAL_DATA item count. The count is supplied from BSShaderLightingProperty+0x8C by BSShaderPPLightingProperty_BuildInheritedLightPasses; batch size is OB_ShaderPassControl.decalPassBatchSize. With emitMode==1, creates selector 0x18A/BSSM_DECAL or 0x18B/BSSM_DECAL_A according to useDecalVariantA; otherwise increments the output pass count. `passByte` is forwarded unchanged; its downstream meaning remains Unknown. Fallout uses distinct selectors 0x1FF/0x1FE and has a separate accumulator geometry-group path; direct equivalence is Unknown.",
+    "data_refs_count": 1,
+    "display_name": "BSShaderProperty_AppendDecalPassesByBatch",
+    "end_ea": "0x85A38B",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "BSShaderProperty_AppendDecalPassesByBatch",
+    "segment": ".text",
+    "sha256": "251a76784d8165ad467a93eb1ebc0b0714afa0a61503c11757c55ca9bfd1a082",
+    "size": 395,
+    "start_ea": "0x85A200",
+    "total_chunk_size": 444,
+    "type": "int __thiscall(BSShaderProperty *this, NiGeometry *geometry, unsigned __int16 *outPassCount, int emitMode, char *passByte, char useDecalVariantA, int decalCount)",
+    "xrefs_from_count": 152,
+    "xrefs_to_count": 1
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] Appends one 1x decal RenderPass per batch from a DECAL_DATA item count. The count is supplied from BSShaderLightingProperty+0x8C by BSShaderPPLightingProperty_BuildInheritedLightPasses; batch size is OB_ShaderPassControl.decalPassBatchSize. With emitMode==1, creates selector 0x18A/BSSM_DECAL or 0x18B/BSSM_DECAL_A according to useDecalVariantA; otherwise increments the output pass count. `passByte` is forwarded unchanged; its downstream meaning remains Unknown. Fallout uses distinct selectors 0x1FF/0x1FE and has a separate accumulator geometry-group path; direct equivalence is Unknown.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x85A200",
+      "regular": "[Verified] Appends one 1x decal RenderPass per batch from a DECAL_DATA item count. The count is supplied from BSShaderLightingProperty+0x8C by BSShaderPPLightingProperty_BuildInheritedLightPasses; batch size is OB_ShaderPassControl.decalPassBatchSize. With emitMode==1, creates selector 0x18A/BSSM_DECAL or 0x18B/BSSM_DECAL_A according to useDecalVariantA; otherwise increments the output pass count. `passByte` is forwarded unchanged; its downstream meaning remains Unknown. Fallout uses distinct selectors 0x1FF/0x1FE and has a separate accumulator geometry-group path; direct equivalence is Unknown.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A248",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A26F",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A271",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A272",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A277",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A278",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A2D3",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A2FA",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A2FC",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A2FD",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A302",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85A303",
+      "regular": "outPass",
+      "repeatable": ""
+    }
+  ]
+}

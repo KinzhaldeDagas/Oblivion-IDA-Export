@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56BD80",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified base save path writes duration, elapsed and owning-cell FormID (0 when absent). Derived particle save delegates here.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x56BD84",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x56BD8A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x56BD8F",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x56BD95",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x56BD9A",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56BD9B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x56BDAB",
-    "line": "mov     [esp+8+var_4], 0",
+    "line": "mov     [esp+8+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -109,37 +109,37 @@
   },
   {
     "ea": "0x56BDB8",
-    "line": "mov     [esp+8+var_4], edx",
+    "line": "mov     [esp+8+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x56BDBC",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x56BDC2",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x56BDC4",
-    "line": "lea     eax, [esp+0Ch+var_4]",
+    "line": "lea     eax, [esp+0Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56BDC8",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56BDC9",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },

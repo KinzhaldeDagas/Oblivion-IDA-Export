@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56D480",
-    "line": "push    esi",
+    "line": "push    esi; [Verified] Requires nonnull DECAL_DATA at +0x18 and generatedGeometry at +0x1C, then requires the saved target FormID to resolve/cast to TESObjectREFR with loaded 3D. Unlike type 0, there is no success path for an unresolved zero FormID. A literal zero is not rejected by a separate unconditional test; the resolved-reference predicate decides.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x56D483",
-    "line": "mov     eax, [esi+18h]",
+    "line": "mov     eax, [esi+18h]; BloodOnDeath decode 2026-05-30: BSTempEffectGeometryDecal saveability is stricter: it requires decal data, created geometry decal payload, and a valid target reference with 3D.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x56D4A2",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

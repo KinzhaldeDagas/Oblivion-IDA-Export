@@ -1,6 +1,6 @@
-0x7AA860: push    esi
+0x7AA860: push    esi; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x7AA861: mov     esi, ecx
-0x7AA863: mov     ecx, [esp+4+arg_0]
+0x7AA863: mov     ecx, [esp+4+node]
 0x7AA867: mov     eax, [ecx]
 0x7AA869: cmp     eax, [esi+4]
 0x7AA86C: push    edi

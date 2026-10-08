@@ -11,5 +11,5 @@
 0x701A9D: mov     edx, [eax]
 0x701A9F: push    1
 0x701AA1: call    edx
-0x701AA3: mov     dword ptr ds:0B3F940h, 0
+0x701AA3: mov     dword ptr ds:0B3F940h, 0; 3DTheft decode 2026-05-16: shutdown path clears g_NiParallelUpdateTaskManager after vfunc +0x5C and scalar destructor. This pass did not find the construction/assignment xref.
 0x701AAD: retn

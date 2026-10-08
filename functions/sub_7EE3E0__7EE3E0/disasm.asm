@@ -1,4 +1,4 @@
-0x7EE3E0: push    esi
+0x7EE3E0: push    esi; [Verified] Appends DECAL_DATA* to this BSShaderLightingProperty's list at +0x80: allocates a node through the list allocator vfunc, stores data at node+8, links at tail, and increments numItems at +0x8C. Resets the base BSShaderProperty cached render-pass state at +0x24. Called by BSTempEffectDecal_Ctor, BSTempEffectDecal_LoadGame, and BSTempEffectGeometryDecal_BuildGeneratedGeometry.
 0x7EE3E1: push    edi
 0x7EE3E2: mov     edi, ecx
 0x7EE3E4: mov     eax, [edi+80h]
@@ -6,7 +6,7 @@
 0x7EE3ED: lea     esi, [edi+80h]
 0x7EE3F3: mov     ecx, esi
 0x7EE3F5: call    edx
-0x7EE3F7: mov     ecx, [esp+8+arg_0]
+0x7EE3F7: mov     ecx, [esp+8+data]
 0x7EE3FB: mov     [eax+8], ecx
 0x7EE3FE: mov     dword ptr [eax], 0
 0x7EE404: mov     edx, [esi+8]

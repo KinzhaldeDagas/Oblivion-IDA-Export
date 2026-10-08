@@ -1,4 +1,4 @@
-0x5704A0: push    0FFFFFFFFh
+0x5704A0: push    0FFFFFFFFh; [Verified] BSTempEffectGeometryDecal destructor unregisters its DECAL_DATA payload from the target shader property via BSShaderLightingProperty_RemoveDecalData, releases the target NiProperty, then releases the payload's source texture and target property and frees the 0x4C payload.
 0x5704A2: push    offset ??1BSTempEffectGeometryDecal@@UAE@XZ_SEH
 0x5704A7: mov     eax, large fs:0
 0x5704AD: push    eax
@@ -62,11 +62,11 @@
 0x570543: call    eax
 0x570545: mov     [esi+1Ch], ebx
 0x570548: mov     eax, [esi+18h]
-0x57054B: mov     ecx, [eax+48h]
+0x57054B: mov     ecx, [eax+48h]; this
 0x57054E: cmp     ecx, ebx
 0x570550: jz      short loc_570558
-0x570552: push    eax
-0x570553: call    sub_7EE740
+0x570552: push    eax; data
+0x570553: call    BSShaderLightingProperty_RemoveDecalData; [Verified] Finds a DECAL_DATA* by payload identity in this property's list at +0x80, removes/frees the matching list node via the generic NiTPointerList removal routine, decrements +0x8C, and resets cached render-pass state at +0x24. Uses property+0x90 as its temporary next-node cursor; no payload ownership release occurs here.
 0x570558: mov     ebp, [esi+18h]
 0x57055B: mov     edi, [ebp+48h]
 0x57055E: add     ebp, 48h ; 'H'
@@ -89,15 +89,15 @@
 0x570587: cmp     eax, ebx
 0x570589: jz      short loc_570594
 0x57058B: push    eax
-0x57058C: call    FormHeapFree
+0x57058C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x570591: add     esp, 4
 0x570594: mov     edi, [esi+18h]
 0x570597: cmp     edi, ebx
 0x570599: jz      short loc_5705AB
-0x57059B: mov     ecx, edi
-0x57059D: call    sub_56C0F0
+0x57059B: mov     ecx, edi; this
+0x57059D: call    DECAL_DATA_ReleaseOwnedReferences; [Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.
 0x5705A2: push    edi
-0x5705A3: call    FormHeapFree
+0x5705A3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5705A8: add     esp, 4
 0x5705AB: mov     edi, [esi+2Ch]
 0x5705AE: cmp     edi, ebx
@@ -180,9 +180,9 @@
 0x57065A: push    1
 0x57065C: mov     ecx, edi
 0x57065E: call    eax
-0x570660: mov     ecx, esi
+0x570660: mov     ecx, esi; self
 0x570662: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x57066A: call    BSTempEffect_destr
+0x57066A: call    BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
 0x57066F: mov     ecx, dword ptr [esp+28h+var_C]
 0x570673: mov     large fs:0, ecx
 0x57067A: pop     ecx
@@ -192,3 +192,21 @@
 0x57067E: pop     ebx
 0x57067F: add     esp, 14h
 0x570682: retn
+0x9BDC50: mov     ecx, [ebp-10h]; self
+0x9BDC53: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+0x9BDC58: mov     ecx, [ebp-10h]
+0x9BDC5B: add     ecx, 1Ch; slot
+0x9BDC5E: jmp     NiPointerSlot_Release
+0x9BDC63: mov     ecx, [ebp-10h]
+0x9BDC66: add     ecx, 2Ch ; ','; slot
+0x9BDC69: jmp     NiPointerSlot_Release
+0x9BDC6E: mov     ecx, [ebp-10h]
+0x9BDC71: add     ecx, 30h ; '0'; slot
+0x9BDC74: jmp     NiPointerSlot_Release
+0x9BDC79: mov     edx, [esp+arg_4]
+0x9BDC7D: lea     eax, [edx-18h]
+0x9BDC80: mov     ecx, [edx-1Ch]
+0x9BDC83: xor     ecx, eax
+0x9BDC85: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDC8A: mov     eax, offset stru_AE74E4
+0x9BDC8F: jmp     ___CxxFrameHandler3

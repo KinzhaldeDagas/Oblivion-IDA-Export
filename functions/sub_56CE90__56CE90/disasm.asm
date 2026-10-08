@@ -1,4 +1,4 @@
-0x56CE90: push    0FFFFFFFFh
+0x56CE90: push    0FFFFFFFFh; Verified BSTempEffectGeometryDecal constructor layout (class size 0x54). Stores decalCreationData +0x18, sourceGeometry +0x2C and its parent NiNode +0x30; initializes generated/target geometry and failure state. Stores projection point XYZ at +0x34..+0x3C, orientation vector XYZ at +0x40..+0x48, footprintScale +0x4C and randomRotation +0x50. Geometry-builder code subtracts projectionPoint XYZ from transformed source points and feeds orientationVector XYZ to the rotation-matrix builder; both vectors are now typed floats. +0x24 and +0x34..+0x3C exact caller semantics beyond their observed dataflow are commented at their access sites.
 0x56CE92: push    offset SEH_56CE90
 0x56CE97: mov     eax, large fs:0
 0x56CE9D: push    eax
@@ -15,18 +15,18 @@
 0x56CEB5: mov     esi, ecx
 0x56CEB7: mov     [esp+24h+var_10], esi
 0x56CEBB: fld     [esp+24h+arg_4]
-0x56CEBF: mov     eax, [esp+24h+arg_0]
+0x56CEBF: mov     eax, [esp+24h+parentCell]
 0x56CEC3: push    ecx
-0x56CEC4: fstp    [esp+28h+var_28]; float
-0x56CEC7: push    eax; int
-0x56CEC8: call    BSTempEff_constr
+0x56CEC4: fstp    [esp+28h+durationSeconds]; durationSeconds
+0x56CEC7: push    eax; parentCell
+0x56CEC8: call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.
 0x56CECD: xor     ebx, ebx
-0x56CECF: mov     dword ptr [esi], offset ??_7BSTempEffectGeometryDecal@@6B@; const BSTempEffectGeometryDecal::`vftable'
+0x56CECF: mov     dword ptr [esi], offset ??_7BSTempEffectGeometryDecal@@6B@; ODismemberment authority: geometry decal temp effect constructor stores source geometry, parent, direction, scale, and decal data; build/attach happens via StartOrQueueCreateTask.
 0x56CED5: mov     [esp+24h+var_4], ebx
 0x56CED9: mov     [esi+1Ch], ebx
 0x56CEDC: mov     [esi+2Ch], ebx
 0x56CEDF: mov     [esi+30h], ebx
-0x56CEE2: mov     eax, [esp+24h+arg_8]
+0x56CEE2: mov     eax, [esp+24h+decalCreationData]
 0x56CEE6: lea     ecx, [eax+8]
 0x56CEE9: mov     byte ptr [esp+24h+var_4], 3
 0x56CEEE: mov     [esi+28h], bl
@@ -48,7 +48,7 @@
 0x56CF18: mov     ecx, edi
 0x56CF1A: call    eax
 0x56CF1C: mov     [esi+1Ch], ebx
-0x56CF1F: mov     ebp, [esp+24h+arg_C]
+0x56CF1F: mov     ebp, [esp+24h+sourceGeometry]
 0x56CF23: mov     [esi+24h], ebx
 0x56CF26: mov     edi, [esi+2Ch]
 0x56CF29: cmp     edi, ebp
@@ -97,20 +97,20 @@
 0x56CF8F: add     ebp, 4
 0x56CF92: push    ebp; lpAddend
 0x56CF93: call    dword ptr ds:0A28078h
-0x56CF99: mov     eax, [esp+24h+arg_10]
-0x56CF9D: fld     [esp+24h+arg_28]
-0x56CFA1: mov     ecx, [esp+24h+arg_14]
-0x56CFA5: fstp    dword ptr [esi+4Ch]
-0x56CFA8: mov     edx, [esp+24h+arg_18]
-0x56CFAC: fld     [esp+24h+arg_2C]
+0x56CF99: mov     eax, [esp+24h+projectionPointX]
+0x56CF9D: fld     [esp+24h+footprintScale]
+0x56CFA1: mov     ecx, [esp+24h+projectionPointY]
+0x56CFA5: fstp    dword ptr [esi+4Ch]; BloodOnDeath decode 2026-05-30: Geometry decal stores the native fixed decal footprint argument here. Decal_AttachToGeometryRecursive passes flt_A468FC = 15.0.
+0x56CFA8: mov     edx, [esp+24h+projectionPointZ]
+0x56CFAC: fld     [esp+24h+randomRotation]
 0x56CFB0: mov     [esi+34h], eax
-0x56CFB3: fstp    dword ptr [esi+50h]
-0x56CFB6: mov     eax, [esp+24h+arg_1C]
+0x56CFB3: fstp    dword ptr [esi+50h]; BloodOnDeath decode 2026-05-30: Geometry decal stores the random rotation angle here; selector/rotation vary appearance but do not increase decal count.
+0x56CFB6: mov     eax, [esp+24h+orientationVectorX]
 0x56CFBA: mov     [esi+38h], ecx
-0x56CFBD: mov     ecx, [esp+24h+arg_20]
+0x56CFBD: mov     ecx, [esp+24h+orientationVectorY]
 0x56CFC1: mov     [esi+40h], eax
 0x56CFC4: mov     [esi+3Ch], edx
-0x56CFC7: mov     edx, [esp+24h+arg_24]
+0x56CFC7: mov     edx, [esp+24h+orientationVectorZ]
 0x56CFCB: mov     [esi+44h], ecx
 0x56CFCE: mov     [esi+48h], edx
 0x56CFD1: mov     eax, esi
@@ -123,3 +123,21 @@
 0x56CFE2: pop     ebx
 0x56CFE3: add     esp, 10h
 0x56CFE6: retn    30h ; '0'
+0x9BDA80: mov     ecx, [ebp-10h]; self
+0x9BDA83: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+0x9BDA88: mov     ecx, [ebp-10h]
+0x9BDA8B: add     ecx, 1Ch; slot
+0x9BDA8E: jmp     NiPointerSlot_Release
+0x9BDA93: mov     ecx, [ebp-10h]
+0x9BDA96: add     ecx, 2Ch ; ','; slot
+0x9BDA99: jmp     NiPointerSlot_Release
+0x9BDA9E: mov     ecx, [ebp-10h]
+0x9BDAA1: add     ecx, 30h ; '0'; slot
+0x9BDAA4: jmp     NiPointerSlot_Release
+0x9BDAA9: mov     edx, [esp+arg_4]
+0x9BDAAD: lea     eax, [edx-14h]
+0x9BDAB0: mov     ecx, [edx-18h]
+0x9BDAB3: xor     ecx, eax
+0x9BDAB5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDABA: mov     eax, offset stru_AE7390
+0x9BDABF: jmp     ___CxxFrameHandler3

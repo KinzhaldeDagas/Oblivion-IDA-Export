@@ -1,4 +1,4 @@
-0x7B4920: sub     esp, 10h
+0x7B4920: sub     esp, 10h; Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.
 0x7B4923: mov     eax, ds:0B30AACh
 0x7B4928: xor     eax, esp
 0x7B492A: mov     [esp+10h+var_4], eax
@@ -72,7 +72,7 @@
 0x7B4A17: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B4A1C: add     esp, 10h
 0x7B4A1F: retn
-0x7B4A20: mov     eax, offset aBssm_fronds; jumptable 007B493D case 15
+0x7B4A20: mov     eax, offset aBssm_fronds; BSSM_FRONDS string returned by BSShaderProperty_GetRenderPassName case 0x0F. Only string-table evidence; not a frond geometry attachment path.
 0x7B4A25: mov     ecx, [esp+10h+var_4]
 0x7B4A29: xor     ecx, esp
 0x7B4A2B: call    @__security_check_cookie@4; __security_check_cookie(x)
@@ -2118,13 +2118,13 @@
 0x7B64BB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B64C0: add     esp, 10h
 0x7B64C3: retn
-0x7B64C4: mov     eax, offset aBssm_3xdecal; jumptable 007B493D case 338
+0x7B64C4: mov     eax, offset aBssm_3xdecal; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x152 (338) to BSSM_3XDECAL.
 0x7B64C9: mov     ecx, [esp+10h+var_4]
 0x7B64CD: xor     ecx, esp
 0x7B64CF: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B64D4: add     esp, 10h
 0x7B64D7: retn
-0x7B64D8: mov     eax, offset aBssm_3xdecal_a; jumptable 007B493D case 339
+0x7B64D8: mov     eax, offset aBssm_3xdecal_a; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x153 (339) to BSSM_3XDECAL_A.
 0x7B64DD: mov     ecx, [esp+10h+var_4]
 0x7B64E1: xor     ecx, esp
 0x7B64E3: call    @__security_check_cookie@4; __security_check_cookie(x)
@@ -2316,25 +2316,25 @@
 0x7B674F: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B6754: add     esp, 10h
 0x7B6757: retn
-0x7B6758: mov     eax, offset aBssm_texeffect; jumptable 007B493D case 396
+0x7B6758: mov     eax, offset aBssm_texeffect; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps render-pass selector 0x18C (396) to the exact name "BSSM_TEXEFFECT".
 0x7B675D: mov     ecx, [esp+10h+var_4]
 0x7B6761: xor     ecx, esp
 0x7B6763: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B6768: add     esp, 10h
 0x7B676B: retn
-0x7B676C: mov     eax, offset aBssm_texeffe_0; jumptable 007B493D case 397
+0x7B676C: mov     eax, offset aBssm_texeffe_0; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18D to "BSSM_TEXEFFECT_S". Probable: _S is the controller/skinned geometry pass variant; the selector is chosen from passInfo bit 0x02, set when SetupGeometry sees a non-null geometry controller, and Fallout's analogous helper branches on abSkinned.
 0x7B6771: mov     ecx, [esp+10h+var_4]
 0x7B6775: xor     ecx, esp
 0x7B6777: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B677C: add     esp, 10h
 0x7B677F: retn
-0x7B6780: mov     eax, offset aBssm_2x_texeff; jumptable 007B493D case 398
+0x7B6780: mov     eax, offset aBssm_2x_texeff; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18E (398) to "BSSM_2x_TEXEFFECT".
 0x7B6785: mov     ecx, [esp+10h+var_4]
 0x7B6789: xor     ecx, esp
 0x7B678B: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B6790: add     esp, 10h
 0x7B6793: retn
-0x7B6794: mov     eax, offset aBssm_2x_texe_0; jumptable 007B493D case 399
+0x7B6794: mov     eax, offset aBssm_2x_texe_0; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18F (399) to "BSSM_2x_TEXEFFECT_S". Probable: _S is the controller/skinned geometry variant, corroborated by passInfo bit 0x02 selection and Fallout's abSkinned 2x helper.
 0x7B6799: mov     ecx, [esp+10h+var_4]
 0x7B679D: xor     ecx, esp
 0x7B679F: call    @__security_check_cookie@4; __security_check_cookie(x)
@@ -2352,13 +2352,13 @@
 0x7B67C7: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B67CC: add     esp, 10h
 0x7B67CF: retn
-0x7B67D0: mov     eax, offset aBssm_decal; jumptable 007B493D case 394
+0x7B67D0: mov     eax, offset aBssm_decal; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x18A (394) to the exact string BSSM_DECAL.
 0x7B67D5: mov     ecx, [esp+10h+var_4]
 0x7B67D9: xor     ecx, esp
 0x7B67DB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B67E0: add     esp, 10h
 0x7B67E3: retn
-0x7B67E4: mov     eax, offset aBssm_decal_a; jumptable 007B493D case 395
+0x7B67E4: mov     eax, offset aBssm_decal_a; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x18B (395) to the exact string BSSM_DECAL_A.
 0x7B67E9: mov     ecx, [esp+10h+var_4]
 0x7B67ED: xor     ecx, esp
 0x7B67EF: call    @__security_check_cookie@4; __security_check_cookie(x)

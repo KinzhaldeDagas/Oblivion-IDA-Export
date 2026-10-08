@@ -1,34 +1,34 @@
-0x56D5F0: sub     esp, 34h
+0x56D5F0: sub     esp, 34h; Verified geometry-decal SaveGame serializes decalCreationData values/path, base lifetime/cell, the persistent targetGeometry scene index, generated mesh vertex/UV/index arrays and skin-partition bone/weight data. This lets LoadGame reconstruct the generated NiTriShape from saved geometry without the transient live-initialization references.
 0x56D5F3: push    esi
 0x56D5F4: push    edi
 0x56D5F5: xor     edi, edi
 0x56D5F7: cmp     byte ptr ds:0B05BACh, 0
 0x56D5FE: mov     esi, ecx
 0x56D600: mov     ecx, ds:0B33B00h
-0x56D606: mov     [esp+3Ch+var_18], edi
+0x56D606: mov     [esp+3Ch+source], edi
 0x56D60A: mov     eax, [ecx+14h]
 0x56D60D: mov     [esp+3Ch+var_1C], edi
 0x56D611: mov     [esp+3Ch+var_24], eax
 0x56D615: jz      short loc_56D61B
 0x56D617: mov     [esp+3Ch+var_24], eax
-0x56D61B: call    sub_45A170
+0x56D61B: call    TESSaveLoadGame_UseSaveGameBlocks
 0x56D620: test    al, al
 0x56D622: jz      short loc_56D657
-0x56D624: mov     ecx, ds:0B33B00h
-0x56D62A: push    4; Size
+0x56D624: mov     ecx, ds:0B33B00h; self
+0x56D62A: push    4; byteCount
 0x56D62C: lea     eax, [esp+40h+Src]
-0x56D630: push    eax; Src
+0x56D630: push    eax; source
 0x56D631: mov     [esp+44h+Src], 4B4F4C42h
 0x56D639: call    SaveLoad_SaveData
-0x56D63E: mov     ecx, ds:0B33B00h
+0x56D63E: mov     ecx, ds:0B33B00h; self
 0x56D644: mov     edx, [ecx+14h]
-0x56D647: push    2; Size
-0x56D649: lea     eax, [esp+40h+var_18]
-0x56D64D: push    eax; Src
+0x56D647: push    2; byteCount
+0x56D649: lea     eax, [esp+40h+source]
+0x56D64D: push    eax; source
 0x56D64E: mov     [esp+44h+var_1C], edx
 0x56D652: call    SaveLoad_SaveData
-0x56D657: mov     ecx, esi
-0x56D659: call    sub_56BD80
+0x56D657: mov     ecx, esi; self
+0x56D659: call    BSTempEffect_SaveGame; BloodOnDeath decode 2026-05-30: geometry decal save serializes base duration, elapsed, and owning cell before generated decal payload.
 0x56D65E: mov     ecx, [esi+18h]
 0x56D661: mov     eax, [ecx]
 0x56D663: cmp     eax, edi
@@ -42,50 +42,50 @@
 0x56D676: push    eax; void *
 0x56D677: call    sub_45E940
 0x56D67C: mov     edx, [esi+18h]
-0x56D67F: mov     ecx, ds:0B33B00h
-0x56D685: push    4; Size
+0x56D67F: mov     ecx, ds:0B33B00h; self
+0x56D685: push    4; byteCount
 0x56D687: add     edx, 4
-0x56D68A: push    edx; Src
+0x56D68A: push    edx; source
 0x56D68B: call    SaveLoad_SaveData
 0x56D690: mov     eax, [esi+18h]
 0x56D693: add     eax, 8
 0x56D696: push    eax
 0x56D697: lea     ecx, [esp+48h+var_10]
 0x56D69B: call    sub_7150F0
-0x56D6A0: push    10h; Size
+0x56D6A0: push    10h; byteCount
 0x56D6A2: lea     ecx, [esp+48h+var_10]
-0x56D6A6: push    ecx; Src
-0x56D6A7: mov     ecx, ds:0B33B00h
+0x56D6A6: push    ecx; source
+0x56D6A7: mov     ecx, ds:0B33B00h; self
 0x56D6AD: call    SaveLoad_SaveData
 0x56D6B2: mov     edx, [esi+18h]
-0x56D6B5: mov     ecx, ds:0B33B00h
-0x56D6BB: push    0Ch; Size
+0x56D6B5: mov     ecx, ds:0B33B00h; self
+0x56D6BB: push    0Ch; byteCount
 0x56D6BD: add     edx, 2Ch ; ','
-0x56D6C0: push    edx; Src
+0x56D6C0: push    edx; source
 0x56D6C1: call    SaveLoad_SaveData
 0x56D6C6: mov     eax, [esi+18h]
-0x56D6C9: mov     ecx, ds:0B33B00h
-0x56D6CF: push    4; Size
+0x56D6C9: mov     ecx, ds:0B33B00h; self
+0x56D6CF: push    4; byteCount
 0x56D6D1: add     eax, 38h ; '8'
-0x56D6D4: push    eax; Src
+0x56D6D4: push    eax; source
 0x56D6D5: call    SaveLoad_SaveData
 0x56D6DA: mov     ecx, [esi+18h]
 0x56D6DD: add     ecx, 3Ch ; '<'
-0x56D6E0: push    4
-0x56D6E2: push    ecx
-0x56D6E3: mov     ecx, ds:0B33B00h
-0x56D6E9: call    SaveLoad_SaveFormID
+0x56D6E0: push    4; byteCount
+0x56D6E2: push    ecx; source
+0x56D6E3: mov     ecx, ds:0B33B00h; self
+0x56D6E9: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x56D6EE: mov     edx, [esi+18h]
-0x56D6F1: mov     ecx, ds:0B33B00h
-0x56D6F7: push    4; Size
+0x56D6F1: mov     ecx, ds:0B33B00h; self
+0x56D6F7: push    4; byteCount
 0x56D6F9: add     edx, 40h ; '@'
-0x56D6FC: push    edx; Src
+0x56D6FC: push    edx; source
 0x56D6FD: call    SaveLoad_SaveData
 0x56D702: mov     eax, [esi+18h]
-0x56D705: mov     ecx, ds:0B33B00h
-0x56D70B: push    1; Size
+0x56D705: mov     ecx, ds:0B33B00h; self
+0x56D70B: push    1; byteCount
 0x56D70D: add     eax, 44h ; 'D'
-0x56D710: push    eax; Src
+0x56D710: push    eax; source
 0x56D711: call    SaveLoad_SaveData
 0x56D716: mov     ecx, [esi+18h]
 0x56D719: mov     edx, [ecx+3Ch]
@@ -94,7 +94,7 @@
 0x56D722: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x56D727: push    edi; int
 0x56D728: push    edx; a1
-0x56D729: call    TESForm_LookupByFormID
+0x56D729: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56D72E: add     esp, 4
 0x56D731: push    eax; void *
 0x56D732: call    OblivionDynamicCast
@@ -123,13 +123,13 @@
 0x56D773: call    sub_4810A0
 0x56D778: add     esp, 10h
 0x56D77B: cmp     eax, 0FFFFFFFFh
-0x56D77E: mov     [esp+44h+var_34], eax
+0x56D77E: mov     [esp+44h+var_34], eax; BloodOnDeath decode 2026-05-30: geometry decal save stores attached geometry index; geometry-count changes can invalidate saved trail decals.
 0x56D782: jnz     short loc_56D7A9
-0x56D784: mov     ecx, ds:0B333C4h
+0x56D784: mov     ecx, ds:0B333C4h; this
 0x56D78A: cmp     ebp, ecx
 0x56D78C: jnz     short loc_56D7A9
-0x56D78E: push    1
-0x56D790: call    PlayerCharacter_GetPlayerNode
+0x56D78E: push    1; firstPerson
+0x56D790: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x56D795: push    0
 0x56D797: push    1
 0x56D799: mov     edi, eax
@@ -156,15 +156,15 @@
 0x56D7D3: push    offset aCouldNotFindGe; "Could not find geometry index for refer"...
 0x56D7D8: call    PrintError
 0x56D7DD: add     esp, 0Ch
-0x56D7E0: push    4; Size
+0x56D7E0: push    4; byteCount
 0x56D7E2: lea     ecx, [esp+48h+var_14]
-0x56D7E6: push    ecx; Src
-0x56D7E7: mov     ecx, ds:0B33B00h
+0x56D7E6: push    ecx; source
+0x56D7E7: mov     ecx, ds:0B33B00h; self
 0x56D7ED: call    SaveLoad_SaveData
-0x56D7F2: mov     ecx, ds:0B33B00h
-0x56D7F8: push    4; Size
+0x56D7F2: mov     ecx, ds:0B33B00h; self
+0x56D7F8: push    4; byteCount
 0x56D7FA: lea     edx, [esp+48h+var_34]
-0x56D7FE: push    edx; Src
+0x56D7FE: push    edx; source
 0x56D7FF: call    SaveLoad_SaveData
 0x56D804: mov     esi, [esi+1Ch]
 0x56D807: mov     edi, [esi+0B4h]
@@ -177,58 +177,57 @@
 0x56D825: mov     [esp+44h+var_20], edx
 0x56D829: mov     eax, [esi+8]
 0x56D82C: movzx   ecx, word ptr [eax+40h]
-0x56D830: push    2; Size
+0x56D830: push    2; byteCount
 0x56D832: lea     edx, [esp+48h+var_30]
 0x56D836: mov     [esp+48h+var_28], ecx
-0x56D83A: mov     ecx, ds:0B33B00h
-0x56D840: push    edx; Src
+0x56D83A: mov     ecx, ds:0B33B00h; self
+0x56D840: push    edx; source
 0x56D841: call    SaveLoad_SaveData
-0x56D846: mov     ecx, ds:0B33B00h
-0x56D84C: push    2; Size
+0x56D846: mov     ecx, ds:0B33B00h; self
+0x56D84C: push    2; byteCount
 0x56D84E: lea     eax, [esp+48h+var_20]
-0x56D852: push    eax; Src
+0x56D852: push    eax; source
 0x56D853: call    SaveLoad_SaveData
-0x56D858: push    2; Size
+0x56D858: push    2; byteCount
 0x56D85A: lea     ecx, [esp+48h+var_28]
-0x56D85E: push    ecx; Src
-0x56D85F: mov     ecx, ds:0B33B00h
+0x56D85E: push    ecx; source
+0x56D85F: mov     ecx, ds:0B33B00h; self
 0x56D865: call    SaveLoad_SaveData
 0x56D86A: movzx   eax, word ptr [esp+44h+var_30]
-0x56D86F: mov     ecx, ds:0B33B00h
+0x56D86F: mov     ecx, ds:0B33B00h; self
 0x56D875: lea     edx, [eax+eax*2]
 0x56D878: mov     eax, [edi+1Ch]
 0x56D87B: add     edx, edx
 0x56D87D: add     edx, edx
-0x56D87F: push    edx; Size
-0x56D880: push    eax; Src
-0x56D881: call    SaveLoad_SaveData
+0x56D87F: push    edx; byteCount
+0x56D880: push    eax; source
+0x56D881: call    SaveLoad_SaveData; BloodOnDeath decode 2026-05-30: geometry decal serializes generated vertex/UV/index payload, so save size grows with more trail decals.
 0x56D886: movzx   eax, word ptr [esp+44h+var_30]
 0x56D88B: mov     edx, [edi+20h]
 0x56D88E: lea     ecx, [eax+eax*2]
 0x56D891: add     ecx, ecx
 0x56D893: add     ecx, ecx
-0x56D895: push    ecx; Size
-0x56D896: mov     ecx, ds:0B33B00h
-0x56D89C: push    edx; Src
+0x56D895: push    ecx; byteCount
+0x56D896: mov     ecx, ds:0B33B00h; self
+0x56D89C: push    edx; source
 0x56D89D: call    SaveLoad_SaveData
 0x56D8A2: movzx   eax, word ptr [esp+44h+var_20]
 0x56D8A7: mov     ecx, [edi+48h]
 0x56D8AA: add     eax, eax
-0x56D8AC: push    eax; Size
-0x56D8AD: push    ecx; Src
-0x56D8AE: mov     ecx, ds:0B33B00h
+0x56D8AC: push    eax; byteCount
+0x56D8AD: push    ecx; source
+0x56D8AE: mov     ecx, ds:0B33B00h; self
 0x56D8B4: call    SaveLoad_SaveData
 0x56D8B9: xor     ebx, ebx
 0x56D8BB: cmp     word ptr [esp+44h+var_28], bx
 0x56D8C0: jbe     short loc_56D921
 0x56D8C2: lea     edi, [ebp+44h]
 0x56D8C5: jmp     short loc_56D8D0
-0x56D8C7: align 10h
 0x56D8D0: movzx   edx, word ptr [edi+4]
-0x56D8D4: mov     ecx, ds:0B33B00h
-0x56D8DA: push    2; Size
+0x56D8D4: mov     ecx, ds:0B33B00h; self
+0x56D8DA: push    2; byteCount
 0x56D8DC: lea     eax, [esp+48h+Src]
-0x56D8E0: push    eax; Src
+0x56D8E0: push    eax; source
 0x56D8E1: mov     [esp+4Ch+Src], edx
 0x56D8E5: call    SaveLoad_SaveData
 0x56D8EA: xor     esi, esi
@@ -236,9 +235,9 @@
 0x56D8F1: jbe     short loc_56D912
 0x56D8F3: mov     ecx, [edi]
 0x56D8F5: lea     edx, [ecx+esi*8]
-0x56D8F8: mov     ecx, ds:0B33B00h
-0x56D8FE: push    8; Size
-0x56D900: push    edx; Src
+0x56D8F8: mov     ecx, ds:0B33B00h; self
+0x56D8FE: push    8; byteCount
+0x56D900: push    edx; source
 0x56D901: call    SaveLoad_SaveData
 0x56D906: movzx   eax, word ptr [esp+44h+Src]
 0x56D90B: add     esi, 1
@@ -260,7 +259,7 @@
 0x56D93C: jz      short loc_56D97B
 0x56D93E: mov     edx, [edi]
 0x56D940: push    edx; a1
-0x56D941: call    TESForm_LookupByFormID
+0x56D941: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56D946: mov     ecx, [edi+5]
 0x56D949: mov     edx, [eax]
 0x56D94B: add     esp, 4
@@ -287,7 +286,7 @@
 0x56D98F: call    sub_40FEC0
 0x56D994: add     esp, 10h
 0x56D997: mov     ecx, ds:0B33B00h
-0x56D99D: call    sub_45A170
+0x56D99D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x56D9A2: test    al, al
 0x56D9A4: jz      short loc_56D9D9
 0x56D9A6: mov     edx, ds:0B33B00h

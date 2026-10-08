@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56CAA0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Verified] BSTempEffectDecal destructor unregisters its DECAL_DATA payload from the target BSShaderLightingProperty list via BSShaderLightingProperty_RemoveDecalData before releasing the target NiProperty at payload+0x48. It then releases the texture/property members and frees the 0x4C DECAL_DATA payload.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56CAD3",
-    "line": "mov     ecx, [eax+48h]",
+    "line": "mov     ecx, [eax+48h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x56CAE2",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56CAE3",
-    "line": "call    sub_7EE740",
+    "line": "call    BSShaderLightingProperty_RemoveDecalData; [Verified] Finds a DECAL_DATA* by payload identity in this property's list at +0x80, removes/frees the matching list node via the generic NiTPointerList removal routine, decrements +0x8C, and resets cached render-pass state at +0x24. Uses property+0x90 as its temporary next-node cursor; no payload ownership release occurs here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x56CB1E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56CB20",
-    "line": "call    sub_56C0F0",
+    "line": "call    DECAL_DATA_ReleaseOwnedReferences; [Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x56CB26",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x56CB2E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x56CB38",
-    "line": "call    BSTempEffect_destr",
+    "line": "call    BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -358,5 +358,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BDA00",
+    "line": "mov     ecx, [ebp-10h]; self",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA03",
+    "line": "jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA08",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BDA0C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA0F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA12",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BDA14",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA19",
+    "line": "mov     eax, offset stru_AE7308",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA1E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

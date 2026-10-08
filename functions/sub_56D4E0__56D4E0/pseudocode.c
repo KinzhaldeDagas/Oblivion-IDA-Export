@@ -1,83 +1,83 @@
-int __thiscall sub_56D4E0(_DWORD **this)
+unsigned int __thiscall BSTempEffectGeometryDecal_GetSaveSize(BSTempEffectGeometryDecalLayout_t *this)
 {
+  int v2; // edi
   int v3; // edi
-  int v4; // edi
-  int v5; // eax
-  const char *v6; // eax
-  int v7; // ecx
-  int v8; // eax
-  int v9; // edx
-  int v10; // ecx
-  int v11; // eax
-  int v12; // ebx
-  unsigned __int16 v13; // di
-  int v14; // eax
-  int v15; // esi
-  unsigned __int16 *v16; // ecx
-  int v17; // edx
-  UInt32 *v18; // edi
-  TESForm *v19; // eax
-  const char *v20; // eax
-  int v22; // [esp-Ch] [ebp-14h]
-  int v23; // [esp-8h] [ebp-10h]
-  const char *v24; // [esp-4h] [ebp-Ch]
+  NiSourceTexture *sourceTexture_00; // eax
+  const char *unk034; // eax
+  int v6; // ecx
+  NiAVObject *generatedGeometry_1C; // eax
+  int v8; // edx
+  const char *m_pcName; // ecx
+  int v10; // eax
+  int v11; // ebx
+  unsigned __int16 v12; // di
+  int v13; // eax
+  unsigned int v14; // esi
+  unsigned __int16 *v15; // ecx
+  int v16; // edx
+  UInt32 *currentlySavingFormHeader; // edi
+  TESForm *v18; // eax
+  const char *v19; // eax
+  int v21; // [esp-Ch] [ebp-14h]
+  int v22; // [esp-8h] [ebp-10h]
+  const char *v23; // [esp-4h] [ebp-Ch]
 
-  v3 = 0;
-  if ( sub_45A170() )
-    v3 = 6;
-  v4 = sub_73D5D0() + v3;
-  v5 = **(this + 6);
-  if ( v5 )
-    v6 = *(const char **)(v5 + 0x34);
+  v2 = 0; /*0x56d4ea*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x56d4ec*/
+    v2 = 6; /*0x56d4f5*/
+  v3 = sub_73D5D0() + v2; /*0x56d501*/
+  sourceTexture_00 = this->decalCreationData_18->sourceTexture_00; /*0x56d506*/
+  if ( sourceTexture_00 ) /*0x56d50a*/
+    unk034 = (const char *)sourceTexture_00->members.unk034; /*0x56d50c*/
   else
-    v6 = 0;
-  v7 = (unsigned __int16)sub_452400(v6);
-  v8 = (int)*(this + 7);
-  v9 = v4 + v7 + 0x35;
-  v10 = *(_DWORD *)(v8 + 0xB4);
-  v11 = *(_DWORD *)(*(_DWORD *)(v8 + 0xB8) + 8);
-  v12 = *(_DWORD *)(v11 + 0x44);
-  v13 = *(_WORD *)(v11 + 0x40);
-  v14 = v13;
-  v15 = v9 + 2 * (*(unsigned __int16 *)(v10 + 0x44) + 0xC * *(unsigned __int16 *)(v10 + 8)) + 6;
-  if ( v13 )
+    unk034 = 0; /*0x56d511*/
+  v6 = (unsigned __int16)sub_452400(unk034); /*0x56d520*/
+  generatedGeometry_1C = this->generatedGeometry_1C; /*0x56d523*/
+  v8 = v3 + v6 + 0x35; /*0x56d526*/
+  m_pcName = generatedGeometry_1C[1].members.super.m_pcName; /*0x56d52a*/
+  v10 = *(_DWORD *)&generatedGeometry_1C[1].members.super.m_controller->member.flags; /*0x56d536*/
+  v11 = *(_DWORD *)(v10 + 0x44); /*0x56d53d*/
+  v12 = *(_WORD *)(v10 + 0x40); /*0x56d540*/
+  v13 = v12; /*0x56d551*/
+  v14 = v8 + 2 * (*((unsigned __int16 *)m_pcName + 0x22) + 0xC * *((unsigned __int16 *)m_pcName + 4)) + 6; /*0x56d556*/
+  if ( v12 ) /*0x56d55a*/
   {
-    v16 = (unsigned __int16 *)(v12 + 0x48);
-    do
+    v15 = (unsigned __int16 *)(v11 + 0x48); /*0x56d55c*/
+    do /*0x56d56d*/
     {
-      v17 = *v16;
-      v16 += 0x26;
-      --v14;
-      v15 += 8 * v17 + 2;
+      v16 = *v15; /*0x56d560*/
+      v15 += 0x26; /*0x56d563*/
+      --v13; /*0x56d566*/
+      v14 += 8 * v16 + 2; /*0x56d569*/
     }
-    while ( v14 );
+    while ( v13 ); /*0x56d56d*/
   }
   if ( Global_DebugSaveBuffer )
   {
-    v18 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    if ( v18 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x56d57e*/
+    if ( currentlySavingFormHeader )
     {
-      v19 = TESForm_LookupByFormID(*v18);
-      v20 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v19->vtbl->GetEditorName)(
-                            v19,
-                            *(UInt32 *)((char *)v18 + 5),
+      v18 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x56d58b*/
+      v19 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v18->vtbl->GetEditorName)( /*0x56d5ab*/
+                            v18,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x51D,
                             "..\\TES Shared\\TempEffects\\BSTempEffectGeometryDecal.cpp");
       sub_40FEC0(
         "GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v15,
-        *v18,
-        v20,
+        v14,
+        *currentlySavingFormHeader,
+        v19,
+        v21,
         v22,
-        v23,
-        v24);
-      return v15;
+        v23);
+      return v14; /*0x56d5c3*/
     }
     sub_40FEC0(
       "GetSaveSize(): %-5i ending at line %i in file %s",
-      v15,
+      v14,
       0x51D,
       "..\\TES Shared\\TempEffects\\BSTempEffectGeometryDecal.cpp");
   }
-  return v15;
+  return v14; /*0x56d5bf*/
 }

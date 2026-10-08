@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x701AB0",
-    "line": "mov     eax, ds:0B3F940h",
+    "line": "mov     eax, ds:0B3F940h; 3DTheft decode 2026-05-16: sets manager byte +0x1B0 to 1, then calls the manager semaphore wait helper with INFINITE.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x701AC2",
-    "line": "call    sub_404D60",
+    "line": "call    NiParallelUpdateTaskManager_WaitForSignal; [Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
     "mnemonic": "call",
     "size": 5
   },

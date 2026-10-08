@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56C180",
-    "line": "push    esi",
+    "line": "push    esi; [Verified] Requires DECAL_DATA at +0x18. Resolves/casts targetReferenceFormID_3C to TESObjectREFR: a resolved reference must have loaded 3D; an unresolved reference is accepted only when the stored FormID is zero. This zero/unresolved success path is absent from geometry-decal IsSaveable at 0x56D480.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x56C183",
-    "line": "mov     eax, [esi+18h]",
+    "line": "mov     eax, [esi+18h]; BloodOnDeath decode 2026-05-30: fallback BSTempEffectDecal saveability requires decal data and either a valid target reference/3D or no saved target FormID.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x56C19C",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

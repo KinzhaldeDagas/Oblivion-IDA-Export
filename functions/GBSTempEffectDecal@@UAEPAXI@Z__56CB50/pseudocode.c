@@ -1,7 +1,9 @@
-BSTempEffectDecal *__thiscall BSTempEffectDecal::`scalar deleting destructor'(BSTempEffectDecal *this, char a2)
+BSTempEffectDecalLayout_t *__thiscall BSTempEffectDecal::`scalar deleting destructor'(
+        BSTempEffectDecalLayout_t *this,
+        char a2)
 {
-  BSTempEffectDecal::~BSTempEffectDecal(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  BSTempEffectDecal::~BSTempEffectDecal(this); /*0x56cb53*/
+  if ( (a2 & 1) != 0 ) /*0x56cb5d*/
+    FormHeapFree((unsigned int)this); /*0x56cb60*/
+  return this; /*0x56cb6a*/
 }

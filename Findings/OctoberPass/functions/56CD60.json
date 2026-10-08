@@ -1,0 +1,62 @@
+{
+  "address_comment_regular": "[Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x56CD60",
+      "0x56CDAB"
+    ]
+  ],
+  "folder": "sub_56CD60__56CD60",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 2,
+    "callers_count": 2,
+    "chunks_sha256": "4001fa0648e22d4389a43a1e31db80f5baae7fa4f2ca29a321048cdeec560205",
+    "comment_regular": "[Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.",
+    "comment_repeatable": "[Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.",
+    "data_refs_count": 0,
+    "display_name": "BSTempEffectGeometryDecal_StartOrQueueCreateTask",
+    "end_ea": "0x56CDAB",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "BSTempEffectGeometryDecal_StartOrQueueCreateTask",
+    "segment": ".text",
+    "sha256": "4001fa0648e22d4389a43a1e31db80f5baae7fa4f2ca29a321048cdeec560205",
+    "size": 75,
+    "start_ea": "0x56CD60",
+    "total_chunk_size": 75,
+    "type": "int __thiscall(BSTempEffectGeometryDecalLayout_t *this)",
+    "xrefs_from_count": 36,
+    "xrefs_to_count": 2
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x56CD60",
+      "regular": "[Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56CD78",
+      "regular": "a2",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56CD79",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x56CD80",
+      "regular": "[Verified] g_NiParallelUpdateTaskManager virtual +0x4C receives BSTECreateTask with mode 1. Successful return leaves the task queued; failure takes the task vtable +0x54 BSTECreateTask_ReturnToPool path before synchronous Initialize.",
+      "repeatable": ""
+    }
+  ]
+}

@@ -1,2 +1,2 @@
-0x73FD50: mov     eax, 3
+0x73FD50: mov     eax, 3; [Verified] Shared leaf stub returning integer 3. It supplies BSTempEffect's base-vtable type ID 3 and is also used by other vtables; class-specific meaning depends on the owning vtable.
 0x73FD55: retn

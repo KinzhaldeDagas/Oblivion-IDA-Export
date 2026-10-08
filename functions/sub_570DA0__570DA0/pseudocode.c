@@ -1,155 +1,140 @@
-void __usercall sub_570DA0(_DWORD *this@<ecx>, int a2@<edi>)
+// Verified: saves base temp-effect state and particle model path/transform/position/scale; includes optional controller-state chunk.
+void __thiscall BSTempEffectParticle_SaveGame(BSTempEffectParticle *self)
 {
-  TESSaveLoad *v4; // ecx
-  UInt32 v5; // ebp
-  TESSaveLoad *v6; // ecx
-  TESSaveLoad *v7; // ecx
-  const char *v8; // eax
-  char v9; // dl
-  unsigned int v10; // eax
-  TESSaveLoad *v11; // ecx
-  _DWORD *v12; // eax
-  TESSaveLoad *v13; // ecx
-  TESSaveLoad *v14; // ecx
-  int v15; // ecx
-  int v16; // esi
+  TESSaveLoadGame_SerializationView *v2; // ecx
+  unsigned __int8 *bufferCursor; // ebp
+  TESSaveLoadGame_SerializationView *v4; // ecx
+  TESSaveLoadGame_SerializationView *v5; // ecx
+  const char *modelPath; // eax
+  char v7; // dl
+  unsigned int v8; // eax
+  TESSaveLoadGame_SerializationView *v9; // ecx
+  NiAVObject *particleNode; // eax
+  TESSaveLoadGame_SerializationView *v11; // ecx
+  TESSaveLoadGame_SerializationView *v12; // ecx
+  NiAVObject *v13; // ecx
+  int m_controller; // esi
+  NiRTTI *v15; // eax
+  char v16; // al
   int v17; // eax
-  char v18; // al
-  int v19; // eax
-  int v20; // ecx
-  UInt32 *v21; // edi
-  UInt32 v22; // esi
-  TESForm *v23; // eax
-  const char *v24; // eax
-  _WORD *v25; // edi
-  unsigned int v26; // esi
-  int v27; // [esp-8h] [ebp-4Ch]
-  int v28; // [esp-4h] [ebp-48h]
-  size_t v29; // [esp+0h] [ebp-44h]
-  size_t v30; // [esp+0h] [ebp-44h]
-  size_t v31; // [esp+0h] [ebp-44h]
-  size_t v32; // [esp+0h] [ebp-44h]
-  size_t v33; // [esp+0h] [ebp-44h]
-  size_t v34; // [esp+0h] [ebp-44h]
-  size_t v35; // [esp+0h] [ebp-44h]
-  const char *v36; // [esp+0h] [ebp-44h]
-  unsigned __int8 v37; // [esp+13h] [ebp-31h] BYREF
-  int v38; // [esp+14h] [ebp-30h] BYREF
-  UInt32 v39; // [esp+18h] [ebp-2Ch]
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v19; // esi
+  TESForm *v20; // eax
+  const char *v21; // eax
+  unsigned __int8 *v22; // edi
+  unsigned __int8 *v23; // esi
+  int v24; // [esp-8h] [ebp-4Ch]
+  int v25; // [esp-4h] [ebp-48h]
+  const char *v26; // [esp+0h] [ebp-44h]
+  unsigned __int8 v27; // [esp+13h] [ebp-31h] BYREF
+  int v28; // [esp+14h] [ebp-30h] BYREF
+  unsigned __int8 *v29; // [esp+18h] [ebp-2Ch]
   int Src; // [esp+1Ch] [ebp-28h] BYREF
-  int v41; // [esp+20h] [ebp-24h] BYREF
-  float v42; // [esp+24h] [ebp-20h] BYREF
-  _DWORD v43[3]; // [esp+28h] [ebp-1Ch] BYREF
-  float v44[4]; // [esp+34h] [ebp-10h] BYREF
+  int source; // [esp+20h] [ebp-24h] BYREF
+  float scale; // [esp+24h] [ebp-20h] BYREF
+  _DWORD v33[3]; // [esp+28h] [ebp-1Ch] BYREF
+  float v34[4]; // [esp+34h] [ebp-10h] BYREF
 
-  v4 = SaveLoad_CurrentSavegame;
-  v41 = 0;
-  v5 = v4->unk000[5];
-  v39 = 0;
-  if ( sub_45A170() )
+  v2 = g_TESSaveLoadGame; /*0x570da7*/
+  source = 0; /*0x570dad*/
+  bufferCursor = v2->bufferCursor; /*0x570db5*/
+  v29 = 0; /*0x570db9*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x570dc1*/
   {
-    v6 = SaveLoad_CurrentSavegame;
-    LODWORD(v29) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData((int)v6, &Src, v29);
-    v7 = SaveLoad_CurrentSavegame;
-    LODWORD(v30) = 2;
-    v39 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_SaveData((int)v7, &v41, v30);
+    v4 = g_TESSaveLoadGame; /*0x570dca*/
+    Src = 0x4B4F4C42; /*0x570dd7*/
+    SaveLoad_SaveData(v4, &Src, 4u); /*0x570ddf*/
+    v5 = g_TESSaveLoadGame; /*0x570de4*/
+    v29 = g_TESSaveLoadGame->bufferCursor; /*0x570df4*/
+    SaveLoad_SaveData(v5, &source, 2u); /*0x570df8*/
   }
-  sub_56BD80(this);
-  v8 = (const char *)*(this + 7);
-  v9 = (_BYTE)v8 + 1;
-  v10 = (unsigned int)&v8[strlen(v8) + 1];
-  LODWORD(v29) = 1;
-  v11 = SaveLoad_CurrentSavegame;
-  v37 = v10 - v9;
-  SaveLoad_SaveData((int)v11, &v37, v29);
-  LODWORD(v31) = v37;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (void *)*(this + 7), v31);
-  sub_7150F0(v44, (float *)(*(this + 6) + 0x30));
-  LODWORD(v32) = 0x10;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, v44, v32);
-  v12 = (_DWORD *)*(this + 6);
-  v43[0] = v12[0x15];
-  LODWORD(v33) = 0xC;
-  v43[1] = v12[0x16];
-  v13 = SaveLoad_CurrentSavegame;
-  v43[2] = v12[0x17];
-  SaveLoad_SaveData((int)v13, v43, v33);
-  v14 = SaveLoad_CurrentSavegame;
-  LODWORD(v34) = 4;
-  v42 = *(float *)(*(this + 6) + 0x60);
-  SaveLoad_SaveData((int)v14, &v42, v34);
-  v15 = *(this + 6);
-  v38 = 0;
-  v16 = *(_DWORD *)(v15 + 0xC);
-  if ( v16 )
+  BSTempEffect_SaveGame(&self->base); /*0x570dff*/
+  modelPath = self->modelPath; /*0x570e04*/
+  v7 = (_BYTE)modelPath + 1; /*0x570e07*/
+  v8 = (unsigned int)&modelPath[strlen(modelPath) + 1]; /*0x570e17*/
+  v9 = g_TESSaveLoadGame; /*0x570e22*/
+  v27 = v8 - v7; /*0x570e28*/
+  SaveLoad_SaveData(v9, &v27, 1u); /*0x570e2c*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, self->modelPath, v27); /*0x570e41*/
+  sub_7150F0(v34, (float *)&self->particleNode->members.m_localTransform); /*0x570e51*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, v34, 0x10u); /*0x570e63*/
+  particleNode = self->particleNode; /*0x570e68*/
+  v33[0] = LODWORD(particleNode->members.m_localTransform.pos.x); /*0x570e6e*/
+  v33[1] = LODWORD(particleNode->members.m_localTransform.pos.y); /*0x570e7b*/
+  v11 = g_TESSaveLoadGame; /*0x570e83*/
+  v33[2] = LODWORD(particleNode->members.m_localTransform.pos.z); /*0x570e89*/
+  SaveLoad_SaveData(v11, v33, 0xCu); /*0x570e8d*/
+  v12 = g_TESSaveLoadGame; /*0x570e98*/
+  scale = self->particleNode->members.m_localTransform.scale; /*0x570ea0*/
+  SaveLoad_SaveData(v12, &scale, 4u); /*0x570ea9*/
+  v13 = self->particleNode; /*0x570eae*/
+  v28 = 0; /*0x570eb1*/
+  m_controller = (int)v13->members.super.m_controller; /*0x570eb9*/
+  if ( m_controller )
   {
-    v17 = (*(int (__thiscall **)(_DWORD))(*(_DWORD *)v16 + 4))(*(_DWORD *)(v15 + 0xC));
-    if ( v17 )
+    v15 = (NiRTTI *)(*(int (__thiscall **)(NiInterpController *))(*(_DWORD *)m_controller + 4))(v13->members.super.m_controller); /*0x570ec7*/
+    if ( v15 ) /*0x570ecb*/
     {
-      while ( (BSStringT *)v17 != &stru_B3CAC0 )
+      while ( v15 != &stru_B3CAC0 ) /*0x570ed5*/
       {
-        v17 = *(_DWORD *)(v17 + 4);
-        if ( !v17 )
-          goto LABEL_7;
+        v15 = v15->parent; /*0x570edb*/
+        if ( !v15 ) /*0x570ee0*/
+          goto LABEL_7; /*0x570ee0*/
       }
-      v18 = 1;
+      v16 = 1; /*0x570f81*/
     }
     else
     {
 LABEL_7:
-      v18 = 0;
+      v16 = 0; /*0x570ee2*/
     }
-    v19 = v18 != 0 ? v16 : 0;
-    v16 = v19;
-    if ( v19 )
-      v38 = (unsigned __int16)sub_4DA760(v19);
+    v17 = v16 != 0 ? m_controller : 0;
+    m_controller = v17; /*0x570eea*/
+    if ( v17 ) /*0x570eec*/
+      v28 = (unsigned __int16)sub_4DA760(v17); /*0x570efa*/
   }
-  LODWORD(v35) = 2;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v38, v35);
-  if ( (_WORD)v38 )
-    sub_4DA7F0(v20, a2, v16, v16, flt_A30634);
+  SaveLoad_SaveData(g_TESSaveLoadGame, &v28, 2u); /*0x570f0b*/
+  if ( (_WORD)v28 ) /*0x570f16*/
+    sub_4DA7F0(m_controller, kTerrainLODQuadRayDirectionZ); /*0x570f23*/
   if ( Global_DebugSaveBuffer )
   {
-    v21 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    v22 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v21 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x570f39*/
+    v19 = g_TESSaveLoadGame->bufferCursor; /*0x570f41*/
+    if ( currentlySavingFormHeader )
     {
-      v23 = TESForm_LookupByFormID(*v21);
-      v24 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v23->vtbl->GetEditorName)(
-                            v23,
-                            *(UInt32 *)((char *)v21 + 5),
+      v20 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x570f49*/
+      v21 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v20->vtbl->GetEditorName)( /*0x570f69*/
+                            v20,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x12B,
                             "..\\TES Shared\\TempEffects\\BSTempEffectParticle.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v22 - v5,
-        *v21,
+        v19 - bufferCursor,
+        *currentlySavingFormHeader,
+        v21,
         v24,
-        v27,
-        v28,
-        v36);
+        v25,
+        v26);
     }
     else
     {
       sub_40FEC0(
         "SaveGame(): %-5i ending at line %i in file %s",
-        v22 - v5,
+        v19 - bufferCursor,
         0x12B,
         "..\\TES Shared\\TempEffects\\BSTempEffectParticle.cpp");
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x570fa8*/
   {
-    v25 = (_WORD *)v39;
-    v26 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v26 > v39 + 0xFFFF )
-      PrintError(
+    v22 = v29; /*0x570fb7*/
+    v23 = g_TESSaveLoadGame->bufferCursor; /*0x570fbb*/
+    if ( v23 > v29 + 0xFFFF ) /*0x570fc6*/
+      PrintError( /*0x570fd7*/
         "Save Game Block in file %s on line %i is greater than maximum short size",
         "..\\TES Shared\\TempEffects\\BSTempEffectParticle.cpp",
         0x12B);
-    *v25 = v26 - (_WORD)v25;
+    *(_WORD *)v22 = (_WORD)v23 - (_WORD)v22; /*0x570fe1*/
   }
 }

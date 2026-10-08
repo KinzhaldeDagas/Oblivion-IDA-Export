@@ -1,4 +1,4 @@
-0x67A8C0: sub     esp, 18h
+0x67A8C0: sub     esp, 18h; [Verified] Called by TESObjectCELL_Deactivate. Removes active and extended temp effects whose BSTempEffect parentCell field at +0x0C equals the unloading cell, irrespective of remaining duration, then releases the list's reference. Thus decal lifetime survives normal updates but not unloading its owning cell.
 0x67A8C3: cmp     dword ptr [ecx+44h], 0
 0x67A8C7: push    ebx
 0x67A8C8: push    ebp
@@ -64,12 +64,12 @@
 0x67A979: call    eax
 0x67A97B: test    bl, bl
 0x67A97D: jnz     short loc_67A9FC
-0x67A97F: lea     ecx, [esp+28h+var_C]
-0x67A983: push    ecx
-0x67A984: mov     ecx, esi
-0x67A986: call    sub_677C70
+0x67A97F: lea     ecx, [esp+28h+outData]
+0x67A983: push    ecx; outData
+0x67A984: mov     ecx, esi; this
+0x67A986: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x67A98B: mov     edi, [eax]
-0x67A98D: mov     eax, [esp+28h+var_C]
+0x67A98D: mov     eax, [esp+28h+outData]
 0x67A991: test    eax, eax
 0x67A993: jz      short loc_67A9B4
 0x67A995: mov     ebp, eax
@@ -87,7 +87,7 @@
 0x67A9B2: call    eax
 0x67A9B4: mov     ecx, [esp+28h+a2]
 0x67A9B8: cmp     [edi+0Ch], ecx
-0x67A9BB: jnz     short loc_67A9ED
+0x67A9BB: jnz     short loc_67A9ED; BloodOnDeath decode 2026-05-30: temp effects tied to this cell are removed on cell unload regardless of duration; long decal lifetime means persists while cell stays loaded/unreset, not across unload cleanup.
 0x67A9BD: mov     ebx, [esp+28h+var_14]
 0x67A9C1: test    ebx, ebx
 0x67A9C3: jz      short loc_67A9E4
@@ -170,12 +170,12 @@
 0x67AAA6: call    eax
 0x67AAA8: test    bl, bl
 0x67AAAA: jnz     short loc_67AB29
-0x67AAAC: lea     ecx, [esp+28h+var_C]
-0x67AAB0: push    ecx
-0x67AAB1: mov     ecx, esi
-0x67AAB3: call    sub_677C70
+0x67AAAC: lea     ecx, [esp+28h+outData]
+0x67AAB0: push    ecx; outData
+0x67AAB1: mov     ecx, esi; this
+0x67AAB3: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x67AAB8: mov     edi, [eax]
-0x67AABA: mov     eax, [esp+28h+var_C]
+0x67AABA: mov     eax, [esp+28h+outData]
 0x67AABE: test    eax, eax
 0x67AAC0: jz      short loc_67AAE1
 0x67AAC2: mov     ebp, eax

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x776690",
-    "line": "mov     eax, [ecx+4]",
+    "line": "mov     eax, [ecx+4]; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x776696",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7766B4",
-    "line": "mov     [esp+0Ch+arg_0], esi",
+    "line": "mov     [esp+0Ch+data], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x7766BA",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7766BE",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7766BF",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },

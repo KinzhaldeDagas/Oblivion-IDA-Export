@@ -1,4 +1,4 @@
-0x56BB90: push    offset stru_B3A600; lpCriticalSection
+0x56BB90: push    offset unk_B3A600; [Verified] Pops one BSTECreateTask pointer from the protected free-item stack. Its only direct caller is BSTempEffectGeometryDecal_StartOrQueueCreateTask.
 0x56BB95: call    dword ptr ds:0A2806Ch
 0x56BB9B: call    dword ptr ds:0A2808Ch
 0x56BBA1: add     dword ptr ds:0B3A67Ch, 1
@@ -8,7 +8,7 @@
 0x56BBB6: mov     eax, ds:0B12BA8h
 0x56BBBB: push    eax
 0x56BBBC: mov     ecx, offset dword_B12B9C
-0x56BBC1: call    sub_56BA20
+0x56BBC1: call    BSTECreateTaskPool_AddBlock; [Verified] Grows the BSTECreateTask free-item stack and appends each available 0x10-byte task slot to it; its only caller is BSTECreateTaskPool_Pop when the pool is empty.
 0x56BBC6: mov     ecx, ds:0B12BA8h
 0x56BBCC: lea     edx, [ecx+ecx]
 0x56BBCF: mov     ds:0B12BA8h, edx
@@ -23,7 +23,7 @@
 0x56BBF1: sub     dword ptr ds:0B3A67Ch, 1
 0x56BBF8: jnz     short loc_56BC04
 0x56BBFA: mov     dword ptr ds:0B3A678h, 0
-0x56BC04: push    offset stru_B3A600; lpCriticalSection
+0x56BC04: push    offset unk_B3A600; lpCriticalSection
 0x56BC09: call    dword ptr ds:0A28074h
 0x56BC0F: mov     eax, esi
 0x56BC11: pop     esi

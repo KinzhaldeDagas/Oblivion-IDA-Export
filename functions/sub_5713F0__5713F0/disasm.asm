@@ -1,4 +1,4 @@
-0x5713F0: push    0FFFFFFFFh
+0x5713F0: push    0FFFFFFFFh; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.
 0x5713F2: push    offset SEH_5713F0
 0x5713F7: mov     eax, large fs:0
 0x5713FD: push    eax
@@ -14,12 +14,12 @@
 0x571411: mov     large fs:0, eax
 0x571417: mov     ebx, ecx
 0x571419: mov     dword ptr [esp+50h+var_3C], ebx
-0x57141D: fld     [esp+50h+arg_4]
-0x571421: mov     eax, [esp+50h+arg_0]
+0x57141D: fld     [esp+50h+durationSeconds]
+0x571421: mov     eax, [esp+50h+parentCell]
 0x571425: push    ecx
-0x571426: fstp    [esp+54h+var_54]; float
-0x571429: push    eax; int
-0x57142A: call    BSTempEff_constr
+0x571426: fstp    [esp+54h+var_54]; durationSeconds
+0x571429: push    eax; parentCell
+0x57142A: call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.
 0x57142F: xor     edi, edi
 0x571431: lea     ebp, [ebx+18h]
 0x571434: mov     dword ptr [ebx], offset ??_7BSTempEffectParticle@@6B@; const BSTempEffectParticle::`vftable'
@@ -45,21 +45,21 @@
 0x57146D: mov     ecx, esi
 0x57146F: call    eax
 0x571471: mov     [ebp+0], edi
-0x571474: mov     esi, [esp+50h+arg_C]
+0x571474: mov     esi, [esp+50h+modelPath]
 0x571478: mov     ecx, ds:0B33A1Ch
 0x57147E: push    1
 0x571480: push    edi
 0x571481: push    edi
 0x571482: push    esi
-0x571483: call    sub_439EB0
-0x571488: cmp     byte ptr [esp+50h+arg_2C], 0
+0x571483: call    ModelLoader_LoadModelData; ODismemberment: BSTempEffectParticle loads model data through the shared ModelLoader, then either asks TES for a cached clone or clones the loaded object directly.
+0x571488: cmp     [esp+50h+useCachedClone], 0
 0x571490: mov     [ebx+1Ch], esi
 0x571493: jz      short loc_5714CF
 0x571495: mov     ecx, ds:0B333A0h
 0x57149B: cmp     ecx, edi
 0x57149D: jz      short loc_5714A7
 0x57149F: push    eax
-0x5714A0: call    sub_441760
+0x5714A0: call    TES_GetCachedModelClone; ODismemberment: TES cached-model lookup used by BSTempEffectParticle when useTESCachedInstance is true.
 0x5714A5: jmp     short loc_5714D6
 0x5714A7: mov     esi, [ebp+0]
 0x5714AA: cmp     esi, edi
@@ -78,8 +78,8 @@
 0x5714C8: call    eax
 0x5714CA: mov     [ebp+0], edi
 0x5714CD: jmp     short loc_5714DE
-0x5714CF: mov     ecx, eax
-0x5714D1: call    sub_700900
+0x5714CF: mov     ecx, eax; this
+0x5714D1: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x5714D6: push    eax; a2
 0x5714D7: mov     ecx, ebp; this
 0x5714D9: call    NiSmartPointer_Set??
@@ -89,10 +89,10 @@
 0x5714E9: push    eax
 0x5714EA: mov     ecx, ebx
 0x5714EC: call    sub_570B40
-0x5714F1: fstp    dword ptr [ebx+8]
-0x5714F4: fld     [esp+50h+arg_10]
-0x5714F8: fld     [esp+50h+arg_14]
-0x5714FC: fld     [esp+50h+arg_18]
+0x5714F1: fstp    dword ptr [ebx+8]; BloodOnDeath decode 2026-05-30: particle temp-effect duration is overwritten with the max controller span found in the cloned particle NIF tree. Visual squirt lifetime is model/controller-driven, not fDecalLifetime:Display.
+0x5714F4: fld     [esp+50h+directionX]
+0x5714F8: fld     [esp+50h+directionY]
+0x5714FC: fld     [esp+50h+directionZ]
 0x571500: fstp    [esp+50h+var_3C+4]
 0x571504: fmul    st, st
 0x571506: fld     st(1)
@@ -101,38 +101,38 @@
 0x57150C: fldz
 0x57150E: fmul    st, st
 0x571510: faddp   st(1), st
-0x571512: fstp    [esp+50h+arg_2C]
-0x571519: fld     [esp+50h+arg_2C]
+0x571512: fstp    dword ptr [esp+50h+useCachedClone]
+0x571519: fld     dword ptr [esp+50h+useCachedClone]
 0x571520: call    __CIsqrt
-0x571525: fstp    [esp+50h+arg_2C]
+0x571525: fstp    dword ptr [esp+50h+useCachedClone]
 0x57152C: fld     [esp+50h+var_3C+4]
-0x571530: fld     [esp+50h+arg_2C]
-0x571537: call    sub_98598A
-0x57153C: fstp    [esp+50h+arg_2C]
-0x571543: fld     [esp+50h+arg_2C]
+0x571530: fld     dword ptr [esp+50h+useCachedClone]
+0x571537: call    sub_98598A; BloodOnDeath decode 2026-05-30: first atan2-like angle is based on horizontal length sqrt(dirX^2+dirY^2) and dirZ; stored negated as pitch for the particle model orientation.
+0x57153C: fstp    dword ptr [esp+50h+useCachedClone]
+0x571543: fld     dword ptr [esp+50h+useCachedClone]
 0x57154A: sub     esp, 8
 0x57154D: fchs
 0x57154F: fstp    [esp+58h+var_54]; float
 0x571553: fldz
 0x571555: fstp    [esp+58h+a2]; float
-0x571558: fld     [esp+58h+arg_10]
-0x57155C: fld     [esp+58h+arg_14]
-0x571560: call    sub_98598A
-0x571565: fstp    [esp+58h+arg_2C]
-0x57156C: fld     [esp+58h+arg_2C]
+0x571558: fld     [esp+58h+directionX]
+0x57155C: fld     [esp+58h+directionY]
+0x571560: call    sub_98598A; BloodOnDeath decode 2026-05-30: second atan2-like angle is horizontal yaw from normalized dirY/dirX. More outward squirt should feed a stronger horizontal direction before this constructor.
+0x571565: fstp    dword ptr [esp+58h+useCachedClone]
+0x57156C: fld     dword ptr [esp+58h+useCachedClone]
 0x571573: push    ecx
 0x571574: lea     ecx, [esp+5Ch+var_30]
 0x571578: fstp    [esp+5Ch+var_5C]; float
-0x57157B: call    sub_7118E0
-0x571580: fld     [esp+50h+arg_28]
+0x57157B: call    sub_7118E0; BloodOnDeath decode 2026-05-30: builds the particle local rotation matrix from yaw, zero middle rotation, and pitch; direction is orientation-only here, no additional outward force is applied.
+0x571580: fld     [esp+50h+scale]
 0x571584: mov     eax, [ebp+0]
 0x571587: fabs
-0x571589: mov     ecx, [esp+50h+arg_1C]
-0x57158D: fstp    [esp+50h+arg_2C]
-0x571594: mov     edx, [esp+50h+arg_20]
-0x571598: fld     [esp+50h+arg_2C]
+0x571589: mov     ecx, [esp+50h+localPosX]
+0x57158D: fstp    dword ptr [esp+50h+useCachedClone]
+0x571594: mov     edx, [esp+50h+unknownChildTag]
+0x571598: fld     dword ptr [esp+50h+useCachedClone]
 0x57159F: mov     [eax+54h], ecx
-0x5715A2: mov     ecx, [esp+50h+arg_24]
+0x5715A2: mov     ecx, [esp+50h+unknownChildName]
 0x5715A6: add     eax, 54h ; 'T'
 0x5715A9: mov     [eax+4], edx
 0x5715AC: mov     [eax+8], ecx
@@ -142,29 +142,29 @@
 0x5715BA: lea     esi, [esp+50h+var_30]
 0x5715BE: rep movsd
 0x5715C0: mov     edx, [ebp+0]
-0x5715C3: mov     ecx, [esp+50h+arg_8]
+0x5715C3: mov     ecx, [esp+50h+parentNode]
 0x5715C7: mov     eax, [ecx]
-0x5715C9: mov     eax, [eax+84h]
+0x5715C9: mov     eax, [eax+84h]; ODismemberment: attaches the loaded/cloned particle model to the supplied NiNode parent with NiNode::AddObject. This gives a visual detached-NIF path, but ownership/lifetime remains temp-effect based.
 0x5715CF: fstp    dword ptr [edx+60h]
 0x5715D2: mov     edx, [ebp+0]
 0x5715D5: push    1
 0x5715D7: push    edx
 0x5715D8: call    eax
 0x5715DA: mov     ecx, [ebp+0]; this
-0x5715DD: call    NiAVObject_InitializePropertyState
+0x5715DD: call    NiAVObject_InitializePropertyState; ODismemberment: initializes properties and updates the attached temp-effect model after AddObject.
 0x5715E2: fld     dword ptr ds:0B33A30h
 0x5715E8: push    1; a3
 0x5715EA: push    ecx
 0x5715EB: mov     ecx, [ebp+0]; this
 0x5715EE: fstp    [esp+58h+a2]; a2
-0x5715F1: call    NiAVObject_UpdateNiAVObject
+0x5715F1: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5715F6: mov     ecx, [ebp+0]
 0x5715F9: push    ecx
 0x5715FA: mov     ecx, ebx
-0x5715FC: call    sub_570A30
+0x5715FC: call    BSTempEffectParticle_AdjustTextureTransforms
 0x571601: mov     edx, [ebp+0]
 0x571604: push    edx
-0x571605: call    sub_715B40
+0x571605: call    NiObjectNET_StartControllersRecursive; ODismemberment: starts controllers recursively on the attached temp-effect model. No separate Havok world insertion has been observed here yet.
 0x57160A: add     esp, 4
 0x57160D: mov     eax, ebx
 0x57160F: mov     ecx, dword ptr [esp+50h+var_C]
@@ -176,3 +176,15 @@
 0x57161E: pop     ebx
 0x57161F: add     esp, 3Ch
 0x571622: retn    30h ; '0'
+0x9BDD30: mov     ecx, [ebp-3Ch]; self
+0x9BDD33: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+0x9BDD38: mov     ecx, [ebp-3Ch]
+0x9BDD3B: add     ecx, 18h; slot
+0x9BDD3E: jmp     NiPointerSlot_Release
+0x9BDD43: mov     edx, [esp+durationSeconds]
+0x9BDD47: lea     eax, [edx-40h]
+0x9BDD4A: mov     ecx, [edx-44h]
+0x9BDD4D: xor     ecx, eax
+0x9BDD4F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDD54: mov     eax, offset stru_AE75AC
+0x9BDD59: jmp     ___CxxFrameHandler3

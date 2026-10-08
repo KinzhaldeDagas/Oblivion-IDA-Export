@@ -1,0 +1,300 @@
+{
+  "address_comment_regular": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x56CFF0",
+      "0x56D47C"
+    ],
+    [
+      "0x9BDAD0",
+      "0x9BDB22"
+    ]
+  ],
+  "folder": "sub_56CFF0__56CFF0",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 28,
+    "callers_count": 3,
+    "chunks_sha256": "66db0c070f21f17b034e2762c17bd278ee18bb42050c2755d5a40cb73a4a484c",
+    "comment_regular": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
+    "comment_repeatable": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
+    "data_refs_count": 5,
+    "display_name": "BSTempEffectGeometryDecal_BuildGeneratedGeometry",
+    "end_ea": "0x56D47C",
+    "evidence_confidence": "Unknown",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "BSTempEffectGeometryDecal_BuildGeneratedGeometry",
+    "segment": ".text",
+    "sha256": "797f2b21e1e6d1dd8bc449d407b51588f83210997149b21968beece75c339fce",
+    "size": 1164,
+    "start_ea": "0x56CFF0",
+    "total_chunk_size": 1246,
+    "type": "void __thiscall(BSTempEffectGeometryDecalLayout_t *this, int arg0, __int16 a3, unsigned __int16 a4, int a5, int a6, unsigned __int16 *a7, int a8)",
+    "xrefs_from_count": 498,
+    "xrefs_to_count": 3
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
+  "instruction_comments": [
+    {
+      "confidence": "Unknown",
+      "ea": "0x56CFF0",
+      "regular": "Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D01D",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D027",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D043",
+      "regular": "triangleIndices",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D056",
+      "regular": "triangleCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D05B",
+      "regular": "dataFlags",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D05C",
+      "regular": "hasVertexColors",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D05D",
+      "regular": "textureCoordinates",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D05E",
+      "regular": "colors",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D05F",
+      "regular": "normals",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D064",
+      "regular": "vertices",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D065",
+      "regular": "vertexCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D08E",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D0B0",
+      "regular": "Src",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D0BE",
+      "regular": "a1",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D0DF",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D105",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D124",
+      "regular": "data",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D125",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x56D127",
+      "regular": "[Verified] Generated geometry's shader property is retrieved with NiNode_GetNiPropertyByID(v10,4), then registered with BSShaderLightingProperty_AddDecalData using the effect's DECAL_DATA payload. The payload's targetShaderProperty_48 is replaced with a retained reference to that generated-geometry property. This connects the geometry-decal build path to the same per-property decal list.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D140",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D162",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D179",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D1A5",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D1DB",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D1FD",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D23D",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D26A",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D28C",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D2CC",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D2EF",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D307",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D32D",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D352",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D36E",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D38D",
+      "regular": "a2",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D38E",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D3FA",
+      "regular": "a3",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D40B",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D415",
+      "regular": "a2",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D41D",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D432",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x56D451",
+      "regular": "lpAddend",
+      "repeatable": ""
+    }
+  ]
+}

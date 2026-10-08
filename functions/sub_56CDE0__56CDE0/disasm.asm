@@ -1,4 +1,4 @@
-0x56CDE0: push    0FFFFFFFFh
+0x56CDE0: push    0FFFFFFFFh; Verified default restore constructor for type ID 1: installs BSTempEffectGeometryDecal vtable and initializes its geometry/decal pointers and state.
 0x56CDE2: push    offset SEH_56CDE0
 0x56CDE7: mov     eax, large fs:0
 0x56CDED: push    eax
@@ -15,10 +15,10 @@
 0x56CE06: mov     [esp+20h+var_10], esi
 0x56CE0A: fldz
 0x56CE0C: push    ecx
-0x56CE0D: fstp    [esp+24h+var_24]; float
+0x56CE0D: fstp    [esp+24h+durationSeconds]; durationSeconds
 0x56CE10: xor     ebx, ebx
-0x56CE12: push    ebx; int
-0x56CE13: call    BSTempEff_constr
+0x56CE12: push    ebx; parentCell
+0x56CE13: call    BSTempEffect_Constructor; Verified default restore constructor installs BSTempEffectGeometryDecal vtable and zeros decal data/output/source refs, failure byte, and initializeCallbackDone through BSTempEffect base construction.
 0x56CE18: mov     dword ptr [esi], offset ??_7BSTempEffectGeometryDecal@@6B@; const BSTempEffectGeometryDecal::`vftable'
 0x56CE1E: mov     [esp+20h+var_4], ebx
 0x56CE22: mov     [esi+1Ch], ebx
@@ -54,3 +54,21 @@
 0x56CE72: pop     ebx
 0x56CE73: add     esp, 10h
 0x56CE76: retn
+0x9BDA30: mov     ecx, [ebp-10h]; self
+0x9BDA33: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
+0x9BDA38: mov     ecx, [ebp-10h]
+0x9BDA3B: add     ecx, 1Ch; slot
+0x9BDA3E: jmp     NiPointerSlot_Release
+0x9BDA43: mov     ecx, [ebp-10h]
+0x9BDA46: add     ecx, 2Ch ; ','; slot
+0x9BDA49: jmp     NiPointerSlot_Release
+0x9BDA4E: mov     ecx, [ebp-10h]
+0x9BDA51: add     ecx, 30h ; '0'; slot
+0x9BDA54: jmp     NiPointerSlot_Release
+0x9BDA59: mov     edx, [esp+arg_4]
+0x9BDA5D: lea     eax, [edx-10h]
+0x9BDA60: mov     ecx, [edx-14h]
+0x9BDA63: xor     ecx, eax
+0x9BDA65: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDA6A: mov     eax, offset stru_AE734C
+0x9BDA6F: jmp     ___CxxFrameHandler3

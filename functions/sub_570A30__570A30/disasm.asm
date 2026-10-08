@@ -44,7 +44,6 @@
 0x570AC1: cmp     [esp+7Ch+var_5A], bp
 0x570AC6: jbe     short loc_570B12
 0x570AC8: jmp     short loc_570AD0
-0x570ACA: align 10h
 0x570AD0: mov     eax, [esp+7Ch+var_60]
 0x570AD4: mov     esi, [eax+ebx*4]
 0x570AD7: cmp     esi, ebp
@@ -55,11 +54,11 @@
 0x570AE3: add     ecx, 64h ; 'd'
 0x570AE6: call    sub_7103C0
 0x570AEB: lea     edi, [esi+30h]
-0x570AEE: push    edi
-0x570AEF: lea     edx, [esp+80h+var_30]
-0x570AF3: push    edx
-0x570AF4: lea     ecx, [esp+84h+var_54]
-0x570AF8: call    NiMAtrix33_Multiply
+0x570AEE: push    edi; right
+0x570AEF: lea     edx, [esp+80h+out]
+0x570AF3: push    edx; out
+0x570AF4: lea     ecx, [esp+84h+var_54]; this
+0x570AF8: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x570AFD: mov     ecx, 9
 0x570B02: mov     esi, eax
 0x570B04: rep movsd
@@ -70,7 +69,7 @@
 0x570B12: mov     ecx, [esp+7Ch+var_60]
 0x570B16: push    ecx
 0x570B17: mov     [esp+80h+var_64], offset ??_7?$NiTArray@PAVNiAVObject@@@@6B@; const NiTArray<NiAVObject *>::`vftable'
-0x570B1F: call    FormHeapFree
+0x570B1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x570B24: add     esp, 4
 0x570B27: mov     ecx, [esp+7Ch+var_C]
 0x570B2B: mov     large fs:0, ecx
@@ -81,3 +80,18 @@
 0x570B36: pop     ebx
 0x570B37: add     esp, 68h
 0x570B3A: retn    4
+0x5706B0: mov     eax, [ecx+4]
+0x5706B3: push    eax
+0x5706B4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVNiAVObject@@@@6B@; const NiTArray<NiAVObject *>::`vftable'
+0x5706BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5706BF: pop     ecx
+0x5706C0: retn
+0x9BDD00: lea     ecx, [ebp-64h]
+0x9BDD03: jmp     loc_5706B0
+0x9BDD08: mov     edx, [esp+arg_4]
+0x9BDD0C: lea     eax, [edx-6Ch]
+0x9BDD0F: mov     ecx, [edx-70h]
+0x9BDD12: xor     ecx, eax
+0x9BDD14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDD19: mov     eax, offset stru_AE7578
+0x9BDD1E: jmp     ___CxxFrameHandler3

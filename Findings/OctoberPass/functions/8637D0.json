@@ -1,0 +1,744 @@
+{
+  "address_comment_regular": "[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x8637D0",
+      "0x8643A4"
+    ],
+    [
+      "0x9D47E0",
+      "0x9D48A0"
+    ]
+  ],
+  "folder": "sub_8637D0__8637D0",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 68,
+    "callers_count": 0,
+    "chunks_sha256": "c495ba38dff95c81854ef58c1d1bf48b55c25df6f23e1eaadb343f4838a7a6ca",
+    "comment_regular": "Oblivion Lighting30 property pass producer. Its normal material RenderPass seeds lightCount=1 with the ShadowSceneNode base light, then includes only active iterator lights whose byte +0xF4 is zero; per-source projected-shadow lights are deliberately excluded from that material light array. Normal material selectors are bounded through 0x146 and this function emits no 0x14E..0x151 records. In render mode 5 it builds selector 0x154 rigid or 0x155 skinned.\n\n[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
+    "comment_repeatable": "[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
+    "data_refs_count": 2,
+    "display_name": "Lighting30ShaderProperty_BuildRenderPasses",
+    "end_ea": "0x8643A4",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "Lighting30ShaderProperty_BuildRenderPasses",
+    "segment": ".text",
+    "sha256": "6bc3cad92fcbc221d4cb253495f161eac5e931fc3fa088945df9d135edb866d2",
+    "size": 3028,
+    "start_ea": "0x8637D0",
+    "total_chunk_size": 3220,
+    "type": "NiTPointerList__BSImageSpaceShader *__thiscall(Lighting30ShaderProperty *this, NiGeometry *geometry, int renderFlags, unsigned __int16 *passCount, int emitMode)",
+    "xrefs_from_count": 1149,
+    "xrefs_to_count": 1
+  },
+  "function_comment_regular": "Oblivion Lighting30 property pass producer. Its normal material RenderPass seeds lightCount=1 with the ShadowSceneNode base light, then includes only active iterator lights whose byte +0xF4 is zero; per-source projected-shadow lights are deliberately excluded from that material light array. Normal material selectors are bounded through 0x146 and this function emits no 0x14E..0x151 records. In render mode 5 it builds selector 0x154 rigid or 0x155 skinned.",
+  "function_comment_repeatable": "[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x8637D0",
+      "regular": "[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863802",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863811",
+      "regular": "output",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863826",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863843",
+      "regular": "Lighting30 shader-property flag bit 1 (mask 2) is the native skinned selector for the mode-5 caster pass.",
+      "repeatable": "Lighting30 shader-property flag bit 1 (mask 2) is the native skinned selector for the mode-5 caster pass."
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x86385B",
+      "regular": "[Verified] Lighting30 pass setup also gates property passInfo bit 0x100000 using OB_ShaderPassControl.bFullBrightLighting.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86387E",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863880",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: Performance negative result: mode5 path calls GetFirst before cache/pass handling; unused return alone does not establish removable work because iterator changes shared cursor+7C. No quadratic scan proven here; do not bypass a stateful iterator based on decompiler dead-value appearance."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8638B5",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8638DE",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8638E0",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8638E2",
+      "regular": "Mode-5 rigid Lighting30 caster: construct selector 0x154 with one current light.",
+      "repeatable": "Mode-5 rigid Lighting30 caster: construct selector 0x154 with one current light."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8638E7",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8638E8",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86390A",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86390C",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86390E",
+      "regular": "Mode-5 skinned Lighting30 caster: construct selector 0x155 with one current light.",
+      "repeatable": "Mode-5 skinned Lighting30 caster: construct selector 0x155 with one current light."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863913",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863914",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86395B",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86397D",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86397F",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863981",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863986",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863987",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639B4",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639B6",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639B8",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639BD",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639BE",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639DB",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639DD",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639DF",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639E4",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8639E5",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863AEC",
+      "regular": "output",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863AED",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863B0D",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D19",
+      "regular": "GPU static-world inventory: cached base passes are property+0x28 when +0x24 equals renderFlags | (renderMode<<8). A current list image alone does not prove future pass selection because preceding alpha/fade work may invalidate +0x24.",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 reachability gate: matching property cached flags returns existing passes before this builder block. On rebuild, clear lists and alpha/visibility gates apply; mode5/mode6 and two refraction shortcuts also bypass ordinary count/fill. Overflow finding is conditional on reaching863E0C, not every Lighting30 draw."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D48",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D68",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D6A",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D6C",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D6E",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D6F",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863D9A",
+      "regular": "Lighting30 Refract selector = 0x156 + passInfoBit2, yielding 0x156 or 0x157 within the Lighting30 resolver domain.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DB4",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DD4",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DD6",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DD8",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DDA",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DDB",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863DFC",
+      "regular": "Lighting30 RefractF selector = 0x158, within the Lighting30 resolver domain.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E21",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E45",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E47",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E49",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E4B",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E4C",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E5F",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E6D",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 Verified large-light correctness blocker: BYTE RenderPass+8 starts at1 for reserved scene-light slot. Each active iterator result with wrapper+F4==0 increments that BYTE at863E89. For stable P eligible additional lights, stored count=(P+1)&255. This is not a measured performance regression; fix before large-count gameplay benchmarks.\nMEF v57 IMPLEMENTED 2026-10-08: LC-1 implemented safety policy: scoped helper replaces BYTE count/count-fill, preserves two filtered traversals and projector exclusion, allocates at most255 slots (reserved+first254 eligible), bounds every write, publishes actual initialized count. Excess lights omitted deliberately, not additive-pass equivalence. P<=254 stable ordering/callback trace retained."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E80",
+      "regular": "Normal Lighting30 material-pass count includes this active light only when ShadowSceneLight+0xF4 is zero; projected-shadow lights are excluded.",
+      "repeatable": "Normal Lighting30 material-pass count includes this active light only when ShadowSceneLight+0xF4 is zero; projected-shadow lights are excluded."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E89",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 overflow point: ADD BYTE PTR [ESI+8],1, no saturation/wide accumulator. P=254 yields255; P=255 wraps0; P=256 wraps1. Iterator follows linked nodes, not this byte count. No eligible-light budget branch was found in this count/fill region."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E8D",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863E9F",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 undersized allocation: MOVZX EAX,AL promotes already-wrapped count; MUL4 overflow detection cannot recover lost high bits. Nonzero count C allocates4*C at863EB3. P=256 gives C=1 and4-byte allocation."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863EB2",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863EBB",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863ED6",
+      "regular": "Populate the normal material light array only from active lights with +0xF4==0; the +0xF4!=0 lights require separate overlay records.",
+      "repeatable": "Populate the normal material light array only from active lights with +0xF4==0; the +0xF4!=0 lights require separate overlay records."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863EE6",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 out-of-bounds store: second traversal writes light pointer at array+4*32-bit output index, initialized1 at863ECC and incremented863EE9, without comparing against allocated C. For stable P=256, base+256additional writes total257 pointers into1-slot allocation; first additional pointer already exceeds allocation. No crash reproduction performed."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863EF0",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863EFF",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 final truncation: after unbounded fill, byte of 32-bit output index is stored back to pass+8. Widening only allocation count or only this final store does not fix byte-sized downstream representation; keep each emitted pass count<=255 or audit a complete representation change."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863F04",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 zero-wrap distinction: when (P+1)&255==0 (e.g.P=255 or511), array is setNULL and count/fill block is skipped. Do not claim the same direct overflow at that exact boundary. Rendering consequences of publishing zero-light pass require consumer review."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863F0B",
+      "regular": "",
+      "repeatable": "MEF v57 IMPLEMENTED 2026-10-08: LC-1 SUCCESS-only continuation: clears dirty bit via863F14 then shader selection/pass publication86406E. Private array/passOOM must not enter here. Failure frees unpublished ownership, complements this request's cache key, restoresESI=property and returns through86438B for later retry."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x863FF7",
+      "regular": "_DWORD",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864099",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8640B9",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8640BB",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8640BD",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8640BF",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8640C0",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864106",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864126",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864128",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86412A",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86412C",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86412D",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86419F",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8641C3",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8641C5",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8641C7",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8641C9",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8641CA",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86421A",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864221",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86425D",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86425F",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864261",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864263",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864264",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x86429D",
+      "regular": "[Verified] The Lighting30 3x-decal loop seeds remaining work from the inherited decalDataList item count at property+0x8C; it emits one 3x decal RenderPass per package-sized batch.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x8642C4",
+      "regular": "[Verified] Tests Lighting30ShaderProperty flag 0x100 to select the decal variant: clear selects 3x decal base, set selects the alpha variant.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8642D6",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8642F6",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8642F8",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x8642FA",
+      "regular": "[Verified] Constructs selector 0x152, which BSShaderProperty_GetRenderPassName maps to BSSM_3XDECAL.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x8642FF",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864300",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864310",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86432C",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86432E",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x864330",
+      "regular": "[Verified] Constructs selector 0x153, which BSShaderProperty_GetRenderPassName maps to BSSM_3XDECAL_A.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864335",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864336",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x864366",
+      "regular": "[Verified] Decrements remaining decalDataList count by OB_ShaderPassControl.decalPassBatchSize and repeats until exhausted; the same 2/6/8 batch policy is used by Lighting30 3x decal selectors.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x864388",
+      "regular": "Store the pass-list cache key at property+0x24 before returning property+0x28. GPU resident admission must retain mode/cache identity and all list-local pass occurrences; a selector/light equality match is not full pass coverage.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86438B",
+      "regular": "",
+      "repeatable": "MEF v57 IMPLEMENTED 2026-10-08: LC-1 failure return target: old ordinary lists were cleared863D21; helper skips invalid pass publication/cache-success and returns existing property list. Exceptions free private ownership and propagate. The skipped output counter local is only redefined at86428C before next use; old count/fill local not needed after success."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x86438E",
+      "regular": "End of complete 993-instruction Lighting30_BuildBasePasses audit: bounded selector ranges exclude 0x14E..0x151. Those selector IDs are consumer-only in retail Oblivion 1.2.416.",
+      "repeatable": ""
+    }
+  ]
+}

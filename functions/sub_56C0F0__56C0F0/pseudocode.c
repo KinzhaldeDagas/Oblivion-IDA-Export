@@ -1,23 +1,24 @@
-void __thiscall sub_56C0F0(int *this)
+// [Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.
+void __thiscall DECAL_DATA_ReleaseOwnedReferences(DECAL_DATA *this)
 {
-  int v2; // esi
+  NiProperty *targetShaderProperty_48; // esi
   LONG (__stdcall *v3)(volatile LONG *); // ebx
-  int v4; // esi
+  NiSourceTexture *sourceTexture_00; // esi
 
-  v2 = *(this + 0x12);
-  v3 = InterlockedDecrement;
-  if ( v2 )
+  targetShaderProperty_48 = this->targetShaderProperty_48; /*0x56c11a*/
+  v3 = InterlockedDecrement; /*0x56c11f*/
+  if ( targetShaderProperty_48 ) /*0x56c12d*/
   {
-    if ( !v3((volatile LONG *)(v2 + 4)) )
-      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
+    if ( !v3((volatile LONG *)&targetShaderProperty_48->members) ) /*0x56c133*/
+      (*(void (__thiscall **)(NiProperty *, int))targetShaderProperty_48->vtbl)(targetShaderProperty_48, 1); /*0x56c145*/
   }
-  v4 = *this;
-  if ( *this )
+  sourceTexture_00 = this->sourceTexture_00; /*0x56c147*/
+  if ( this->sourceTexture_00 ) /*0x56c147*/
   {
-    if ( !v3((volatile LONG *)(v4 + 4)) )
+    if ( !v3((volatile LONG *)&sourceTexture_00->members) ) /*0x56c159*/
     {
-      if ( v4 )
-        (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+      if ( sourceTexture_00 ) /*0x56c161*/
+        sourceTexture_00->vtbl->super.super.super.Destructor((NiRefObject *)sourceTexture_00, 1); /*0x56c16b*/
     }
   }
 }

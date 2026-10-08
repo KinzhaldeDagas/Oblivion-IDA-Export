@@ -1,0 +1,504 @@
+{
+  "address_comment_regular": "[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.",
+  "address_comment_repeatable": "Inherited +0x9C compatibility: stock high output is reachable for base PP and SpeedTree PP-lighting owners that retain base +0x5C. Lighting30 overrides +0x5C and never enters; Hair's only entry carries Refract/RefractF and returns via 0x160..0x162. Global selector filtering remains invalid because ordinary PP/SpeedTree high passes are consumed.",
+  "chunks": [
+    [
+      "0x85AE20",
+      "0x85BBD4"
+    ],
+    [
+      "0x9D4540",
+      "0x9D457F"
+    ]
+  ],
+  "folder": "sub_85AE20__85AE20",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 57,
+    "callers_count": 0,
+    "chunks_sha256": "99d05a10136e1d2689ae79bff69bf9ecd30e2a4174e63e4a97d0ab17ba4e2412",
+    "comment_regular": "Shared Oblivion BSShaderPPLightingProperty inherited virtual at vtable slot +0x9C. Exact ABI: void __thiscall(BSShaderProperty *this, NiGeometry *geometry, int rendererState, WORD *outContext, int emit). It requires shadow mapping ready, iterates eligible active non-shadow lights with ShadowSceneLight+0xF4 nonnull, constructs light-count-1 RenderPass records, stores pad+7=1, and inserts at this+0x28 head. Selector priority: passInfo bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else exact SpeedTreeBranch RTTI ancestry -> 0x17A; otherwise 0x177. Hair owns this slot but reaches it only through HairShaderProperty_BuildRenderPasses' image-space + flag fallback and base shader-class>=2 dispatch.\n\nSpeedTreeOBSE v159 static adapter: ordinary mode0 low-mask4 suppresses ordinary ambient/dynamic-light production while retaining texture pass10B and native extra/projector behavior. Full mask check here is (flags&F)==F, unlike class1855240 exact flags==F. Existing logs show renderState1F; adapter preserves upper10 bit (1F->14) and appends fog194 for the class-appropriate full mask. Texture-only final byte+7 is cleared before separate fog. Real game hook behavior remains UNVERIFIED.\n\n[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.",
+    "comment_repeatable": "[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.\n\nInherited +0x9C compatibility: stock high output is reachable for base PP and SpeedTree PP-lighting owners that retain base +0x5C. Lighting30 overrides +0x5C and never enters; Hair's only entry carries Refract/RefractF and returns via 0x160..0x162. Global selector filtering remains invalid because ordinary PP/SpeedTree high passes are consumed.",
+    "data_refs_count": 8,
+    "display_name": "BSShaderPPLightingProperty_BuildInheritedLightPasses",
+    "end_ea": "0x85BBD4",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "BSShaderPPLightingProperty_BuildInheritedLightPasses",
+    "segment": ".text",
+    "sha256": "6fb6d7e3a8c44107e0e2553c8d7e6c6086f32c425bed47eb97b23a16b741241c",
+    "size": 3508,
+    "start_ea": "0x85AE20",
+    "total_chunk_size": 3571,
+    "type": "void __thiscall(BSShaderLightingPropertyLayout_t *this, NiGeometry *geometry, int rendererState, unsigned __int16 *outContext, int emit)",
+    "xrefs_from_count": 1295,
+    "xrefs_to_count": 5
+  },
+  "function_comment_regular": "Shared Oblivion BSShaderPPLightingProperty inherited virtual at vtable slot +0x9C. Exact ABI: void __thiscall(BSShaderProperty *this, NiGeometry *geometry, int rendererState, WORD *outContext, int emit). It requires shadow mapping ready, iterates eligible active non-shadow lights with ShadowSceneLight+0xF4 nonnull, constructs light-count-1 RenderPass records, stores pad+7=1, and inserts at this+0x28 head. Selector priority: passInfo bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else exact SpeedTreeBranch RTTI ancestry -> 0x17A; otherwise 0x177. Hair owns this slot but reaches it only through HairShaderProperty_BuildRenderPasses' image-space + flag fallback and base shader-class>=2 dispatch.\n\nSpeedTreeOBSE v159 static adapter: ordinary mode0 low-mask4 suppresses ordinary ambient/dynamic-light production while retaining texture pass10B and native extra/projector behavior. Full mask check here is (flags&F)==F, unlike class1855240 exact flags==F. Existing logs show renderState1F; adapter preserves upper10 bit (1F->14) and appends fog194 for the class-appropriate full mask. Texture-only final byte+7 is cleared before separate fog. Real game hook behavior remains UNVERIFIED.",
+  "function_comment_repeatable": "[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x85AE20",
+      "regular": "[Verified] After inherited lighting passes are assembled, this function passes decalDataList_80.numItems (+0x8C) to BSShaderProperty_AppendDecalPassesByBatch when the decal-path flag is set. This is the 1x consumer of the same list registered by BSTempEffect decal creation/build/restore paths; package batch size is OB_ShaderPassControl.decalPassBatchSize.",
+      "repeatable": "Inherited +0x9C compatibility: stock high output is reachable for base PP and SpeedTree PP-lighting owners that retain base +0x5C. Lighting30 overrides +0x5C and never enters; Hair's only entry carries Refract/RefractF and returns via 0x160..0x162. Global selector filtering remains invalid because ordinary PP/SpeedTree high passes are consumed."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85AEA0",
+      "regular": "Test passInfo bit 0x2; highest-priority native high-selector state.",
+      "repeatable": "Test passInfo bit 0x2; highest-priority native high-selector state."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85AEA3",
+      "regular": "If passInfo bit 0x2 is set, all eligible native high passes use selector 0x178.",
+      "repeatable": "If passInfo bit 0x2 is set, all eligible native high passes use selector 0x178."
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x85AED8",
+      "regular": "[Verified] passInfo bit 0x100 is captured as the helper's useDecalVariantA argument; it selects 0x18B/BSSM_DECAL_A instead of 0x18A/BSSM_DECAL. [Probable] The `_A` selector variant denotes alpha.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85AF70",
+      "regular": "Call this property's virtual GetRTTI, then walk the Oblivion NiRTTI parent chain.",
+      "repeatable": "Call this property's virtual GetRTTI, then walk the Oblivion NiRTTI parent chain."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85AF80",
+      "regular": "Exact ancestry comparison against NiRTTI_SpeedTreeBranchShaderProperty (B468C8).",
+      "repeatable": "Exact ancestry comparison against NiRTTI_SpeedTreeBranchShaderProperty (B468C8)."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85AFA1",
+      "regular": "Persist the property-wide SpeedTreeBranchShaderProperty ancestry gate once before light emission.",
+      "repeatable": "Persist the property-wide SpeedTreeBranchShaderProperty ancestry gate once before light emission."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B034",
+      "regular": "Test passInfo bit 0x4000 only after bit 0x2 was absent.",
+      "repeatable": "Test passInfo bit 0x4000 only after bit 0x2 was absent."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B039",
+      "regular": "If passInfo bit 0x4000 is set, all eligible native high passes use selector 0x179.",
+      "repeatable": "If passInfo bit 0x4000 is set, all eligible native high passes use selector 0x179."
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x85B078",
+      "regular": "[Verified] In inherited PPLighting pass setup, bFullBrightLighting modifies the branch for property passInfo bit 0x100000.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B0AD",
+      "regular": "output",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B0AE",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B0CC",
+      "regular": "output",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B0CD",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B0E3",
+      "regular": "An RTTI-chain match marks this property as SpeedTreeBranchShaderProperty-derived.",
+      "repeatable": "An RTTI-chain match marks this property as SpeedTreeBranchShaderProperty-derived."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B118",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B147",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B208",
+      "regular": "other",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B20D",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B238",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B29F",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x85B2A1",
+      "regular": "[Verified] Initializes passByte to 1 before passing its address to the selected pass builders, including BSShaderProperty_AppendDecalPassesByBatch. The helper forwards this byte to RenderPass_Construct; its downstream meaning remains Unknown.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B32D",
+      "regular": "If passInfo contains Refract 0x8000 or RefractF 0x10000, take the terminal refraction path before all later inherited light/high-selector production.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B4B5",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B577",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B5D7",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B632",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B6F1",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B6FA",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B710",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B767",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B7AD",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B84D",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B891",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B8A3",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B919",
+      "regular": "Size",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B93F",
+      "regular": "lightCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B941",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B943",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B945",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B946",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9DD",
+      "regular": "decalCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9E2",
+      "regular": "useDecalVariantA",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9E7",
+      "regular": "passByte",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9E8",
+      "regular": "emitMode",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9E9",
+      "regular": "outPassCount",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9EA",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85B9EB",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x85B9ED",
+      "regular": "[Verified] Passes the decalDataList_80.numItems count at BSShaderLightingProperty+0x8C into BSShaderProperty_AppendDecalPassesByBatch after base lighting passes are assembled.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BAAD",
+      "regular": "Native 0x177..0x17A producer is reachable only when Oblivion shadow mapping is ready.",
+      "repeatable": "Native 0x177..0x17A producer is reachable only when Oblivion shadow mapping is ready."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BABA",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BABC",
+      "regular": "Begin native light iteration for the 0x177..0x17A producer.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BAE0",
+      "regular": "For each active non-shadow light, test ShadowSceneLight+0xF4 eligibility.",
+      "repeatable": "For each active non-shadow light, test ShadowSceneLight+0xF4 eligibility."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BAED",
+      "regular": "Eligible light: allocate and construct one light-count-1 RenderPass for this property.",
+      "repeatable": "Eligible light: allocate and construct one light-count-1 RenderPass for this property."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BAEF",
+      "regular": "Allocate one property-owned 0x10-byte native RenderPass from FormHeap for the current eligible projector light.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB0B",
+      "regular": "Construct this per-light RenderPass with lightCount=1 and the current iterator light as its sole +0x0C entry.",
+      "repeatable": "Construct this per-light RenderPass with lightCount=1 and the current iterator light as its sole +0x0C entry."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB0D",
+      "regular": "byte6",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB0F",
+      "regular": "selector",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB11",
+      "regular": "geometry",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB12",
+      "regular": "outPass",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB13",
+      "regular": "Construct the property-owned pass. The record stores raw geometry/light pointers and owns only its separately allocated light-pointer array.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB1F",
+      "regular": "Exact selector precedence: bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else Branch RTTI -> 0x17A; else 0x177.",
+      "repeatable": "Exact selector precedence: bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else Branch RTTI -> 0x17A; else 0x177."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB24",
+      "regular": "Selector state is property-wide and exact: passInfo bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else SpeedTreeBranchShaderProperty ancestry -> 0x17A; otherwise 0x177.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB35",
+      "regular": "Select native high-pass selector 0x178 when passInfo bit 0x2 is set.",
+      "repeatable": "Select native high-pass selector 0x178."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB3C",
+      "regular": "No bit 0x2: now test passInfo bit 0x4000.",
+      "repeatable": "No bit 0x2: now test passInfo bit 0x4000."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB43",
+      "regular": "Select native high-pass selector 0x179 when bit 0x2 is absent and passInfo bit 0x4000 is set.",
+      "repeatable": "Select native high-pass selector 0x179."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB4A",
+      "regular": "With neither passInfo flag set, map SpeedTreeBranchShaderProperty RTTI ancestry to 0x17A; otherwise select 0x177.",
+      "repeatable": "Neither passInfo flag set: map property-wide Branch RTTI gate to 0x17A, otherwise 0x177."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB53",
+      "regular": "Oblivion arithmetic realizes fallback exactly as 0x177 + 3*isSpeedTreeBranchProperty.",
+      "repeatable": "Oblivion arithmetic realizes fallback exactly as 0x177 + 3*isSpeedTreeBranchProperty."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB5B",
+      "regular": "Store exact native selector 0x177..0x17A into the per-light RenderPass.",
+      "repeatable": "Store the exact native selector into this per-light RenderPass."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB5F",
+      "regular": "Set native RenderPass byte +7 to 1 before ownership transfer.",
+      "repeatable": "Set RenderPass byte +7 to 1 for this native high-selector record."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB63",
+      "regular": "Prepare the completed RenderPass pointer for insertion at the property pass-list head.",
+      "repeatable": "Insert the completed native high-selector pass at BSShaderProperty+0x28 list head."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB6B",
+      "regular": "Transfer the completed native high-selector pass to the BSShaderProperty+0x28 owner list via NiTList_AddHead.",
+      "repeatable": "Advance to the next active non-shadow light; selector state remains property-wide."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB70",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB72",
+      "regular": "Advance active non-shadow light iteration; selector state remains constant for the property invocation.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BB77",
+      "regular": "Keep the next active non-shadow light for the loop continuation.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x85BBB3",
+      "regular": "Emit refraction 0x160..0x162 and return. For exact Hair this is the only class>=2 outcome of its flagged fallback, so Hair cannot reach 0x177..0x179.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x9D4540",
+      "regular": "slot",
+      "repeatable": ""
+    }
+  ]
+}

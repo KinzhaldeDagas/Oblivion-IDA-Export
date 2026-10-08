@@ -1,4 +1,4 @@
-0x56B920: push    0FFFFFFFFh
+0x56B920: push    0FFFFFFFFh; [Verified] Allocates a pool block of 0x10-byte BSTECreateTask items and initializes each with BSTECreateTask_Ctor, paired with BSTECreateTask_Dtor for array destruction.
 0x56B922: push    offset SEH_787830
 0x56B927: mov     eax, large fs:0
 0x56B92D: push    eax
@@ -36,8 +36,8 @@
 0x56B980: cmp     eax, edi
 0x56B982: mov     [esp+1Ch+var_4], edi
 0x56B986: jz      short loc_56B9A0
-0x56B988: push    offset sub_56B820; a5
-0x56B98D: push    offset sub_56B7F0; a4
+0x56B988: push    offset BSTECreateTask_Dtor; a5
+0x56B98D: push    offset BSTECreateTask_Ctor; a4
 0x56B992: push    esi; size
 0x56B993: lea     edi, [eax+4]
 0x56B996: push    10h; a2
@@ -54,3 +54,15 @@
 0x56B9B3: pop     ebp
 0x56B9B4: add     esp, 0Ch
 0x56B9B7: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

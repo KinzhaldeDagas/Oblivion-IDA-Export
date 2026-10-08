@@ -1,26 +1,30 @@
-_DWORD *__thiscall sub_7EE3E0(_DWORD *this, int a2)
+// [Verified] Appends DECAL_DATA* to this BSShaderLightingProperty's list at +0x80: allocates a node through the list allocator vfunc, stores data at node+8, links at tail, and increments numItems at +0x8C. Resets the base BSShaderProperty cached render-pass state at +0x24. Called by BSTempEffectDecal_Ctor, BSTempEffectDecal_LoadGame, and BSTempEffectGeometryDecal_BuildGeneratedGeometry.
+NiTPointerListNode_DECAL_DATA_t *__thiscall BSShaderLightingProperty_AddDecalData(
+        BSShaderLightingPropertyLayout_t *this,
+        DECAL_DATA *data)
 {
-  _DWORD *v3; // esi
-  _DWORD *result; // eax
-  _DWORD *v5; // ecx
+  NiTPointerList_DecalDataLayout_t *p_decalDataList_80; // esi
+  NiTPointerListNode_DECAL_DATA_t *result; // eax
+  NiTPointerListNode_DECAL_DATA_t *tail; // ecx
 
-  v3 = this + 0x20;
-  result = (_DWORD *)(*(int (__thiscall **)(_DWORD *))(*(this + 0x20) + 4))(this + 0x20);
-  result[2] = a2;
-  *result = 0;
-  result[1] = v3[2];
-  v5 = (_DWORD *)v3[2];
-  if ( v5 )
+  p_decalDataList_80 = &this->decalDataList_80; /*0x7ee3ed*/
+  result = (NiTPointerListNode_DECAL_DATA_t *)(*((int (__thiscall **)(NiTPointerList_DecalDataLayout_t *))this->decalDataList_80.vftable /*0x7ee3f5*/
+                                               + 1))(&this->decalDataList_80);
+  result->data_08 = data; /*0x7ee3fb*/
+  result->next_00 = 0; /*0x7ee3fe*/
+  result->prev_04 = p_decalDataList_80->tail; /*0x7ee407*/
+  tail = p_decalDataList_80->tail; /*0x7ee40a*/
+  if ( tail ) /*0x7ee40f*/
   {
-    *v5 = result;
-    ++v3[3];
+    tail->next_00 = result; /*0x7ee411*/
+    ++p_decalDataList_80->numItems; /*0x7ee413*/
   }
   else
   {
-    ++v3[3];
-    v3[1] = result;
+    ++p_decalDataList_80->numItems; /*0x7ee426*/
+    p_decalDataList_80->head = result; /*0x7ee42a*/
   }
-  v3[2] = result;
-  *(this + 9) = 0;
-  return result;
+  p_decalDataList_80->tail = result; /*0x7ee417*/
+  this->base.member.lastRenderPassState = 0; /*0x7ee41a*/
+  return result; /*0x7ee421*/
 }

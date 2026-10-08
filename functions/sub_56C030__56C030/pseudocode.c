@@ -1,53 +1,53 @@
-int __thiscall sub_56C030(_DWORD **this)
+unsigned int __thiscall BSTempEffectDecal_GetSaveSize(BSTempEffectDecalLayout_t *this)
 {
+  int v2; // edi
   int v3; // edi
-  int v4; // edi
-  int v5; // eax
-  const char *v6; // eax
-  int v7; // edi
-  UInt32 *v8; // esi
-  TESForm *v9; // eax
-  const char *v10; // eax
-  int v12; // [esp-Ch] [ebp-14h]
-  int v13; // [esp-8h] [ebp-10h]
-  const char *v14; // [esp-4h] [ebp-Ch]
+  NiSourceTexture *sourceTexture_00; // eax
+  const char *unk034; // eax
+  unsigned int v6; // edi
+  UInt32 *currentlySavingFormHeader; // esi
+  TESForm *v8; // eax
+  const char *v9; // eax
+  int v11; // [esp-Ch] [ebp-14h]
+  int v12; // [esp-8h] [ebp-10h]
+  const char *v13; // [esp-4h] [ebp-Ch]
 
-  v3 = 0;
-  if ( sub_45A170() )
-    v3 = 6;
-  v4 = sub_73D5D0() + v3;
-  v5 = **(this + 6);
-  if ( v5 )
-    v6 = *(const char **)(v5 + 0x34);
+  v2 = 0; /*0x56c03a*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x56c03c*/
+    v2 = 6; /*0x56c045*/
+  v3 = sub_73D5D0() + v2; /*0x56c051*/
+  sourceTexture_00 = this->decalData_18->sourceTexture_00; /*0x56c056*/
+  if ( sourceTexture_00 ) /*0x56c05a*/
+    unk034 = (const char *)sourceTexture_00->members.unk034; /*0x56c05c*/
   else
-    v6 = 0;
-  v7 = v4 + (unsigned __int16)sub_452400(v6) + 0x35;
+    unk034 = 0; /*0x56c061*/
+  v6 = v3 + (unsigned __int16)sub_452400(unk034) + 0x35; /*0x56c079*/
   if ( Global_DebugSaveBuffer )
   {
-    v8 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    if ( v8 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x56c085*/
+    if ( currentlySavingFormHeader )
     {
-      v9 = TESForm_LookupByFormID(*v8);
-      v10 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v9->vtbl->GetEditorName)(
-                            v9,
-                            *(UInt32 *)((char *)v8 + 5),
-                            0x90,
-                            "..\\TES Shared\\TempEffects\\BSTempEffectDecal.cpp");
+      v8 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x56c092*/
+      v9 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v8->vtbl->GetEditorName)( /*0x56c0b2*/
+                           v8,
+                           *(UInt32 *)((char *)currentlySavingFormHeader + 5),
+                           0x90,
+                           "..\\TES Shared\\TempEffects\\BSTempEffectDecal.cpp");
       sub_40FEC0(
         "GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v7,
-        *v8,
-        v10,
+        v6,
+        *currentlySavingFormHeader,
+        v9,
+        v11,
         v12,
-        v13,
-        v14);
-      return v7;
+        v13);
+      return v6; /*0x56c0ca*/
     }
     sub_40FEC0(
       "GetSaveSize(): %-5i ending at line %i in file %s",
-      v7,
+      v6,
       0x90,
       "..\\TES Shared\\TempEffects\\BSTempEffectDecal.cpp");
   }
-  return v7;
+  return v6; /*0x56c0c8*/
 }

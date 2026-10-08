@@ -1,0 +1,204 @@
+{
+  "address_comment_regular": "Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5713F0",
+      "0x571625"
+    ],
+    [
+      "0x9BDD30",
+      "0x9BDD5E"
+    ]
+  ],
+  "folder": "sub_5713F0__5713F0",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 15,
+    "callers_count": 11,
+    "chunks_sha256": "2b06feb91a97c36644317353956ccc7314ecb7e87ad153b58941b61f64d4568c",
+    "comment_regular": "Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
+    "comment_repeatable": "Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
+    "data_refs_count": 2,
+    "display_name": "BSTempEffectParticle_Constructor",
+    "end_ea": "0x571625",
+    "evidence_confidence": "Unknown",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "BSTempEffectParticle_Constructor",
+    "segment": ".text",
+    "sha256": "8ee865891ed3ed976933ed8b50380cf05551bea9c4daed718d3f5128d55865a9",
+    "size": 565,
+    "start_ea": "0x5713F0",
+    "total_chunk_size": 611,
+    "type": "BSTempEffectParticle *__thiscall(BSTempEffectParticle *self, TESObjectCELL *parentCell, float durationSeconds, NiNode *parentNode, const char *modelPath, float directionX, float directionY, float directionZ, float localPosX, float localPosY, float localPosZ, float scale, bool useCachedClone)",
+    "xrefs_from_count": 216,
+    "xrefs_to_count": 11
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
+  "instruction_comments": [
+    {
+      "confidence": "Unknown",
+      "ea": "0x5713F0",
+      "regular": "Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571404",
+      "regular": "float",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x57140C",
+      "regular": "float",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571426",
+      "regular": "durationSeconds",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571429",
+      "regular": "parentCell",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571458",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571483",
+      "regular": "ODismemberment: BSTempEffectParticle loads model data through the shared ModelLoader, then either asks TES for a cached clone or clones the loaded object directly.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5714B1",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5714CF",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5714D6",
+      "regular": "a2",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5714D7",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5714F1",
+      "regular": "BloodOnDeath decode 2026-05-30: particle temp-effect duration is overwritten with the max controller span found in the cloned particle NIF tree. Visual squirt lifetime is model/controller-driven, not fDecalLifetime:Display.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571537",
+      "regular": "BloodOnDeath decode 2026-05-30: first atan2-like angle is based on horizontal length sqrt(dirX^2+dirY^2) and dirZ; stored negated as pitch for the particle model orientation.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x57154F",
+      "regular": "float",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571555",
+      "regular": "float",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571560",
+      "regular": "BloodOnDeath decode 2026-05-30: second atan2-like angle is horizontal yaw from normalized dirY/dirX. More outward squirt should feed a stronger horizontal direction before this constructor.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571578",
+      "regular": "float",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x57157B",
+      "regular": "BloodOnDeath decode 2026-05-30: builds the particle local rotation matrix from yaw, zero middle rotation, and pitch; direction is orientation-only here, no additional outward force is applied.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5715C9",
+      "regular": "ODismemberment: attaches the loaded/cloned particle model to the supplied NiNode parent with NiNode::AddObject. This gives a visual detached-NIF path, but ownership/lifetime remains temp-effect based.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5715DA",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5715DD",
+      "regular": "ODismemberment: initializes properties and updates the attached temp-effect model after AddObject.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5715E8",
+      "regular": "a3",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5715EB",
+      "regular": "this",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x5715EE",
+      "regular": "a2",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x571605",
+      "regular": "ODismemberment: starts controllers recursively on the attached temp-effect model. No separate Havok world insertion has been observed here yet.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x9BDD30",
+      "regular": "self",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x9BDD3B",
+      "regular": "slot",
+      "repeatable": ""
+    }
+  ]
+}

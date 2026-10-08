@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B4920",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Generic shader/render-pass name table. Case 0x0F returns BSSM_FRONDS, but this is only a pass-name mapping; it does not attach frond geometry or request SpeedTreeFrondShader.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7B4A20",
-    "line": "mov     eax, offset aBssm_fronds; jumptable 007B493D case 15",
+    "line": "mov     eax, offset aBssm_fronds; BSSM_FRONDS string returned by BSShaderProperty_GetRenderPassName case 0x0F. Only string-table evidence; not a frond geometry attachment path.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -12721,7 +12721,7 @@
   },
   {
     "ea": "0x7B64C4",
-    "line": "mov     eax, offset aBssm_3xdecal; jumptable 007B493D case 338",
+    "line": "mov     eax, offset aBssm_3xdecal; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x152 (338) to BSSM_3XDECAL.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -12757,7 +12757,7 @@
   },
   {
     "ea": "0x7B64D8",
-    "line": "mov     eax, offset aBssm_3xdecal_a; jumptable 007B493D case 339",
+    "line": "mov     eax, offset aBssm_3xdecal_a; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x153 (339) to BSSM_3XDECAL_A.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13909,7 +13909,7 @@
   },
   {
     "ea": "0x7B6758",
-    "line": "mov     eax, offset aBssm_texeffect; jumptable 007B493D case 396",
+    "line": "mov     eax, offset aBssm_texeffect; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps render-pass selector 0x18C (396) to the exact name \"BSSM_TEXEFFECT\".",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13945,7 +13945,7 @@
   },
   {
     "ea": "0x7B676C",
-    "line": "mov     eax, offset aBssm_texeffe_0; jumptable 007B493D case 397",
+    "line": "mov     eax, offset aBssm_texeffe_0; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18D to \"BSSM_TEXEFFECT_S\". Probable: _S is the controller/skinned geometry pass variant; the selector is chosen from passInfo bit 0x02, set when SetupGeometry sees a non-null geometry controller, and Fallout's analogous helper branches on abSkinned.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13981,7 +13981,7 @@
   },
   {
     "ea": "0x7B6780",
-    "line": "mov     eax, offset aBssm_2x_texeff; jumptable 007B493D case 398",
+    "line": "mov     eax, offset aBssm_2x_texeff; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18E (398) to \"BSSM_2x_TEXEFFECT\".",
     "mnemonic": "mov",
     "size": 5
   },
@@ -14017,7 +14017,7 @@
   },
   {
     "ea": "0x7B6794",
-    "line": "mov     eax, offset aBssm_2x_texe_0; jumptable 007B493D case 399",
+    "line": "mov     eax, offset aBssm_2x_texe_0; Verified (Oblivion): BSShaderProperty_GetRenderPassName maps selector 0x18F (399) to \"BSSM_2x_TEXEFFECT_S\". Probable: _S is the controller/skinned geometry variant, corroborated by passInfo bit 0x02 selection and Fallout's abSkinned 2x helper.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -14125,7 +14125,7 @@
   },
   {
     "ea": "0x7B67D0",
-    "line": "mov     eax, offset aBssm_decal; jumptable 007B493D case 394",
+    "line": "mov     eax, offset aBssm_decal; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x18A (394) to the exact string BSSM_DECAL.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -14161,7 +14161,7 @@
   },
   {
     "ea": "0x7B67E4",
-    "line": "mov     eax, offset aBssm_decal_a; jumptable 007B493D case 395",
+    "line": "mov     eax, offset aBssm_decal_a; [Verified] BSShaderProperty_GetRenderPassName maps selector 0x18B (395) to the exact string BSSM_DECAL_A.",
     "mnemonic": "mov",
     "size": 5
   },

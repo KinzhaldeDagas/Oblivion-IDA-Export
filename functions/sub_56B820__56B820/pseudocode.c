@@ -1,24 +1,25 @@
-void __thiscall sub_56B820(_DWORD *this)
+// [Verified] BSTECreateTask destructor decrements/releases its NiTimeController slot at +0x0C, then chains to NiRefObject destruction. Field +0x08 remains Unknown.
+void __thiscall BSTECreateTask_Dtor(BSTECreateTask_Layout_t *this)
 {
-  int v2; // esi
+  BSTempEffectGeometryDecal *geometryDecalEffect_0C; // esi
   LONG (__stdcall *v3)(volatile LONG *); // ebp
-  int v4; // esi
+  BSTempEffectGeometryDecal *v4; // esi
 
-  *this = &BSTECreateTask::`vftable';
-  v2 = *(this + 3);
-  v3 = InterlockedDecrement;
-  if ( v2 )
+  this->vftable = &BSTECreateTask::`vftable'; /*0x56b84a*/
+  geometryDecalEffect_0C = this->taskController_0C; /*0x56b850*/
+  v3 = InterlockedDecrement; /*0x56b855*/
+  if ( geometryDecalEffect_0C ) /*0x56b863*/
   {
-    if ( !v3((volatile LONG *)(v2 + 4)) )
-      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
-    *(this + 3) = 0;
+    if ( !v3(&geometryDecalEffect_0C->base.refCount) ) /*0x56b869*/
+      geometryDecalEffect_0C->base.vtable->super.super.Destructor((NiRefObject *)geometryDecalEffect_0C, 1); /*0x56b87b*/
+    this->taskController_0C = 0; /*0x56b87d*/
   }
-  v4 = *(this + 3);
-  if ( v4 )
+  v4 = this->taskController_0C; /*0x56b884*/
+  if ( v4 ) /*0x56b88e*/
   {
-    if ( !v3((volatile LONG *)(v4 + 4)) )
-      (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+    if ( !v3(&v4->base.refCount) ) /*0x56b894*/
+      v4->base.vtable->super.super.Destructor((NiRefObject *)v4, 1); /*0x56b8a6*/
   }
-  *this = &NiTask::`vftable';
-  NiRefObject_destr(this);
+  this->vftable = &NiTask::`vftable'; /*0x56b8b2*/
+  NiRefObject_destr(this); /*0x56b8b8*/
 }

@@ -1,0 +1,72 @@
+{
+  "address_comment_regular": "[Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7EE440",
+      "0x7EE4DF"
+    ],
+    [
+      "0x9CFBB0",
+      "0x9CFBEC"
+    ]
+  ],
+  "folder": "0BSShaderLightingProperty@@QAE@XZ__7EE440",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 4,
+    "callers_count": 7,
+    "chunks_sha256": "14477e2e5927c5524f5e864e72b6a82f79e5d76390a4a63619a6810992aa2421",
+    "comment_regular": "[Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.",
+    "comment_repeatable": "[Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.",
+    "data_refs_count": 4,
+    "display_name": "??0BSShaderLightingProperty@@QAE@XZ",
+    "end_ea": "0x7EE4DF",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "??0BSShaderLightingProperty@@QAE@XZ",
+    "segment": ".text",
+    "sha256": "709e745cfa2c9e8ee8c2a59e8634006596ef4662e009031fce0ce178bd71889b",
+    "size": 159,
+    "start_ea": "0x7EE440",
+    "total_chunk_size": 219,
+    "type": "BSShaderLightingPropertyLayout_t *__thiscall(BSShaderLightingPropertyLayout_t *this)",
+    "xrefs_from_count": 70,
+    "xrefs_to_count": 7
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x7EE440",
+      "regular": "[Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7EE487",
+      "regular": "",
+      "repeatable": "MEF PERF 2026-10-07 PASS4: LC-1 layout evidence: constructor initializes raw ShadowSceneLight pointer-list vtable at lighting-property+6C, DWORD count+78 and head+70/tail+74. Cursor+7C initialized separately7EE4AE. These fields lie in lighting extension beyond the existing6Ch BSShaderProperty base; base type was not resized."
+    },
+    {
+      "confidence": "Verified",
+      "ea": "0x7EE49C",
+      "regular": "[Verified] BSShaderLightingProperty constructor initializes a NiTPointerList<DECAL_DATA*> at +0x80: vtable, head, tail and item count (+0x8C). This count drives decal pass batching.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x7EE4B8",
+      "regular": "OBLIVION AUTHORITY (2026-08-24): BSShaderLightingProperty constructor initializes per-property light dimmer at +0x94 to 1.0f. DrawRenderPass 0x7A9820 passes this scalar into each light constant update.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x9CFBB0",
+      "regular": "this",
+      "repeatable": ""
+    }
+  ]
+}

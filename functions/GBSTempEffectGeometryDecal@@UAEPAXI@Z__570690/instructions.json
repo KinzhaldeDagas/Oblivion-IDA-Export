@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x570693",
-    "line": "call    ??1BSTempEffectGeometryDecal@@UAE@XZ; BSTempEffectGeometryDecal::~BSTempEffectGeometryDecal(void)",
+    "line": "call    BSTempEffectGeometryDecal_Dtor; [Verified] BSTempEffectGeometryDecal destructor unregisters its DECAL_DATA payload from the target shader property via BSShaderLightingProperty_RemoveDecalData, releases the target NiProperty, then releases the payload's source texture and target property and frees the 0x4C payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x5706A0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,552 +1,798 @@
-char __fastcall sub_85AE20(float *a1, int a2, NiNode *a3, int a4, NiTPointerList_Node_void *a5, int a6)
+// Shared Oblivion BSShaderPPLightingProperty inherited virtual at vtable slot +0x9C. Exact ABI: void __thiscall(BSShaderProperty *this, NiGeometry *geometry, int rendererState, WORD *outContext, int emit). It requires shadow mapping ready, iterates eligible active non-shadow lights with ShadowSceneLight+0xF4 nonnull, constructs light-count-1 RenderPass records, stores pad+7=1, and inserts at this+0x28 head. Selector priority: passInfo bit 0x2 -> 0x178; else bit 0x4000 -> 0x179; else exact SpeedTreeBranch RTTI ancestry -> 0x17A; otherwise 0x177. Hair owns this slot but reaches it only through HairShaderProperty_BuildRenderPasses' image-space + flag fallback and base shader-class>=2 dispatch.
+void __thiscall BSShaderPPLightingProperty_BuildInheritedLightPasses(
+        BSShaderLightingPropertyLayout_t *this,
+        NiGeometry *geometry,
+        int rendererState,
+        unsigned __int16 *outContext,
+        int emit)
 {
-  unsigned int v7; // ecx
-  __int16 v8; // di
-  _DWORD *v9; // eax
-  int v10; // eax
-  bool v11; // zf
-  double v12; // st7
-  int v13; // eax
-  char v14; // al
-  int (__thiscall *v15)(float *); // eax
-  int v16; // eax
-  char v17; // al
-  int (__thiscall *v18)(float *); // eax
-  int v19; // eax
-  char v20; // al
-  int v21; // edx
-  int v22; // eax
-  BSShaderAccumulator *inited; // eax
-  int v24; // eax
+  UInt32 passInfo; // ecx
+  __int16 v7; // di
+  _DWORD *v8; // eax
+  NiGeometryData *geomData; // eax
+  bool v10; // zf
+  double v11; // st7
+  struct NiRTTI *v12; // eax
+  char v13; // al
+  int (__thiscall *v14)(BSShaderLightingPropertyLayout_t *); // eax
+  NiRTTI *v15; // eax
+  char v16; // al
+  int (__thiscall *v17)(BSShaderLightingPropertyLayout_t *); // eax
+  struct NiRTTI *v18; // eax
+  char v19; // al
+  int v20; // edx
+  UInt32 v21; // eax
+  BSShaderAccumulator *Global; // eax
+  UInt32 v23; // eax
   NiProperty *NiPropertyByID; // eax
-  LONG (__stdcall *v26)(volatile LONG *); // ebx
-  NiProperty *v27; // edi
-  volatile LONG *v28; // ebp
-  volatile LONG *v29; // ebp
-  _DWORD *v30; // eax
-  int v31; // eax
-  void (__thiscall ***v32)(_DWORD, int); // edi
-  char v33; // bp
-  unsigned __int16 v34; // dx
-  _DWORD *v35; // eax
-  _DWORD *v36; // eax
-  _DWORD *v37; // eax
-  int v38; // eax
-  _DWORD *v39; // eax
-  int v40; // eax
-  int v41; // eax
-  _DWORD *i; // eax
-  _DWORD *v43; // eax
-  int v44; // eax
-  int v45; // eax
-  int v46; // eax
-  __int16 v47; // cx
-  char v48; // al
-  _DWORD *v49; // eax
-  int v50; // edi
-  char v51; // bl
-  int v52; // eax
-  int v53; // eax
-  __int16 v54; // cx
-  char v56; // [esp+15h] [ebp-87h] BYREF
-  bool v57; // [esp+16h] [ebp-86h]
-  char v58; // [esp+17h] [ebp-85h]
-  char v59; // [esp+18h] [ebp-84h]
-  char v60; // [esp+19h] [ebp-83h]
-  bool v61; // [esp+1Ah] [ebp-82h]
-  char v62; // [esp+1Bh] [ebp-81h] BYREF
-  unsigned int v63; // [esp+1Ch] [ebp-80h]
-  int v64; // [esp+21h] [ebp-7Bh]
-  char v65; // [esp+25h] [ebp-77h]
-  bool v66; // [esp+26h] [ebp-76h]
-  bool v67; // [esp+27h] [ebp-75h]
-  int v68; // [esp+28h] [ebp-74h]
-  _DWORD *v69; // [esp+2Ch] [ebp-70h]
-  _DWORD *j; // [esp+30h] [ebp-6Ch]
-  int v71; // [esp+36h] [ebp-66h]
-  int v72; // [esp+3Ah] [ebp-62h]
-  char v73; // [esp+3Eh] [ebp-5Eh]
-  char v74; // [esp+3Fh] [ebp-5Dh]
-  char v75; // [esp+43h] [ebp-59h]
-  int v76; // [esp+47h] [ebp-55h]
-  bool v77; // [esp+4Bh] [ebp-51h]
-  bool v78; // [esp+4Ch] [ebp-50h]
-  bool v79; // [esp+4Dh] [ebp-4Fh]
-  bool v80; // [esp+4Eh] [ebp-4Eh]
-  char v81; // [esp+4Fh] [ebp-4Dh]
-  BOOL v82; // [esp+50h] [ebp-4Ch] BYREF
-  int v83; // [esp+54h] [ebp-48h]
-  int v84; // [esp+58h] [ebp-44h]
-  int v85; // [esp+5Ch] [ebp-40h]
-  int v86; // [esp+60h] [ebp-3Ch] BYREF
-  __int64 v87; // [esp+64h] [ebp-38h] BYREF
-  int v88; // [esp+6Ch] [ebp-30h]
-  int v89; // [esp+70h] [ebp-2Ch]
-  NiProperty *v90; // [esp+74h] [ebp-28h]
-  char v91; // [esp+78h] [ebp-24h]
-  char v92; // [esp+7Ch] [ebp-20h]
-  int v93; // [esp+80h] [ebp-1Ch]
-  volatile LONG *v94; // [esp+84h] [ebp-18h] BYREF
-  volatile LONG *v95; // [esp+88h] [ebp-14h] BYREF
-  int v96; // [esp+8Ch] [ebp-10h]
-  int v97; // [esp+98h] [ebp-4h]
+  LONG (__stdcall *v25)(volatile LONG *); // ebx
+  NiProperty *v26; // edi
+  NiPropertyState *v27; // ebp
+  NiPropertyState *v28; // ebp
+  _DWORD *v29; // eax
+  int v30; // eax
+  void (__thiscall ***v31)(_DWORD, int); // edi
+  char v32; // bp
+  unsigned __int16 v33; // dx
+  ShadowSceneLight *FirstActiveLight; // eax
+  ShadowSceneLight *NextActiveLight; // eax
+  ShadowSceneLight *v36; // eax
+  ShadowSceneLight *v37; // eax
+  ShadowSceneLight *v38; // eax
+  ShadowSceneLight *i; // eax
+  RenderPass_DecodedLayout *v40; // eax
+  RenderPass_DecodedLayout *v41; // eax
+  NiProperty *data; // eax
+  __int16 m_uiRefCount; // cx
+  char v44; // al
+  ShadowSceneLight_DecodedLayout *FirstActiveNonShadowLight; // edi
+  bool v46; // bl
+  RenderPass_DecodedLayout *v47; // eax
+  RenderPass_DecodedLayout *v48; // eax
+  __int16 v49; // cx
+  ShadowSceneLight *v50; // [esp-30h] [ebp-CCh]
+  ShadowSceneLight *v51; // [esp-2Ch] [ebp-C8h]
+  ShadowSceneLight *v52; // [esp-1Ch] [ebp-B8h]
+  char decalPassFlags[4]; // [esp+15h] [ebp-87h] BYREF
+  char v54; // [esp+19h] [ebp-83h]
+  bool v55; // [esp+1Ah] [ebp-82h]
+  char v56; // [esp+1Bh] [ebp-81h] BYREF
+  unsigned int v57; // [esp+1Ch] [ebp-80h]
+  _BOOL4 isSpeedTreeBranchProperty; // [esp+21h] [ebp-7Bh]
+  char v59; // [esp+25h] [ebp-77h]
+  bool passInfoBit4000; // [esp+26h] [ebp-76h]
+  bool v61; // [esp+27h] [ebp-75h]
+  int v62; // [esp+28h] [ebp-74h]
+  _DWORD *v63; // [esp+2Ch] [ebp-70h]
+  ShadowSceneLight *j; // [esp+30h] [ebp-6Ch]
+  int v65; // [esp+36h] [ebp-66h]
+  int v66; // [esp+3Ah] [ebp-62h]
+  char v67; // [esp+3Eh] [ebp-5Eh]
+  char v68; // [esp+3Fh] [ebp-5Dh]
+  char v69; // [esp+43h] [ebp-59h]
+  int v70; // [esp+47h] [ebp-55h]
+  bool v71; // [esp+4Bh] [ebp-51h]
+  bool v72; // [esp+4Ch] [ebp-50h]
+  bool v73; // [esp+4Dh] [ebp-4Fh]
+  bool v74; // [esp+4Eh] [ebp-4Eh]
+  unsigned __int8 v75; // [esp+4Fh] [ebp-4Dh]
+  int v76; // [esp+50h] [ebp-4Ch] BYREF
+  int v77; // [esp+54h] [ebp-48h]
+  char useAlphaDecalSelector[4]; // [esp+58h] [ebp-44h]
+  int v79; // [esp+5Ch] [ebp-40h]
+  RenderPass_DecodedLayout *v80; // [esp+60h] [ebp-3Ch] BYREF
+  __int64 v81; // [esp+64h] [ebp-38h] BYREF
+  int v82; // [esp+6Ch] [ebp-30h]
+  int v83; // [esp+70h] [ebp-2Ch]
+  NiProperty *v84; // [esp+74h] [ebp-28h]
+  bool passInfoBit2; // [esp+78h] [ebp-24h]
+  char v86; // [esp+7Ch] [ebp-20h]
+  int v87; // [esp+80h] [ebp-1Ch]
+  NiPropertyState *v88; // [esp+84h] [ebp-18h] BYREF
+  NiPropertyState *output; // [esp+88h] [ebp-14h] BYREF
+  int v90; // [esp+8Ch] [ebp-10h]
+  int v91; // [esp+98h] [ebp-4h]
 
-  v7 = *((_DWORD *)a1 + 7);
-  v8 = dword_B42EAC;
-  v63 = 0;
-  if ( (v7 & 1) != 0 || (LOBYTE(j) = 0, (v7 & 0x10) != 0) )
-    LOBYTE(j) = 1;
-  v57 = (v7 & 0x80) != 0;
-  v92 = (v7 & 0x20000) != 0;
-  v91 = (v7 & 2) != 0;
-  LOBYTE(v86) = (v7 & 0x200000) != 0;
-  LOBYTE(v71) = (v7 & 8) != 0;
-  if ( (v7 & 0x20) != 0 || (v59 = 0, v8 == 3) )
-    v59 = 1;
-  v9 = *((_DWORD **)a1 + 0x31);
-  LOBYTE(v84) = (v7 & 0x100) != 0;
-  LOBYTE(v76) = *v9 != 0;
-  v10 = *(_DWORD *)&a3->members.children.capacity;
-  v74 = (v7 & 0x400) != 0;
-  v11 = byte_B43074 == 0;
-  LOBYTE(v96) = *(_DWORD *)(v10 + 0x24) != 0;
-  if ( !v11
-    || !dword_B43108
-    || (dword_B42F40 & 0x20) == 0
-    || ShaderPackage < 2
-    || (v7 & 0x2000) != 0
-    || (v12 = flt_B44F04, v85 = v82 | 0xC00, v87 = (__int64)v12, !(unsigned int)(__int64)v12)
-    || (LOBYTE(v72) = 1, v7 >> 0x1C == 1) )
+  passInfo = this->base.member.passInfo; /*0x85ae4c*/
+  v7 = *(_WORD *)&OB_RendererGlobalState_010201A0.pad_00D[6]; /*0x85ae4f*/
+  v57 = 0; /*0x85ae64*/
+  if ( (passInfo & 1) != 0 || (LOBYTE(j) = 0, (passInfo & 0x10) != 0) ) /*0x85ae74*/
+    LOBYTE(j) = 1; /*0x85ae76*/
+  decalPassFlags[1] = (passInfo & 0x80) != 0; /*0x85ae81*/
+  v86 = (passInfo & 0x20000) != 0; /*0x85ae8c*/
+  passInfoBit2 = (passInfo & 2) != 0; /*0x85aea3*/
+  LOBYTE(v80) = (passInfo & 0x200000) != 0; /*0x85aeab*/
+  LOBYTE(v65) = (passInfo & 8) != 0; /*0x85aeaf*/
+  if ( (passInfo & 0x20) != 0 || (decalPassFlags[3] = 0, v7 == 3) ) /*0x85aebe*/
+    decalPassFlags[3] = 1; /*0x85aec0*/
+  v8 = *((_DWORD **)this + 0x31); /*0x85aec5*/
+  useAlphaDecalSelector[0] = (passInfo & 0x100) != 0; /*0x85aed8*/
+  LOBYTE(v70) = *v8 != 0; /*0x85aee9*/
+  geomData = geometry->member.geomData; /*0x85aeed*/
+  v68 = (passInfo & 0x400) != 0; /*0x85aef3*/
+  v10 = OB_RendererGlobalState_010201A0.pad_1DB[0] == 0; /*0x85aeff*/
+  LOBYTE(v90) = geomData->member.m_pkColor != 0; /*0x85af06*/
+  if ( !v10 /*0x85af69*/
+    || !LODWORD(unk_B43108[0])
+    || (OB_RendererGlobalState_010201A0.pad_00D[0x9A] & 0x20) == 0
+    || *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le < 2
+    || (passInfo & 0x2000) != 0
+    || (v11 = g_CanopyShadowProjectionScale,
+        v79 = (unsigned __int16)v76 | 0xC00,
+        v81 = (__int64)v11,
+        !(unsigned int)(__int64)v11)
+    || (LOBYTE(v66) = 1, passInfo >> 0x1C == 1) )
   {
-    LOBYTE(v72) = 0;
+    LOBYTE(v66) = 0; /*0x85af6b*/
   }
-  v13 = (*(int (__thiscall **)(float *))(*(_DWORD *)a1 + 4))(a1);
-  if ( v13 )
+  v12 = (struct NiRTTI *)(*((int (__thiscall **)(BSShaderLightingPropertyLayout_t *))this->base.vtbl + 1))(this); /*0x85af77*/
+  if ( v12 ) /*0x85af7b*/
   {
-    while ( (_UNKNOWN *)v13 != &unk_B468C8 )
+    while ( v12 != &NiRTTI_SpeedTreeBranchShaderProperty ) /*0x85af85*/
     {
-      v13 = *(_DWORD *)(v13 + 4);
-      if ( !v13 )
-        goto LABEL_18;
+      v12 = v12->parent; /*0x85af8b*/
+      if ( !v12 ) /*0x85af90*/
+        goto LABEL_18; /*0x85af90*/
     }
-    v14 = 1;
+    v13 = 1; /*0x85b0e3*/
   }
   else
   {
 LABEL_18:
-    v14 = 0;
+    v13 = 0; /*0x85af92*/
   }
-  v11 = (v14 != 0 ? (unsigned int)a1 : 0) == 0;
-  v15 = *(int (__thiscall **)(float *))(*(_DWORD *)a1 + 4);
-  LOBYTE(v64) = !v11;
-  v16 = v15(a1);
-  if ( v16 )
+  v10 = (v13 != 0 ? (unsigned int)this : 0) == 0;
+  v14 = *((int (__thiscall **)(BSShaderLightingPropertyLayout_t *))this->base.vtbl + 1); /*0x85af9e*/
+  LOBYTE(isSpeedTreeBranchProperty) = !v10; /*0x85afa1*/
+  v15 = (NiRTTI *)v14(this); /*0x85afa6*/
+  if ( v15 ) /*0x85afaa*/
   {
-    while ( (_UNKNOWN *)v16 != &unk_B478B0 )
+    while ( v15 != &stru_B478B0 ) /*0x85afb5*/
     {
-      v16 = *(_DWORD *)(v16 + 4);
-      if ( !v16 )
-        goto LABEL_22;
+      v15 = v15->parent; /*0x85afbb*/
+      if ( !v15 ) /*0x85afc0*/
+        goto LABEL_22; /*0x85afc0*/
     }
-    v17 = 1;
+    v16 = 1; /*0x85b0ea*/
   }
   else
   {
 LABEL_22:
-    v17 = 0;
+    v16 = 0; /*0x85afc2*/
   }
-  v11 = (v17 != 0 ? (unsigned int)a1 : 0) == 0;
-  v18 = *(int (__thiscall **)(float *))(*(_DWORD *)a1 + 4);
-  v77 = !v11;
-  v19 = v18(a1);
-  if ( v19 )
+  v10 = (v16 != 0 ? (unsigned int)this : 0) == 0;
+  v17 = *((int (__thiscall **)(BSShaderLightingPropertyLayout_t *))this->base.vtbl + 1); /*0x85afce*/
+  v71 = !v10; /*0x85afd1*/
+  v18 = (struct NiRTTI *)v17(this); /*0x85afd6*/
+  if ( v18 ) /*0x85afda*/
   {
-    while ( (_UNKNOWN *)v19 != &unk_B468BC )
+    while ( v18 != &NiRTTI_SpeedTreeLeafShaderProperty ) /*0x85afe5*/
     {
-      v19 = *(_DWORD *)(v19 + 4);
-      if ( !v19 )
-        goto LABEL_26;
+      v18 = v18->parent; /*0x85afeb*/
+      if ( !v18 ) /*0x85aff0*/
+        goto LABEL_26; /*0x85aff0*/
     }
-    v20 = 1;
+    v19 = 1; /*0x85b0f1*/
   }
   else
   {
 LABEL_26:
-    v20 = 0;
+    v19 = 0; /*0x85aff2*/
   }
-  v21 = ShaderPackage;
-  v81 = ImageSpaceEffectEnabled;
-  v83 = v21;
-  v11 = (v20 != 0 ? (unsigned int)a1 : 0) == 0;
-  v22 = *((_DWORD *)a1 + 7);
-  v79 = !v11;
-  LOBYTE(v88) = (v22 & 0x400000) != 0;
-  LOBYTE(v68) = (v22 & 0x800) != 0;
-  LOBYTE(v89) = (v22 & 0x1000) != 0;
-  v66 = (v22 & 0x4000) != 0;
-  v78 = (v22 & 0x8000) != 0;
-  LOBYTE(v85) = (v22 & 0x10000) != 0;
-  inited = InitBSShaderAccumulator();
-  v61 = sub_7AA380(inited);
-  v24 = *((_DWORD *)a1 + 7);
-  if ( (v24 & 0x100000) == 0 || (v11 = byte_B42E86 == 0, v73 = 0, !v11) )
-    v73 = 1;
-  v75 = (v24 & 0x40000) != 0;
-  NiPropertyByID = NiNode_GetNiPropertyByID(a3, 0);
-  v26 = InterlockedDecrement;
-  v27 = NiPropertyByID;
-  v90 = NiPropertyByID;
-  if ( !NiPropertyByID )
+  v20 = *(_DWORD *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le; /*0x85affc*/
+  v75 = OB_RendererGlobalState_010201A0.pad_00D[0x98]; /*0x85b002*/
+  v77 = v20; /*0x85b006*/
+  v10 = (v19 != 0 ? (unsigned int)this : 0) == 0;
+  v21 = this->base.member.passInfo; /*0x85b00e*/
+  v73 = !v10; /*0x85b011*/
+  LOBYTE(v82) = (v21 & 0x400000) != 0; /*0x85b01b*/
+  LOBYTE(v62) = (v21 & 0x800) != 0; /*0x85b025*/
+  LOBYTE(v83) = (v21 & 0x1000) != 0; /*0x85b02f*/
+  passInfoBit4000 = (v21 & 0x4000) != 0; /*0x85b039*/
+  v72 = (v21 & 0x8000) != 0; /*0x85b043*/
+  LOBYTE(v79) = (v21 & 0x10000) != 0; /*0x85b04d*/
+  Global = BSShaderAccumulator_GetOrCreateGlobal(); /*0x85b052*/
+  v55 = sub_7AA380(Global); /*0x85b05e*/
+  v23 = this->base.member.passInfo; /*0x85b062*/
+  if ( (v23 & 0x100000) == 0 || (v10 = OB_ShaderPassControl_010201A0.unk_01[1] == 0, v67 = 0, !v10) )// [Verified] In inherited PPLighting pass setup, bFullBrightLighting modifies the branch for property passInfo bit 0x100000. /*0x85b078*/
+    v67 = 1; /*0x85b07a*/
+  v69 = (v23 & 0x40000) != 0; /*0x85b088*/
+  NiPropertyByID = NiNode_GetNiPropertyByID((NiNode *)geometry, 0); /*0x85b08d*/
+  v25 = InterlockedDecrement; /*0x85b092*/
+  v26 = NiPropertyByID; /*0x85b098*/
+  v84 = NiPropertyByID; /*0x85b09c*/
+  if ( !NiPropertyByID ) /*0x85b0a0*/
   {
-    v11 = *sub_405760((NiGeometry *)a3, &v95) == 0;
-    v97 = 0;
-    if ( v11 )
+    v10 = *NiGeometry_GetPropertyState(geometry, &output) == 0; /*0x85b0b5*/
+    v91 = 0; /*0x85b0b8*/
+    if ( v10 ) /*0x85b0c3*/
     {
-      v27 = 0;
+      v26 = 0; /*0x85b0f8*/
     }
     else
     {
-      v27 = *((NiProperty **)*sub_405760((NiGeometry *)a3, &v94) + 2);
-      v63 = 1;
+      v26 = *((NiProperty **)*NiGeometry_GetPropertyState(geometry, &v88) + 2); /*0x85b0d6*/
+      v57 = 1; /*0x85b0d9*/
     }
-    v90 = v27;
-    if ( (v63 & 1) != 0 )
+    v84 = v26; /*0x85b0ff*/
+    if ( (v57 & 1) != 0 ) /*0x85b103*/
     {
-      v28 = v94;
-      v63 &= ~1u;
-      if ( v94 )
+      v27 = v88; /*0x85b105*/
+      v57 &= ~1u; /*0x85b10c*/
+      if ( v88 ) /*0x85b113*/
       {
-        if ( !v26(v94 + 1) )
+        if ( !v25((volatile LONG *)v88 + 1) ) /*0x85b119*/
         {
-          if ( v28 )
-            (**(void (__thiscall ***)(volatile LONG *, int))v28)(v28, 1);
+          if ( v27 ) /*0x85b121*/
+            (**(void (__thiscall ***)(NiPropertyState *, int))v27)(v27, 1); /*0x85b12c*/
         }
       }
     }
-    v29 = v95;
-    v97 = 0xFFFFFFFF;
-    if ( v95 )
+    v28 = output; /*0x85b12e*/
+    v91 = 0xFFFFFFFF; /*0x85b137*/
+    if ( output ) /*0x85b142*/
     {
-      if ( !v26(v95 + 1) )
+      if ( !v25((volatile LONG *)output + 1) ) /*0x85b148*/
       {
-        if ( v29 )
-          (**(void (__thiscall ***)(volatile LONG *, int))v29)(v29, 1);
+        if ( v28 ) /*0x85b150*/
+          (**(void (__thiscall ***)(NiPropertyState *, int))v28)(v28, 1); /*0x85b15b*/
       }
     }
-    if ( !v27 )
-      goto LABEL_48;
+    if ( !v26 ) /*0x85b15f*/
+      goto LABEL_48; /*0x85b15f*/
   }
-  v11 = ((int)v27[1].vtbl & 1) == 0;
-  v58 = 1;
-  if ( v11 )
+  v10 = ((int)v26[1].vtbl & 1) == 0; /*0x85b161*/
+  decalPassFlags[2] = 1; /*0x85b165*/
+  if ( v10 ) /*0x85b16a*/
 LABEL_48:
-    v58 = 0;
-  if ( v27 && ((int)v27[1].vtbl & 0x200) != 0 )
+    decalPassFlags[2] = 0; /*0x85b16c*/
+  if ( v26 && ((int)v26[1].vtbl & 0x200) != 0 ) /*0x85b180*/
   {
-    LOBYTE(v93) = 1;
-    LOBYTE(v84) = 0;
+    LOBYTE(v87) = 1; /*0x85b182*/
+    useAlphaDecalSelector[0] = 0; /*0x85b18a*/
   }
   else
   {
-    LOBYTE(v93) = 0;
+    LOBYTE(v87) = 0; /*0x85b1a5*/
   }
-  if ( 0.0 == a1[0x29] )
+  if ( 0.0 == *((float *)this + 0x29) ) /*0x85b19c*/
   {
-    v57 = 0;
+    decalPassFlags[1] = 0; /*0x85b19e*/
   }
-  else if ( v92 )
+  else if ( v86 ) /*0x85b1b4*/
   {
-    v57 = 1;
-    LOBYTE(j) = 0;
+    decalPassFlags[1] = 1; /*0x85b1b6*/
+    LOBYTE(j) = 0; /*0x85b1bb*/
   }
-  if ( 0.0 == a1[0x27] )
-    LOBYTE(j) = 0;
-  v30 = *(_DWORD **)(GetShadowSceneNode(*((_DWORD *)a1 + 7) >> 0x1C) + 0x118);
-  v69 = v30;
-  if ( !(_BYTE)j
-    || (v31 = *sub_405AD0(v30, &v82), v63 |= 2u, v65 = 1, !sub_8AA390((float *)(v31 + 0xF8), (float *)&dword_B3FA90)) )
+  if ( 0.0 == *((float *)this + 0x27) ) /*0x85b1cb*/
+    LOBYTE(j) = 0; /*0x85b1cd*/
+  v29 = *(_DWORD **)(GetShadowSceneNode(this->base.member.passInfo >> 0x1C) + 0x118); /*0x85b1e1*/
+  v63 = v29; /*0x85b1ef*/
+  if ( !(_BYTE)j /*0x85b213*/
+    || (v30 = *ShadowSceneLight_GetLightRef(v29, &v76),
+        v57 |= 2u,
+        v59 = 1,
+        !NiPoint3__NotEqual((const NiPoint3 *)(v30 + 0xF8), &stru_B3FA90)) )
   {
-    v65 = 0;
+    v59 = 0; /*0x85b221*/
   }
-  if ( (v63 & 2) != 0 )
+  if ( (v57 & 2) != 0 ) /*0x85b22b*/
   {
-    v32 = (void (__thiscall ***)(_DWORD, int))v82;
-    if ( v82 )
+    v31 = (void (__thiscall ***)(_DWORD, int))v76; /*0x85b22d*/
+    if ( v76 ) /*0x85b233*/
     {
-      if ( !v26((volatile LONG *)(v82 + 4)) )
+      if ( !v25((volatile LONG *)(v76 + 4)) ) /*0x85b239*/
       {
-        if ( v32 )
-          (**v32)(v32, 1);
+        if ( v31 ) /*0x85b241*/
+          (**v31)(v31, 1); /*0x85b24b*/
       }
     }
   }
-  v33 = v91;
-  if ( a1[8] < 1.0 || v58 )
+  v32 = passInfoBit2; /*0x85b260*/
+  if ( this->base.member.alpha < 1.0 || decalPassFlags[2] ) /*0x85b270*/
   {
-    v62 = 1;
-    if ( v61 )
+    v56 = 1; /*0x85b277*/
+    if ( v55 ) /*0x85b27c*/
     {
-      sub_854E90(a1, (int)a3, a5, a6, &v62, v91);
-      LOBYTE(j) = 0;
+      Lighting30__AppendPassSelector0Or2( /*0x85b290*/
+        this,
+        geometry,
+        outContext,
+        (RenderPass_DecodedLayout *)emit,
+        &v56,
+        passInfoBit2);
+      LOBYTE(j) = 0; /*0x85b295*/
     }
-    v59 = 1;
+    decalPassFlags[3] = 1; /*0x85b29a*/
   }
-  v56 = 1;
-  v34 = sub_7ED600(a1);
-  v80 = (a4 & 1) != 0;
-  v67 = (a4 & 2) != 0;
-  LODWORD(v87) = a4 & 1;
-  v58 = (a4 & 4) != 0;
-  if ( (a4 & 8) == 0 || (v60 = 1, !(_BYTE)j) )
-    v60 = 0;
-  if ( !v57 || (v61 = 1, (a4 & 8) == 0) )
-    v61 = 0;
-  LOBYTE(v82) = (a4 & 0xF) == 0xF;
-  v57 = v82;
-  v62 = 1;
-  v63 = v34;
-  if ( v78 || (_BYTE)v85 )
+  decalPassFlags[0] = 1;                        // [Verified] Initializes passByte to 1 before passing its address to the selected pass builders, including BSShaderProperty_AppendDecalPassesByBatch. The helper forwards this byte to RenderPass_Construct; its downstream meaning remains Unknown. /*0x85b2a1*/
+  v33 = BSShaderLightingProperty__CountFrustumVisibleEnabledLights((BSShaderLightingProperty *)this); /*0x85b2ab*/
+  v74 = (rendererState & 1) != 0; /*0x85b2ba*/
+  v61 = (rendererState & 2) != 0; /*0x85b2c1*/
+  LODWORD(v81) = rendererState & 1; /*0x85b2c6*/
+  decalPassFlags[2] = (rendererState & 4) != 0; /*0x85b2ce*/
+  if ( (rendererState & 8) == 0 || (v54 = 1, !(_BYTE)j) ) /*0x85b2e2*/
+    v54 = 0; /*0x85b2e4*/
+  if ( !decalPassFlags[1] || (v55 = 1, (rendererState & 8) == 0) ) /*0x85b2f7*/
+    v55 = 0; /*0x85b2f9*/
+  LOBYTE(v76) = (rendererState & 0xF) == 0xF; /*0x85b30e*/
+  decalPassFlags[1] = v76; /*0x85b312*/
+  v56 = 1; /*0x85b319*/
+  v57 = v33; /*0x85b31e*/
+  if ( v72 || (_BYTE)v79 ) /*0x85b32d*/
   {
-    LOBYTE(v49) = (unsigned __int8)sub_854CD0(a1, (int)a3, a5, a6, &v56, v33, v85);
-    return (char)v49;
+    BSShaderPPLightingProperty_AppendRefractionPass160To162( /*0x85bbb3*/
+      this,
+      geometry,
+      outContext,
+      (RenderPass_DecodedLayout *)emit,
+      decalPassFlags,
+      v32,
+      v79);
+    return; /*0x85bbb3*/
   }
-  if ( v77 || v79 )
+  if ( v71 || v73 ) /*0x85b343*/
   {
-    LOBYTE(v49) = (*(char (__thiscall **)(float *, NiNode *, int, NiTPointerList_Node_void *, int))(*(_DWORD *)a1 + 0x98))(
-                    a1,
-                    a3,
-                    a4,
-                    a5,
-                    a6);
-    return (char)v49;
+    (*((void (__thiscall **)(BSShaderLightingPropertyLayout_t *, NiGeometry *, int, unsigned __int16 *, int))this->base.vtbl /*0x85bb98*/
+     + 0x26))(
+      this,
+      geometry,
+      rendererState,
+      outContext,
+      emit);
+    return; /*0x85bb9a*/
   }
-  if ( v66 )
+  if ( passInfoBit4000 ) /*0x85b34e*/
   {
-    sub_85A390((int **)a1, a3, v69, a5, a6, &v56, (int)j, v72);
+    sub_85A390( /*0x85b997*/
+      (int ***)this,
+      (NiNode *)geometry,
+      v63,
+      (NiTPointerList_Node_void *)outContext,
+      emit,
+      decalPassFlags,
+      (int)j,
+      v66);
   }
-  else if ( v73 )
+  else if ( v67 ) /*0x85b359*/
   {
-    if ( !v80 )
-      goto LABEL_122;
-    if ( !byte_B43073 )
+    if ( !v74 ) /*0x85b364*/
+      goto LABEL_122; /*0x85b364*/
+    if ( !OB_RendererGlobalState_010201A0.bBloomLightingEnabled ) /*0x85b36a*/
     {
-      if ( v59 )
-        goto LABEL_101;
-      if ( !v67 )
-        goto LABEL_121;
-      if ( v58 != v59 && v60 != v59 && v74 == v59 && (v81 == v59 || (_BYTE)v84 == v59) )
+      if ( decalPassFlags[3] ) /*0x85b37d*/
+        goto LABEL_101; /*0x85b37d*/
+      if ( !v61 ) /*0x85b383*/
+        goto LABEL_121; /*0x85b383*/
+      if ( decalPassFlags[2] != decalPassFlags[3] /*0x85b3b1*/
+        && v54 != decalPassFlags[3]
+        && v68 == decalPassFlags[3]
+        && (v75 == decalPassFlags[3] || useAlphaDecalSelector[0] == decalPassFlags[3]) )
       {
 LABEL_101:
-        if ( (v34 <= 1u || v59) && v65 && (!v34 || !(_BYTE)v72) && (v83 >= 5 || !(_BYTE)v68 && !v75) && 1.0 == a1[0x27] )
+        if ( (v33 <= 1u || decalPassFlags[3]) /*0x85b40a*/
+          && v59
+          && (!v33 || !(_BYTE)v66)
+          && (v77 >= 5 || !(_BYTE)v62 && !v69)
+          && 1.0 == *((float *)this + 0x27) )
         {
-          if ( v74 )
+          if ( v68 ) /*0x85b415*/
           {
-            sub_856D60(a1, (int)a3, (int)v69, a5, a6, &v56, v33, v76, v74, v71, v72, v68, v89, v64, v88, v75);
-            v57 = 0;
+            sub_856D60( /*0x85b45b*/
+              this,
+              geometry,
+              (int)v63,
+              (NiTPointerList_Node_void *)outContext,
+              (RenderPass_DecodedLayout *)emit,
+              decalPassFlags,
+              v32,
+              v70,
+              v68,
+              v65,
+              v66,
+              v62,
+              v83,
+              isSpeedTreeBranchProperty,
+              v82,
+              v69);
+            decalPassFlags[1] = 0; /*0x85b460*/
           }
           else
           {
-            if ( v34 )
+            if ( v33 ) /*0x85b46d*/
             {
-              v35 = sub_7ED2A0(a1);
-              sub_8588E0(a1, (int)a3, (int)v69, (int)v35, a5, a6, &v56, v33, v76, 0, v71, v72, v68, v64, v75);
+              FirstActiveLight = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b4b7*/
+              sub_8588E0( /*0x85b4f4*/
+                this,
+                geometry,
+                (int)v63,
+                (int)FirstActiveLight,
+                outContext,
+                (RenderPass_DecodedLayout *)emit,
+                decalPassFlags,
+                v32,
+                v70,
+                0,
+                v65,
+                v66,
+                v62,
+                isSpeedTreeBranchProperty,
+                v69);
             }
             else
             {
-              sub_8580E0(a1, (int)a3, (int)v69, a5, a6, &v56, v33, v76, 0, v71, v72, v68, v64, v75);
+              sub_8580E0( /*0x85b4a6*/
+                this,
+                geometry,
+                (int)v63,
+                (NiTPointerList_Node_void *)outContext,
+                (RenderPass_DecodedLayout *)emit,
+                decalPassFlags,
+                v32,
+                v70,
+                0,
+                v65,
+                v66,
+                v62,
+                isSpeedTreeBranchProperty,
+                v69);
             }
-            v57 = 0;
+            decalPassFlags[1] = 0; /*0x85b4ab*/
           }
-          goto LABEL_140;
+          goto LABEL_140; /*0x85b465*/
         }
       }
     }
-    if ( v67 )
+    if ( v61 ) /*0x85b508*/
     {
-      if ( v58 && (v34 <= 1u || v59) )
+      if ( decalPassFlags[2] && (v33 <= 1u || decalPassFlags[3]) ) /*0x85b521*/
       {
-        if ( v34 )
+        if ( v33 ) /*0x85b52a*/
         {
-          v36 = sub_7ED2A0(a1);
-          sub_857750(a1, (int)a3, (int)v69, (int)v36, a5, a6, &v56, v33, v76, v74, v71, v72, v68, v64, v75);
+          v50 = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b5ad*/
+          sub_857750( /*0x85b5b9*/
+            this,
+            geometry,
+            (int)v63,
+            (int)v50,
+            outContext,
+            (RenderPass_DecodedLayout *)emit,
+            decalPassFlags,
+            v32,
+            v70,
+            v68,
+            v65,
+            v66,
+            v62,
+            isSpeedTreeBranchProperty,
+            v69);
         }
         else
         {
-          sub_856D60(a1, (int)a3, (int)v69, a5, a6, &v56, v33, v76, v74, v71, v72, v68, v89, v64, v88, v75);
+          sub_856D60( /*0x85b570*/
+            this,
+            geometry,
+            (int)v63,
+            (NiTPointerList_Node_void *)outContext,
+            (RenderPass_DecodedLayout *)emit,
+            decalPassFlags,
+            v32,
+            v70,
+            v68,
+            v65,
+            v66,
+            v62,
+            v83,
+            isSpeedTreeBranchProperty,
+            v82,
+            v69);
         }
-        if ( !v60 )
+        if ( !v54 ) /*0x85b5c3*/
         {
-          v57 = 0;
+          decalPassFlags[1] = 0; /*0x85b5c9*/
 LABEL_140:
-          if ( v61 )
+          if ( v55 ) /*0x85b8a1*/
           {
-            v43 = sub_7ED2A0(a1);
-            sub_85A010(a1, (int)a3, (int)v69, (int)v43, a5, a6, &v56, v33, v92, v86);
-            v57 = 1;
+            v52 = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b8c0*/
+            sub_85A010(this, (int)geometry, (int)v63, (int)v52, outContext, emit, decalPassFlags, v32, v86, (char)v80); /*0x85b8cc*/
+            decalPassFlags[1] = 1; /*0x85b8d1*/
           }
-          if ( *((_DWORD *)a1 + 0xD) > 2u || LOWORD(a5->next) > 2u )
+          if ( this->base.member.passes.numItems > 2 || *outContext > 2u ) /*0x85b8e0*/
           {
-            if ( OcclusionCullngBool )
+            if ( MEMORY[0xB42E97] ) /*0x85b8e6*/
             {
-              if ( !(_BYTE)v64 && !v59 && !(_BYTE)v84 )
+              if ( !isSpeedTreeBranchProperty && !decalPassFlags[3] && !useAlphaDecalSelector[0] ) /*0x85b90e*/
               {
-                if ( (_BYTE)a6 == 1 )
+                if ( (_BYTE)emit == 1 ) /*0x85b917*/
                 {
-                  v44 = FormHeapAlloc(0x10u);
-                  v86 = v44;
-                  v97 = 1;
-                  if ( v44 )
-                    v45 = sub_7E2370(v44, (int)a3, 3, 1, 0, 0);
+                  v40 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x85b91b*/
+                  v80 = v40; /*0x85b923*/
+                  v91 = 1; /*0x85b929*/
+                  if ( v40 ) /*0x85b934*/
+                    v41 = RenderPass_Construct(v40, geometry, 3u, 1u, 0, 0); /*0x85b947*/
                   else
-                    v45 = 0;
-                  v97 = 0xFFFFFFFF;
-                  v86 = v45;
-                  sub_6AA320((_DWORD *)a1 + 0xA, &v86);
+                    v41 = 0; /*0x85b951*/
+                  v91 = 0xFFFFFFFF; /*0x85b95b*/
+                  v80 = v41; /*0x85b966*/
+                  NiTList_AddHead(&this->base.member.passes.vtlb, &v80); /*0x85b96a*/
                 }
                 else
                 {
-                  ++LOWORD(a5->next);
+                  ++*outContext; /*0x85b971*/
                 }
               }
             }
           }
-          goto LABEL_155;
+          goto LABEL_155; /*0x85b96f*/
         }
 LABEL_136:
-        if ( v65 )
-          sub_859880(a1, (int)a3, (int)v69, a5, a6, &v56, v33, v71, v72, v68, v64, v75);
-        for ( i = sub_7ED2A0(a1); i; i = (_DWORD *)sub_7ED4B0((int **)a1) )
-          sub_859880(a1, (int)a3, (int)i, a5, a6, &v56, v33, v71, v72, v68, v64, v75);
-        goto LABEL_140;
+        if ( v59 ) /*0x85b816*/
+          sub_859880( /*0x85b848*/
+            this,
+            geometry,
+            (int)v63,
+            outContext,
+            (RenderPass_DecodedLayout *)emit,
+            decalPassFlags,
+            v32,
+            v65,
+            v66,
+            v62,
+            isSpeedTreeBranchProperty,
+            v69);
+        for ( i = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b856*/
+              i;
+              i = BSShaderLightingProperty__GetNextActiveLight((BSShaderLightingProperty *)this) )
+        {
+          sub_859880( /*0x85b88c*/
+            this,
+            geometry,
+            (int)i,
+            outContext,
+            (RenderPass_DecodedLayout *)emit,
+            decalPassFlags,
+            v32,
+            v65,
+            v66,
+            v62,
+            isSpeedTreeBranchProperty,
+            v69);
+        }
+        goto LABEL_140; /*0x85b89a*/
       }
-      if ( v34 > 1u )
+      if ( v33 > 1u ) /*0x85b5d9*/
       {
-        v83 = (int)sub_7ED2A0(a1);
-        v38 = sub_7ED4B0((int **)a1);
-        sub_856510(a1, (int)a3, (int)v69, v83, v38, a5, a6, &v56, v33, v76, v74, v71, v72, v68, v64);
-        v63 -= 2;
+        v77 = (int)BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b634*/
+        NextActiveLight = BSShaderLightingProperty__GetNextActiveLight((BSShaderLightingProperty *)this); /*0x85b638*/
+        sub_856510( /*0x85b678*/
+          this,
+          geometry,
+          (int)v63,
+          v77,
+          (int)NextActiveLight,
+          (NiTPointerList_Node_void *)outContext,
+          (RenderPass_DecodedLayout *)emit,
+          decalPassFlags,
+          v32,
+          v70,
+          v68,
+          v65,
+          v66,
+          v62,
+          isSpeedTreeBranchProperty);
+        v57 -= 2; /*0x85b67d*/
       }
       else
       {
-        v37 = sub_7ED2A0(a1);
-        sub_855E80(a1, (int)a3, (int)v69, (int)v37, a5, a6, &v56, v33, v76, v74, v71, v72, v68, v64);
-        v63 = 0;
+        v51 = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b60a*/
+        sub_855E80( /*0x85b616*/
+          this,
+          geometry,
+          (int)v63,
+          (int)v51,
+          outContext,
+          (RenderPass_DecodedLayout *)emit,
+          decalPassFlags,
+          v32,
+          v70,
+          v68,
+          v65,
+          v66,
+          v62,
+          isSpeedTreeBranchProperty);
+        v57 = 0; /*0x85b61b*/
       }
-      v62 = 0;
+      v56 = 0; /*0x85b623*/
 LABEL_122:
-      if ( v67 )
+      if ( v61 ) /*0x85b6bc*/
       {
-        if ( v62 )
+        if ( v56 ) /*0x85b6c7*/
         {
-          sub_853720(a1, (int)a3, (int)v69, a5, a6, &v56, v33, 0, v71, v64);
-          v39 = sub_7ED2A0(a1);
+          sub_853720( /*0x85b6ec*/
+            this,
+            geometry,
+            (int)v63,
+            (NiTPointerList_Node_void *)outContext,
+            (RenderPass_DecodedLayout *)emit,
+            decalPassFlags,
+            v32,
+            0,
+            v65,
+            isSpeedTreeBranchProperty);
+          v36 = BSShaderLightingProperty__GetFirstActiveLight((BSShaderLightingProperty *)this); /*0x85b6f3*/
         }
         else
         {
-          v39 = (_DWORD *)sub_7ED4B0((int **)a1);
+          v36 = BSShaderLightingProperty__GetNextActiveLight((BSShaderLightingProperty *)this); /*0x85b6fc*/
         }
-        for ( j = v39; j; j = (_DWORD *)sub_7ED4B0((int **)a1) )
+        for ( j = v36; j; j = BSShaderLightingProperty__GetNextActiveLight((BSShaderLightingProperty *)this) ) /*0x85b707*/
         {
-          v40 = sub_7ED4B0((int **)a1);
-          if ( v63 > 2 )
+          v37 = BSShaderLightingProperty__GetNextActiveLight((BSShaderLightingProperty *)this); /*0x85b712*/
+          if ( v57 > 2 ) /*0x85b71c*/
           {
-            v83 = v40;
-            v41 = sub_7ED4B0((int **)a1);
-            sub_859430(a1, (int)a3, (int)j, v83, v41, a5, a6, &v56, v33, v74, v71, v68, v64);
-            v63 -= 3;
+            v77 = (int)v37; /*0x85b769*/
+            v38 = BSShaderLightingProperty__GetNextActiveLight((BSShaderLightingProperty *)this); /*0x85b76d*/
+            BSShaderPPLightingProperty_EmitThreePointAdditivePass( /*0x85b7a3*/
+              this,
+              geometry,
+              (int)j,
+              v77,
+              (int)v38,
+              (NiTPointerList_Node_void *)outContext,
+              (RenderPass_DecodedLayout *)emit,
+              decalPassFlags,
+              v32,
+              v68,
+              v65,
+              v62,
+              isSpeedTreeBranchProperty);
+            v57 -= 3; /*0x85b7a8*/
           }
           else
           {
-            sub_859160(a1, (int)a3, (int)j, v40, a5, a6, &v56, v33, v74, v71, v68, v64);
-            if ( v63 > 1 )
-              v63 -= 2;
+            BSShaderPPLightingProperty_EmitTwoPointAdditivePass( /*0x85b74a*/
+              this,
+              geometry,
+              (int)j,
+              (int)v37,
+              (NiTPointerList_Node_void *)outContext,
+              (RenderPass_DecodedLayout *)emit,
+              decalPassFlags,
+              v32,
+              v68,
+              v65,
+              v62,
+              isSpeedTreeBranchProperty);
+            if ( v57 > 1 ) /*0x85b754*/
+              v57 -= 2; /*0x85b760*/
             else
-              v63 = 0;
+              v57 = 0; /*0x85b756*/
           }
         }
       }
-      if ( v58 )
-        sub_859720(a1, (int)a3, (int)v69, a5, a6, &v56, v33, v71, v74, v96, v64, 0, v68, v75);
-      if ( !v60 )
-        goto LABEL_140;
-      goto LABEL_136;
+      if ( decalPassFlags[2] ) /*0x85b7c5*/
+        sub_859720( /*0x85b801*/
+          this,
+          geometry,
+          (int)v63,
+          (NiTPointerList_Node_void *)outContext,
+          emit,
+          decalPassFlags,
+          v32,
+          v65,
+          v68,
+          v90,
+          isSpeedTreeBranchProperty,
+          0,
+          (RenderPass_DecodedLayout *)v62,
+          v69);
+      if ( !v54 ) /*0x85b80b*/
+        goto LABEL_140; /*0x85b80b*/
+      goto LABEL_136; /*0x85b80b*/
     }
 LABEL_121:
-    sub_852150(a1, (int)a3, (int)v69, a5, a6, &v56, v33, v93, v76, v64);
-    goto LABEL_122;
+    sub_852150( /*0x85b689*/
+      this,
+      geometry,
+      (int)v63,
+      (NiTPointerList_Node_void *)outContext,
+      (RenderPass_DecodedLayout *)emit,
+      decalPassFlags,
+      v32,
+      v87,
+      v70,
+      isSpeedTreeBranchProperty);
+    goto LABEL_122; /*0x85b6b2*/
   }
 LABEL_155:
-  if ( !v57 )
+  if ( !decalPassFlags[1] ) /*0x85b9a1*/
   {
-    if ( *((_DWORD *)a1 + 0xD) )
+    if ( this->base.member.passes.numItems ) /*0x85b9a3*/
     {
-      v46 = *(_DWORD *)(*((_DWORD *)a1 + 0xC) + 8);
-      v47 = *(_WORD *)(v46 + 4);
-      if ( v47 != 0x190 && v47 != 0x192 )
-        *(_BYTE *)(v46 + 7) = 1;
+      data = this->base.member.passes.end->data; /*0x85b9ac*/
+      m_uiRefCount = data->members.super.m_uiRefCount; /*0x85b9af*/
+      if ( m_uiRefCount != 0x190 && m_uiRefCount != 0x192 ) /*0x85b9bf*/
+        HIBYTE(data->members.super.m_uiRefCount) = 1; /*0x85b9c1*/
     }
   }
-  if ( v82 )
+  if ( (_BYTE)v76 ) /*0x85b9ca*/
   {
-    if ( *((_DWORD *)a1 + 0x23) )
-      sub_85A200(a1, (int)a3, a5, a6, &v56, v84, *((_DWORD *)a1 + 0x23));
+    if ( this->decalDataList_80.numItems ) /*0x85b9cc*/
+      BSShaderProperty_AppendDecalPassesByBatch( /*0x85b9ed*/
+        &this->base,
+        geometry,
+        outContext,
+        emit,
+        decalPassFlags,
+        useAlphaDecalSelector[0],
+        this->decalDataList_80.numItems);       // [Verified] Passes the decalDataList_80.numItems count at BSShaderLightingProperty+0x8C into BSShaderProperty_AppendDecalPassesByBatch after base lighting passes are assembled.
   }
-  if ( v57 )
+  if ( decalPassFlags[1] ) /*0x85b9f7*/
   {
-    v48 = v90 && ((int)v90[1].vtbl & 1) != 0;
-    sub_854190(a1, (int)a3, a5, a6, &v56, v33, v64, v48);
+    v44 = v84 && ((int)v84[1].vtbl & 1) != 0; /*0x85ba07*/
+    sub_854190( /*0x85ba25*/
+      this,
+      geometry,
+      (NiTPointerList_Node_void *)outContext,
+      (RenderPass_DecodedLayout *)emit,
+      decalPassFlags,
+      v32,
+      isSpeedTreeBranchProperty,
+      v44);
   }
-  if ( *((_DWORD *)a1 + 0x38) )
-    sub_85ACC0(a1, (int)a3, a5, a6, &v56, v33);
-  if ( byte_B43073 )
+  if ( *((_DWORD *)this + 0x38) ) /*0x85ba2a*/
+    sub_85ACC0(this, (int)geometry, outContext, emit, decalPassFlags, v32); /*0x85ba45*/
+  if ( OB_RendererGlobalState_010201A0.bBloomLightingEnabled ) /*0x85ba4a*/
   {
-    if ( (_DWORD)v87 )
-      sub_854FF0(a1, (NiGeometry *)a3, a5, a6, v33, v76);
-    if ( !(_BYTE)v64 && !(_BYTE)v88 && !(_BYTE)v68 && !(_BYTE)v89 && !v66 && !v75 )
-      sub_855170(a1, (int)a3, (int)a5, a6, v33);
+    if ( (_DWORD)v81 ) /*0x85ba58*/
+      Lighting30__AppendPassSelector19EOr19F( /*0x85ba6c*/
+        this,
+        geometry,
+        (NiTPointerList_Node_void *)outContext,
+        (RenderPass_DecodedLayout *)emit,
+        v32,
+        v70);
+    if ( !isSpeedTreeBranchProperty && !(_BYTE)v82 && !(_BYTE)v62 && !(_BYTE)v83 && !passInfoBit4000 && !v69 ) /*0x85ba99*/
+      Lighting30__AppendPassSelectorAOrB(this, geometry, (int)outContext, (RenderPass_DecodedLayout *)emit, v32); /*0x85baa8*/
   }
-  LOBYTE(v49) = sub_405A80();
-  if ( (_BYTE)v49 )
+  if ( BSShaderManager_IsShadowMappingReady() )
   {
-    v49 = sub_7ED1A0(a1);
-    v50 = (int)v49;
-    if ( v49 )
+    FirstActiveNonShadowLight = BSShaderLightingProperty__GetFirstActiveNonShadowLight((MEF_LightingPropertyIterationView32 *)this); /*0x85bac1*/
+    if ( FirstActiveNonShadowLight )
     {
-      v51 = v64;
+      v46 = isSpeedTreeBranchProperty; /*0x85bacb*/
       do
       {
-        if ( *(_BYTE *)(v50 + 0xF4) )
+        if ( FirstActiveNonShadowLight->perSourceProjectorMode_F4 )
         {
-          v52 = FormHeapAlloc(0x10u);
-          LODWORD(v87) = v52;
-          v97 = 2;
-          if ( v52 )
-            v53 = sub_7E2370(v52, (int)a3, 0, 0, 1u, v50);
+          v47 = (RenderPass_DecodedLayout *)FormHeapAlloc(0x10u); /*0x85baef*/
+          LODWORD(v81) = v47; /*0x85baf7*/
+          v91 = 2; /*0x85bafd*/
+          if ( v47 ) /*0x85bb08*/
+            v48 = RenderPass_Construct(v47, geometry, 0, 0, 1u, FirstActiveNonShadowLight); /*0x85bb13*/
           else
-            v53 = 0;
-          v97 = 0xFFFFFFFF;
-          LODWORD(v87) = v53;
-          if ( v91 )
+            v48 = 0; /*0x85bb1d*/
+          v91 = 0xFFFFFFFF; /*0x85bb24*/
+          LODWORD(v81) = v48; /*0x85bb2f*/
+          if ( passInfoBit2 )
           {
-            v54 = 0x178;
+            v49 = 0x178; /*0x85bb35*/
           }
-          else if ( v66 )
+          else if ( passInfoBit4000 )
           {
-            v54 = 0x179;
+            v49 = 0x179; /*0x85bb43*/
           }
           else
           {
-            v54 = v51 != 0 ? 0x17A : 0x177;
+            v49 = v46 ? 0x17A : 0x177;
           }
-          *(_WORD *)(v53 + 4) = v54;
-          *(_BYTE *)(v53 + 7) = 1;
-          sub_6AA320((_DWORD *)a1 + 0xA, &v87);
+          v48->selector_04 = v49; /*0x85bb5b*/
+          v48->pad_07 = 1; /*0x85bb5f*/
+          NiTList_AddHead(&this->base.member.passes.vtlb, &v81); /*0x85bb6b*/
         }
-        v49 = (_DWORD *)sub_7ED3B0((int **)a1);
-        v50 = (int)v49;
+        FirstActiveNonShadowLight = BSShaderLightingProperty__GetNextActiveNonShadowLight((MEF_LightingPropertyIterationView32 *)this); /*0x85bb77*/
       }
-      while ( v49 );
+      while ( FirstActiveNonShadowLight );
     }
   }
-  return (char)v49;
 }

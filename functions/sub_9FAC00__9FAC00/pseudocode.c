@@ -1,4 +1,4 @@
-BSStringT *sub_9FAC00()
+NiRTTI *NiRTTI_BSTempEffectDecal_Initialize()
 {
-  return sub_70E220(&stru_B3A688, "BSTempEffectDecal", (int)&stru_B3A680);
+  return NiRTTI_Constructor(&stru_B3A688, "BSTempEffectDecal", &stru_B3A680); /*0x9fac14*/
 }

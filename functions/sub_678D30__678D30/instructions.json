@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x678D30",
-    "line": "push    esi",
+    "line": "push    esi; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x678D31",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+effect]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x678D49",
-    "line": "cmp     eax, 2",
+    "line": "cmp     eax, 2; BloodOnDeath decode 2026-05-30: RegisterTempEffect routes type IDs 4..6 to manager list +0x48; ordinary decals are type 0/1 and particles are type 2, so blood decals update through the primary list +0x40.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x678D4E",
-    "line": "mov     [esp+0Ch+arg_0], esp",
+    "line": "mov     [esp+0Ch+effect], esp",
     "mnemonic": "mov",
     "size": 4
   },

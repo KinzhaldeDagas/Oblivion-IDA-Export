@@ -1,4 +1,4 @@
-0x7EE4F0: push    0FFFFFFFFh
+0x7EE4F0: push    0FFFFFFFFh; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
 0x7EE4F2: push    offset ??1BSShaderLightingProperty@@UAE@XZ_SEH
 0x7EE4F7: mov     eax, large fs:0
 0x7EE4FD: push    eax
@@ -17,9 +17,9 @@
 0x7EE51B: mov     dword ptr [edi], offset ??_7BSShaderLightingProperty@@6B@; const BSShaderLightingProperty::`vftable'
 0x7EE521: lea     ecx, [edi+6Ch]
 0x7EE524: mov     [esp+24h+var_4], 2
-0x7EE52C: call    NiTPointerList__FreeAllNodes
+0x7EE52C: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7EE531: xor     ebx, ebx
-0x7EE533: cmp     [edi+8Ch], ebx
+0x7EE533: cmp     [edi+8Ch], ebx; [Verified] BSShaderLightingProperty destructor drains the decal list at +0x80 until its item count at +0x8C reaches zero, then destroys the list.
 0x7EE539: mov     [edi+7Ch], ebx
 0x7EE53C: jz      short loc_7EE58B
 0x7EE53E: lea     esi, [edi+80h]
@@ -41,10 +41,10 @@
 0x7EE56B: add     dword ptr [esi+0Ch], 0FFFFFFFFh
 0x7EE56F: cmp     ebp, ebx
 0x7EE571: jz      short loc_7EE583
-0x7EE573: mov     ecx, ebp
-0x7EE575: call    sub_56C0F0
+0x7EE573: mov     ecx, ebp; this
+0x7EE575: call    DECAL_DATA_ReleaseOwnedReferences; [Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.
 0x7EE57A: push    ebp
-0x7EE57B: call    FormHeapFree
+0x7EE57B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7EE580: add     esp, 4
 0x7EE583: cmp     [edi+8Ch], ebx
 0x7EE589: jnz     short loc_7EE544
@@ -67,3 +67,18 @@
 0x7EE5CB: pop     ebx
 0x7EE5CC: add     esp, 10h
 0x7EE5CF: retn
+0x9CFBF0: mov     ecx, [ebp-10h]; this
+0x9CFBF3: jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)
+0x9CFBF8: mov     ecx, [ebp-10h]
+0x9CFBFB: add     ecx, 6Ch ; 'l'
+0x9CFBFE: jmp     j_??1?$NiTPointerList@PAVShadowSceneLight@@@@UAE@XZ; NiTPointerList<ShadowSceneLight *>::~NiTPointerList<ShadowSceneLight *>(void)
+0x9CFC03: mov     ecx, [ebp-10h]
+0x9CFC06: add     ecx, 80h ; '€'
+0x9CFC0C: jmp     j_??1?$NiTPointerList@PAUDECAL_DATA@@@@UAE@XZ; NiTPointerList<DECAL_DATA *>::~NiTPointerList<DECAL_DATA *>(void)
+0x9CFC11: mov     edx, [esp+arg_4]
+0x9CFC15: lea     eax, [edx-14h]
+0x9CFC18: mov     ecx, [edx-18h]
+0x9CFC1B: xor     ecx, eax
+0x9CFC1D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFC22: mov     eax, offset stru_AF8758
+0x9CFC27: jmp     ___CxxFrameHandler3

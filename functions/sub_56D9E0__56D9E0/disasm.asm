@@ -1,4 +1,4 @@
-0x56D9E0: push    ebp
+0x56D9E0: push    ebp; Verified vertex-stream builder uses source geometry data, locks/reads/unlocks the vertex stream, constructs clipped decal mesh arrays and hands them to BSTempEffectGeometryDecal_BuildGeneratedGeometry. Called from Initialize only when source additional-data vslot +0x4C returns true.
 0x56D9E1: mov     ebp, esp
 0x56D9E3: and     esp, 0FFFFFFF8h
 0x56D9E6: push    0FFFFFFFFh
@@ -40,9 +40,9 @@
 0x56DA6A: call    sub_7107A0
 0x56DA6F: fld     dword ptr [ebx+50h]
 0x56DA72: add     esp, 0Ch
-0x56DA75: lea     ecx, [esp+238h+var_C4]
-0x56DA7C: fstp    [esp+238h+var_238]; float
-0x56DA7F: call    NiMatrix33_InitRotationTransform
+0x56DA75: lea     ecx, [esp+238h+var_C4]; this
+0x56DA7C: fstp    dword ptr [esp+238h+var_238]; angleZ
+0x56DA7F: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x56DA84: mov     edx, [esi]
 0x56DA86: mov     ecx, [esi+4]
 0x56DA89: sub     esp, 0Ch
@@ -55,11 +55,11 @@
 0x56DAA0: push    eax
 0x56DAA1: call    sub_6F9290
 0x56DAA6: add     esp, 10h
-0x56DAA9: push    eax
-0x56DAAA: lea     ecx, [esp+238h+var_58]
-0x56DAB1: push    ecx
-0x56DAB2: lea     ecx, [esp+23Ch+var_C4]
-0x56DAB9: call    NiMAtrix33_Multiply
+0x56DAA9: push    eax; right
+0x56DAAA: lea     ecx, [esp+238h+out]
+0x56DAB1: push    ecx; out
+0x56DAB2: lea     ecx, [esp+23Ch+var_C4]; this
+0x56DAB9: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x56DABE: mov     esi, eax
 0x56DAC0: mov     eax, [ebx+2Ch]
 0x56DAC3: mov     ecx, 9
@@ -78,10 +78,10 @@
 0x56DB04: fld     [esp+234h+var_F0]
 0x56DB0B: fsub    dword ptr [ebx+3Ch]
 0x56DB0E: xor     esi, esi
-0x56DB10: mov     [esp+234h+var_198], esi
-0x56DB17: mov     [esp+234h+var_194], esi
+0x56DB10: mov     [esp+234h+outVertices.data], esi
+0x56DB17: mov     [esp+234h+outVertices.stride], esi
 0x56DB1E: fstp    [esp+234h+var_F0]
-0x56DB25: mov     [esp+234h+var_190], 0
+0x56DB25: mov     [esp+234h+outVertices.unknown08], 0
 0x56DB2D: mov     [esp+234h+var_1A4], esi
 0x56DB34: mov     [esp+234h+var_1A0], esi
 0x56DB3B: mov     [esp+234h+var_19C], 0
@@ -99,17 +99,17 @@
 0x56DB8E: movzx   ecx, word ptr [ecx+0Ch]
 0x56DB92: movzx   edx, cx
 0x56DB95: mov     eax, [eax+0B4h]
-0x56DB9B: push    esi
-0x56DB9C: mov     ecx, eax
+0x56DB9B: push    esi; writeAccess
+0x56DB9C: mov     ecx, eax; self
 0x56DB9E: mov     [esp+238h+var_208], edx
-0x56DBA2: call    sub_728AB0
+0x56DBA2: call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.
 0x56DBA7: mov     [esp+234h+var_1B9], al
 0x56DBAB: mov     eax, [ebx+2Ch]
 0x56DBAE: mov     eax, [eax+0B4h]
-0x56DBB4: lea     ecx, [esp+234h+var_198]
-0x56DBBB: push    ecx
-0x56DBBC: mov     ecx, eax
-0x56DBBE: call    sub_728B60
+0x56DBB4: lea     ecx, [esp+234h+outVertices]
+0x56DBBB: push    ecx; outVertices
+0x56DBBC: mov     ecx, eax; self
+0x56DBBE: call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.
 0x56DBC3: mov     eax, [ebx+2Ch]
 0x56DBC6: mov     eax, [eax+0B4h]
 0x56DBCC: lea     edx, [esp+234h+var_1A4]
@@ -140,7 +140,7 @@
 0x56DC2A: xor     ecx, ecx
 0x56DC2C: cmp     [esp+234h+var_21C], esi
 0x56DC30: mov     [esp+234h+var_220], esi
-0x56DC34: mov     [esp+234h+var_1C4], eax
+0x56DC34: mov     [esp+234h+source], eax
 0x56DC38: jle     short loc_56DC6E
 0x56DC3A: mov     edi, [esp+234h+var_21C]
 0x56DC3E: add     eax, 22h ; '"'
@@ -262,7 +262,7 @@
 0x56DDA1: push    eax
 0x56DDA2: lea     ecx, [esp+24Ch+var_170]
 0x56DDA9: push    ecx
-0x56DDAA: lea     edx, [esp+250h+var_198]
+0x56DDAA: lea     edx, [esp+250h+outVertices]
 0x56DDB1: push    edx
 0x56DDB2: mov     ecx, ebp
 0x56DDB4: call    nullsub_4
@@ -297,18 +297,17 @@
 0x56DE17: add     edi, 4Ch ; 'L'
 0x56DE1A: sub     ebp, 1
 0x56DE1D: jns     short loc_56DE10
-0x56DE1F: mov     [esp+234h+var_1CC], esi
+0x56DE1F: mov     [esp+234h+a8], esi
 0x56DE23: xor     eax, eax
 0x56DE25: jmp     short loc_56DE2B
-0x56DE27: mov     [esp+234h+var_1CC], eax
+0x56DE27: mov     [esp+234h+a8], eax
 0x56DE2B: cmp     [esp+234h+var_1B4], eax
 0x56DE32: mov     [esp+234h+var_4], 0FFFFFFFFh
-0x56DE3D: mov     [esp+234h+var_214], eax
+0x56DE3D: mov     [esp+234h+a6], eax
 0x56DE41: jle     loc_56DF44
 0x56DE47: jmp     short loc_56DE50
-0x56DE49: align 10h
-0x56DE50: mov     edx, [esp+234h+var_214]
-0x56DE54: mov     ecx, [esp+234h+var_1CC]
+0x56DE50: mov     edx, [esp+234h+a6]
+0x56DE54: mov     ecx, [esp+234h+a8]
 0x56DE58: mov     eax, edx
 0x56DE5A: imul    eax, 4Ch ; 'L'
 0x56DE5D: lea     edi, [eax+ecx]
@@ -376,11 +375,11 @@
 0x56DF18: xor     ebp, ebp
 0x56DF1A: mov     eax, [esp+234h+var_1C8]
 0x56DF1E: mov     [eax+44h], ebp
-0x56DF21: mov     eax, [esp+234h+var_214]
+0x56DF21: mov     eax, [esp+234h+a6]
 0x56DF25: add     eax, 1
 0x56DF28: cmp     eax, [esp+234h+var_1B4]
 0x56DF2F: mov     [esp+234h+var_4], 0FFFFFFFFh
-0x56DF3A: mov     [esp+234h+var_214], eax
+0x56DF3A: mov     [esp+234h+a6], eax
 0x56DF3E: jl      loc_56DE50
 0x56DF44: cmp     [esp+234h+var_208], 0
 0x56DF49: mov     [esp+234h+var_220], 0
@@ -388,7 +387,7 @@
 0x56DF57: fld     [esp+234h+var_124]
 0x56DF5E: mov     ebp, [esp+234h+var_1B0]
 0x56DF65: mov     esi, [esp+234h+var_218]
-0x56DF69: fstp    qword ptr [esp+234h+var_180]
+0x56DF69: fstp    qword ptr [esp+234h+a7]
 0x56DF70: fld     [esp+234h+var_128]
 0x56DF77: mov     edi, [esp+234h+var_174]
 0x56DF7E: mov     eax, [esp+234h+var_188]
@@ -423,31 +422,31 @@
 0x56E005: mov     [esp+234h+var_158], ecx
 0x56E00C: mov     [esp+234h+var_154], edx
 0x56E013: fld     dword ptr [eax]
-0x56E015: fstp    [esp+234h+var_214]
-0x56E019: fld     [esp+234h+var_214]
+0x56E015: fstp    [esp+234h+a6]
+0x56E019: fld     [esp+234h+a6]
 0x56E01D: fld     st
 0x56E01F: fsubr   st, st(2)
-0x56E021: fstp    [esp+234h+var_204]
+0x56E021: fstp    dword ptr [esp+234h+a4]
 0x56E025: fstp    dword ptr [esi-8]
 0x56E028: fld     dword ptr [eax+4]
-0x56E02B: fstp    [esp+234h+var_214]
-0x56E02F: fld     [esp+234h+var_204]
-0x56E033: fld     [esp+234h+var_214]
+0x56E02B: fstp    [esp+234h+a6]
+0x56E02F: fld     dword ptr [esp+234h+a4]
+0x56E033: fld     [esp+234h+a6]
 0x56E037: fld     st
 0x56E039: fsubp   st(2), st
 0x56E03B: fxch    st(1)
-0x56E03D: fstp    [esp+234h+var_204]
+0x56E03D: fstp    dword ptr [esp+234h+a4]
 0x56E041: fstp    dword ptr [esi-4]
 0x56E044: fld     dword ptr [eax+8]
-0x56E047: fstp    [esp+234h+var_214]
-0x56E04B: fld     [esp+234h+var_204]
-0x56E04F: fld     [esp+234h+var_214]
+0x56E047: fstp    [esp+234h+a6]
+0x56E04B: fld     dword ptr [esp+234h+a4]
+0x56E04F: fld     [esp+234h+a6]
 0x56E053: fld     st
 0x56E055: fsubp   st(2), st
 0x56E057: fxch    st(1)
-0x56E059: fstp    [esp+234h+var_204]
+0x56E059: fstp    dword ptr [esp+234h+a4]
 0x56E05D: fstp    dword ptr [esi]
-0x56E05F: fld     [esp+234h+var_204]
+0x56E05F: fld     dword ptr [esp+234h+a4]
 0x56E063: fstp    dword ptr [esi+4]
 0x56E066: fld     dword ptr [esi-4]
 0x56E069: fadd    dword ptr [esi-8]
@@ -485,7 +484,7 @@
 0x56E0EC: push    eax
 0x56E0ED: push    1
 0x56E0EF: lea     ecx, [esp+254h+var_A0]
-0x56E0F6: push    offset Vector3_InitValue?
+0x56E0F6: push    offset g_zeroNiPoint3
 0x56E0FB: push    ecx
 0x56E0FC: call    sub_710580
 0x56E101: fld     dword ptr [esp+25Ch+var_1FC]
@@ -501,7 +500,7 @@
 0x56E126: faddp   st(1), st
 0x56E128: fstp    dword ptr [ebp-4]
 0x56E12B: fld     [esp+234h+var_154]
-0x56E132: fmul    qword ptr [esp+234h+var_180]
+0x56E132: fmul    qword ptr [esp+234h+a7]
 0x56E139: fld     [esp+234h+var_158]
 0x56E140: fmul    [esp+234h+var_1E0]
 0x56E144: faddp   st(1), st
@@ -525,13 +524,13 @@
 0x56E177: fxch    st(1)
 0x56E179: fstp    [esp+234h+var_1C8]
 0x56E17D: fld1
-0x56E17F: fstp    [esp+234h+var_214]
+0x56E17F: fstp    [esp+234h+a6]
 0x56E183: test    al, 1
 0x56E185: fld     [esp+234h+var_1C8]
 0x56E189: jz      short loc_56E195
-0x56E18B: fld     [esp+234h+var_214]
+0x56E18B: fld     [esp+234h+a6]
 0x56E18F: fmul    st, st(1)
-0x56E191: fstp    [esp+234h+var_214]
+0x56E191: fstp    [esp+234h+a6]
 0x56E195: shr     eax, 1
 0x56E197: jz      short loc_56E1A1
 0x56E199: fmul    st, st
@@ -539,7 +538,7 @@
 0x56E19F: jmp     short loc_56E183
 0x56E1A1: mov     eax, [esp+234h+var_220]
 0x56E1A5: fstp    st
-0x56E1A7: fld     [esp+234h+var_214]
+0x56E1A7: fld     [esp+234h+a6]
 0x56E1AB: add     eax, 1
 0x56E1AE: fstp    [esp+234h+var_1B8]
 0x56E1B2: add     esi, 10h
@@ -559,15 +558,14 @@
 0x56E1E6: fstp    st
 0x56E1E8: xor     edi, edi
 0x56E1EA: cmp     [esp+234h+var_21C], edi
-0x56E1EE: mov     [esp+234h+var_204], edi
-0x56E1F2: mov     [esp+234h+var_214], edi
+0x56E1EE: mov     dword ptr [esp+234h+a4], edi
+0x56E1F2: mov     [esp+234h+a6], edi
 0x56E1F6: jle     loc_56E578
-0x56E1FC: mov     esi, [esp+234h+var_1C4]
+0x56E1FC: mov     esi, [esp+234h+source]
 0x56E200: mov     edx, [esp+234h+var_21C]
 0x56E204: add     esi, 14h
 0x56E207: mov     [esp+234h+var_200], edx
 0x56E20B: jmp     short loc_56E210
-0x56E20D: align 10h
 0x56E210: movzx   eax, word ptr [esi+0Ah]
 0x56E214: cmp     word ptr [esi+0Eh], 0
 0x56E219: mov     edx, [esi]
@@ -575,7 +573,7 @@
 0x56E21F: movzx   eax, ax
 0x56E222: setnbe  byte ptr [esp+234h+var_21C]
 0x56E227: test    eax, eax
-0x56E229: mov     [esp+234h+var_180], edx
+0x56E229: mov     [esp+234h+a7], edx
 0x56E230: mov     [esp+234h+var_20D], 0
 0x56E235: mov     dword ptr [esp+234h+var_1E0], 0
 0x56E23D: jle     loc_56E560
@@ -610,7 +608,7 @@
 0x56E2A8: cmp     cx, dx
 0x56E2AB: jz      loc_56E516
 0x56E2B1: mov     eax, [esp+234h+var_1B0]
-0x56E2B8: mov     ecx, [esp+234h+var_180]
+0x56E2B8: mov     ecx, [esp+234h+a7]
 0x56E2BF: mov     edx, [esp+234h+var_21C]
 0x56E2C3: push    0
 0x56E2C5: push    eax
@@ -634,10 +632,10 @@
 0x56E305: jmp     short loc_56E31F
 0x56E307: mov     eax, [esp+234h+var_184]
 0x56E30E: mov     edx, [esp+234h+var_1C8]
-0x56E312: mov     ecx, [esp+234h+var_180]
+0x56E312: mov     ecx, [esp+234h+a7]
 0x56E319: add     edx, eax
 0x56E31B: movzx   eax, word ptr [ecx+edx*2]
-0x56E31F: add     eax, [esp+234h+var_214]
+0x56E31F: add     eax, [esp+234h+a6]
 0x56E323: movzx   edx, ax
 0x56E326: mov     eax, [esp+234h+var_1A8]
 0x56E32D: cmp     dword ptr [eax+edx*4], 0FFFFFFFFh
@@ -645,9 +643,9 @@
 0x56E338: jnz     loc_56E499
 0x56E33E: movzx   ebp, bx
 0x56E341: mov     [eax+ecx], ebp
-0x56E344: movzx   eax, word ptr [esp+234h+var_204]
+0x56E344: movzx   eax, [esp+234h+a4]
 0x56E349: mov     ebp, [esp+234h+Src]
-0x56E350: add     [esp+234h+var_204], 1
+0x56E350: add     dword ptr [esp+234h+a4], 1
 0x56E355: mov     [ebp+eax*2+0], bx
 0x56E35A: mov     eax, [esp+234h+var_160]
 0x56E361: fcom    dword ptr [edi+ecx*4]
@@ -655,15 +653,15 @@
 0x56E367: add     eax, [esp+234h+var_164]
 0x56E36E: mov     edx, [eax]
 0x56E370: fnstsw  ax
-0x56E372: mov     [esp+234h+var_1C4], edx
+0x56E372: mov     [esp+234h+source], edx
 0x56E376: test    ah, 44h
 0x56E379: jnp     short loc_56E3B8
 0x56E37B: mov     edi, [esi-10h]
-0x56E37E: movzx   eax, byte ptr [esp+234h+var_1C4+3]
+0x56E37E: movzx   eax, byte ptr [esp+234h+source+3]
 0x56E383: movzx   eax, word ptr [edi+eax*2]
 0x56E387: movzx   eax, ax
 0x56E38A: imul    eax, 4Ch ; 'L'
-0x56E38D: add     eax, [esp+234h+var_1CC]
+0x56E38D: add     eax, [esp+234h+a8]
 0x56E391: movzx   edi, word ptr [eax+48h]
 0x56E395: mov     ebp, [eax+44h]
 0x56E398: mov     [ebp+edi*8+0], bx
@@ -679,11 +677,11 @@
 0x56E3BE: test    ah, 44h
 0x56E3C1: jnp     short loc_56E403
 0x56E3C3: mov     edi, [esi-10h]
-0x56E3C6: movzx   eax, byte ptr [esp+234h+var_1C4+2]
+0x56E3C6: movzx   eax, byte ptr [esp+234h+source+2]
 0x56E3CB: movzx   eax, word ptr [edi+eax*2]
 0x56E3CF: movzx   eax, ax
 0x56E3D2: imul    eax, 4Ch ; 'L'
-0x56E3D5: add     eax, [esp+234h+var_1CC]
+0x56E3D5: add     eax, [esp+234h+a8]
 0x56E3D9: movzx   edi, word ptr [eax+48h]
 0x56E3DD: mov     ebp, [eax+44h]
 0x56E3E0: mov     [ebp+edi*8+0], bx
@@ -704,7 +702,7 @@
 0x56E414: movzx   eax, word ptr [edi+eax*2]
 0x56E418: movzx   eax, ax
 0x56E41B: imul    eax, 4Ch ; 'L'
-0x56E41E: add     eax, [esp+234h+var_1CC]
+0x56E41E: add     eax, [esp+234h+a8]
 0x56E422: movzx   edi, word ptr [eax+48h]
 0x56E426: mov     ebp, [eax+44h]
 0x56E429: mov     [ebp+edi*8+0], bx
@@ -724,7 +722,7 @@
 0x56E45B: movzx   eax, word ptr [eax+edx*2]
 0x56E45F: movzx   eax, ax
 0x56E462: imul    eax, 4Ch ; 'L'
-0x56E465: add     eax, [esp+234h+var_1CC]
+0x56E465: add     eax, [esp+234h+a8]
 0x56E469: movzx   edx, word ptr [eax+48h]
 0x56E46D: mov     ebp, [eax+44h]
 0x56E470: mov     [ebp+edx*8+0], bx
@@ -737,14 +735,14 @@
 0x56E490: add     ebx, 1
 0x56E493: mov     [esp+234h+var_1C0], ebx
 0x56E497: jmp     short loc_56E4B9
-0x56E499: mov     edx, [esp+234h+var_204]
+0x56E499: mov     edx, dword ptr [esp+234h+a4]
 0x56E49D: mov     ax, [eax+ecx]
 0x56E4A1: movzx   ebp, dx
 0x56E4A4: mov     ecx, ebp
 0x56E4A6: mov     ebp, [esp+234h+Src]
 0x56E4AD: add     edx, 1
 0x56E4B0: mov     [ebp+ecx*2+0], ax
-0x56E4B5: mov     [esp+234h+var_204], edx
+0x56E4B5: mov     dword ptr [esp+234h+a4], edx
 0x56E4B9: mov     eax, [esp+234h+var_184]
 0x56E4C0: add     dword ptr [esp+234h+var_1F0], 2
 0x56E4C5: add     eax, 1
@@ -756,7 +754,7 @@
 0x56E4DF: jz      short loc_56E529
 0x56E4E1: cmp     [esp+234h+var_20D], 0
 0x56E4E6: jz      short loc_56E501
-0x56E4E8: movzx   eax, word ptr [esp+234h+var_204]
+0x56E4E8: movzx   eax, [esp+234h+a4]
 0x56E4ED: movzx   ecx, word ptr [ebp+eax*2-6]
 0x56E4F2: movzx   edx, word ptr [ebp+eax*2-2]
 0x56E4F7: mov     [ebp+eax*2-6], dx
@@ -777,7 +775,7 @@
 0x56E531: mov     ebp, [esp+234h+Dst]
 0x56E535: movzx   eax, word ptr [esp+234h+var_220]
 0x56E53A: add     [esp+234h+var_1C8], 3
-0x56E53F: mov     edi, [esp+234h+var_214]
+0x56E53F: mov     edi, [esp+234h+a6]
 0x56E543: add     ecx, 1
 0x56E546: add     edx, 6
 0x56E549: add     ebp, 2
@@ -790,15 +788,15 @@
 0x56E564: add     edi, eax
 0x56E566: add     esi, 2Ch ; ','
 0x56E569: sub     [esp+234h+var_200], 1
-0x56E56E: mov     [esp+234h+var_214], edi
+0x56E56E: mov     [esp+234h+a6], edi
 0x56E572: jnz     loc_56E210
 0x56E578: mov     ecx, [esp+234h+var_218]
 0x56E57C: push    ecx
-0x56E57D: call    FormHeapFree
+0x56E57D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56E582: add     esp, 4
 0x56E585: test    bx, bx
 0x56E588: jbe     loc_56EC20
-0x56E58E: movzx   esi, word ptr [esp+234h+var_204]
+0x56E58E: movzx   esi, [esp+234h+a4]
 0x56E593: xor     ecx, ecx
 0x56E595: mov     eax, esi
 0x56E597: mov     edx, 2
@@ -810,11 +808,11 @@
 0x56E5A6: call    FormHeapAlloc
 0x56E5AB: mov     edx, [esp+238h+Src]
 0x56E5B2: lea     ecx, [esi+esi]
-0x56E5B5: push    ecx; Size
-0x56E5B6: push    edx; Src
-0x56E5B7: push    eax; Dst
-0x56E5B8: mov     [esp+244h+var_180], eax
-0x56E5BF: call    _memcpy
+0x56E5B5: push    ecx; byteCount
+0x56E5B6: push    edx; source
+0x56E5B7: push    eax; destination
+0x56E5B8: mov     [esp+244h+a7], eax
+0x56E5BF: call    _memcpy;
 0x56E5C4: movzx   esi, bx
 0x56E5C7: xor     ecx, ecx
 0x56E5C9: mov     eax, esi
@@ -840,7 +838,7 @@
 0x56E603: add     esp, 18h
 0x56E606: xor     esi, esi
 0x56E608: cmp     [esp+234h+var_208], 4
-0x56E60D: mov     [esp+234h+var_214], eax
+0x56E60D: mov     [esp+234h+a6], eax
 0x56E611: jl      loc_56EA0C
 0x56E617: mov     edx, [esp+234h+var_1A8]
 0x56E61E: mov     ecx, [esp+234h+var_1B0]
@@ -849,9 +847,9 @@
 0x56E62D: add     ecx, 18h
 0x56E630: cmp     dword ptr [edx-8], 0FFFFFFFFh
 0x56E634: jz      loc_56E71E
-0x56E63A: mov     eax, [esp+234h+var_194]
+0x56E63A: mov     eax, [esp+234h+outVertices.stride]
 0x56E641: imul    eax, esi
-0x56E644: add     eax, [esp+234h+var_198]
+0x56E644: add     eax, [esp+234h+outVertices.data]
 0x56E64B: mov     ebx, [eax]
 0x56E64D: mov     dword ptr [esp+234h+var_1F0], ebx
 0x56E651: mov     ebx, [eax+4]
@@ -901,7 +899,7 @@
 0x56E6F5: mov     ebx, [esp+234h+var_1F4]
 0x56E6F9: mov     [eax+8], ebx
 0x56E6FC: mov     eax, [edx-8]
-0x56E6FF: mov     ebx, [esp+234h+var_214]
+0x56E6FF: mov     ebx, [esp+234h+a6]
 0x56E703: lea     eax, [eax+eax*2]
 0x56E706: lea     eax, [ebx+eax*4]
 0x56E709: mov     ebx, [ecx-18h]
@@ -913,10 +911,10 @@
 0x56E71A: mov     ebx, [esp+234h+var_1C0]
 0x56E71E: cmp     dword ptr [edx-4], 0FFFFFFFFh
 0x56E722: jz      loc_56E812
-0x56E728: mov     eax, [esp+234h+var_194]
+0x56E728: mov     eax, [esp+234h+outVertices.stride]
 0x56E72F: lea     ebx, [edi-1]
 0x56E732: imul    eax, ebx
-0x56E735: add     eax, [esp+234h+var_198]
+0x56E735: add     eax, [esp+234h+outVertices.data]
 0x56E73C: mov     ebx, [eax]
 0x56E73E: mov     dword ptr [esp+234h+var_1F0], ebx
 0x56E742: mov     ebx, [eax+4]
@@ -967,7 +965,7 @@
 0x56E7E9: mov     ebx, [esp+234h+var_1F4]
 0x56E7ED: mov     [eax+8], ebx
 0x56E7F0: mov     eax, [edx-4]
-0x56E7F3: mov     ebx, [esp+234h+var_214]
+0x56E7F3: mov     ebx, [esp+234h+a6]
 0x56E7F7: lea     eax, [eax+eax*2]
 0x56E7FA: lea     eax, [ebx+eax*4]
 0x56E7FD: mov     ebx, [ecx-0Ch]
@@ -980,8 +978,8 @@
 0x56E812: cmp     dword ptr [edx], 0FFFFFFFFh
 0x56E815: jz      loc_56E8FC
 0x56E81B: mov     eax, edi
-0x56E81D: imul    eax, [esp+234h+var_194]
-0x56E825: add     eax, [esp+234h+var_198]
+0x56E81D: imul    eax, [esp+234h+outVertices.stride]
+0x56E825: add     eax, [esp+234h+outVertices.data]
 0x56E82C: mov     ebx, [eax]
 0x56E82E: mov     dword ptr [esp+234h+var_1F0], ebx
 0x56E832: mov     ebx, [eax+4]
@@ -1031,7 +1029,7 @@
 0x56E8D5: mov     ebx, [esp+234h+var_1F4]
 0x56E8D9: mov     [eax+8], ebx
 0x56E8DC: mov     eax, [edx]
-0x56E8DE: mov     ebx, [esp+234h+var_214]
+0x56E8DE: mov     ebx, [esp+234h+a6]
 0x56E8E2: lea     eax, [eax+eax*2]
 0x56E8E5: lea     eax, [ebx+eax*4]
 0x56E8E8: mov     ebx, [ecx]
@@ -1043,10 +1041,10 @@
 0x56E8F8: mov     ebx, [esp+234h+var_1C0]
 0x56E8FC: cmp     dword ptr [edx+4], 0FFFFFFFFh
 0x56E900: jz      loc_56E9F1
-0x56E906: mov     eax, [esp+234h+var_194]
+0x56E906: mov     eax, [esp+234h+outVertices.stride]
 0x56E90D: lea     ebp, [edi+1]
 0x56E910: imul    eax, ebp
-0x56E913: add     eax, [esp+234h+var_198]
+0x56E913: add     eax, [esp+234h+outVertices.data]
 0x56E91A: mov     ebx, [eax]
 0x56E91C: mov     dword ptr [esp+234h+var_1F0], ebx
 0x56E920: mov     ebx, [eax+4]
@@ -1097,7 +1095,7 @@
 0x56E9C8: mov     ebx, [esp+234h+var_1F4]
 0x56E9CC: mov     [eax+8], ebx
 0x56E9CF: mov     eax, [edx+4]
-0x56E9D2: mov     ebx, [esp+234h+var_214]
+0x56E9D2: mov     ebx, [esp+234h+a6]
 0x56E9D6: lea     eax, [eax+eax*2]
 0x56E9D9: lea     eax, [ebx+eax*4]
 0x56E9DC: mov     ebx, [ecx+0Ch]
@@ -1124,9 +1122,9 @@
 0x56EA2A: mov     edx, [eax+esi*4]
 0x56EA2D: cmp     edx, 0FFFFFFFFh
 0x56EA30: jz      loc_56EB19
-0x56EA36: mov     eax, [esp+234h+var_194]
+0x56EA36: mov     eax, [esp+234h+outVertices.stride]
 0x56EA3D: imul    eax, esi
-0x56EA40: add     eax, [esp+234h+var_198]
+0x56EA40: add     eax, [esp+234h+outVertices.data]
 0x56EA47: lea     edx, [edx+edx*2]
 0x56EA4A: mov     edi, [eax]
 0x56EA4C: mov     dword ptr [esp+234h+var_1F0], edi
@@ -1177,7 +1175,7 @@
 0x56EAF5: mov     eax, [esp+234h+var_1A8]
 0x56EAFC: mov     eax, [eax+esi*4]
 0x56EAFF: lea     edx, [eax+eax*2]
-0x56EB02: mov     eax, [esp+234h+var_214]
+0x56EB02: mov     eax, [esp+234h+a6]
 0x56EB06: lea     eax, [eax+edx*4]
 0x56EB09: mov     edx, [ecx]
 0x56EB0B: mov     [eax], edx
@@ -1192,15 +1190,14 @@
 0x56EB29: cmp     [esp+234h+var_1B4], 0
 0x56EB31: fstp    st
 0x56EB33: jle     loc_56EBF3
-0x56EB39: mov     esi, [esp+234h+var_1CC]
+0x56EB39: mov     esi, [esp+234h+a8]
 0x56EB3D: mov     eax, [esp+234h+var_1B4]
 0x56EB44: add     esi, 44h ; 'D'
 0x56EB47: mov     [esp+234h+var_1B8], eax
 0x56EB4B: jmp     short loc_56EB50
-0x56EB4D: align 10h
 0x56EB50: movzx   edi, word ptr [esi+4]
 0x56EB54: mov     ecx, [esi]
-0x56EB56: mov     [esp+234h+var_1C4], ecx
+0x56EB56: mov     [esp+234h+source], ecx
 0x56EB5A: xor     ecx, ecx
 0x56EB5C: mov     eax, edi
 0x56EB5E: mov     edx, 8
@@ -1222,7 +1219,6 @@
 0x56EB95: mov     [esp+234h+var_200], eax
 0x56EB99: js      short loc_56EBB1
 0x56EB9B: jmp     short loc_56EBA0
-0x56EB9D: align 10h
 0x56EBA0: mov     ecx, edi
 0x56EBA2: call    sub_72EFA0
 0x56EBA7: add     edi, 8
@@ -1231,78 +1227,78 @@
 0x56EBB1: mov     eax, [esp+234h+Dst]
 0x56EBB5: jmp     short loc_56EBB9
 0x56EBB7: xor     eax, eax
-0x56EBB9: mov     edi, [esp+234h+var_1C4]
+0x56EBB9: mov     edi, [esp+234h+source]
 0x56EBBD: mov     [esi], eax
 0x56EBBF: movzx   ecx, word ptr [esi+4]
 0x56EBC3: add     ecx, ecx
 0x56EBC5: add     ecx, ecx
 0x56EBC7: add     ecx, ecx
-0x56EBC9: push    ecx; Size
-0x56EBCA: push    edi; Src
-0x56EBCB: push    eax; Dst
+0x56EBC9: push    ecx; byteCount
+0x56EBCA: push    edi; source
+0x56EBCB: push    eax; destination
 0x56EBCC: mov     [esp+240h+var_4], 0FFFFFFFFh
-0x56EBD7: call    _memcpy
+0x56EBD7: call    _memcpy;
 0x56EBDC: push    edi
-0x56EBDD: call    FormHeapFree
+0x56EBDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EBE2: add     esp, 10h
 0x56EBE5: add     esi, 4Ch ; 'L'
 0x56EBE8: sub     [esp+234h+var_1B8], 1
 0x56EBED: jnz     loc_56EB50
-0x56EBF3: mov     edx, [esp+234h+var_1CC]
-0x56EBF7: mov     eax, [esp+234h+var_180]
-0x56EBFE: mov     ecx, [esp+234h+var_214]
+0x56EBF3: mov     edx, [esp+234h+a8]
+0x56EBF7: mov     eax, [esp+234h+a7]
+0x56EBFE: mov     ecx, [esp+234h+a6]
 0x56EC02: mov     esi, [esp+234h+var_18C]
-0x56EC09: push    edx
-0x56EC0A: mov     edx, [esp+238h+var_204]
-0x56EC0E: push    eax
+0x56EC09: push    edx; a8
+0x56EC0A: mov     edx, dword ptr [esp+238h+a4]
+0x56EC0E: push    eax; a7
 0x56EC0F: mov     eax, [esi+2Ch]
-0x56EC12: push    ecx
-0x56EC13: push    ebp
-0x56EC14: push    edx
-0x56EC15: push    ebx
-0x56EC16: push    eax
-0x56EC17: mov     ecx, esi
-0x56EC19: call    sub_56CFF0
+0x56EC12: push    ecx; a6
+0x56EC13: push    ebp; a5
+0x56EC14: push    edx; a4
+0x56EC15: push    ebx; a3
+0x56EC16: push    eax; arg0
+0x56EC17: mov     ecx, esi; this
+0x56EC19: call    BSTempEffectGeometryDecal_BuildGeneratedGeometry; Verified common generated-geometry builder used by both Initialize branches and by LoadGame. Calls sub_7174B0 to create a NiTriShape from projected mesh arrays, constructs skin data/instance/partition and shader state, attaches the result under sourceParentNode (+0x30), stores generatedGeometry (+0x1C), and stores the persistent targetGeometry (+0x20).
 0x56EC1E: jmp     short loc_56EC5F
 0x56EC20: mov     edi, [esp+234h+var_1B4]
 0x56EC27: test    edi, edi
 0x56EC29: jle     short loc_56EC4B
-0x56EC2B: mov     esi, [esp+234h+var_1CC]
+0x56EC2B: mov     esi, [esp+234h+a8]
 0x56EC2F: add     esi, 44h ; 'D'
 0x56EC32: mov     ecx, [esi]
 0x56EC34: push    ecx
-0x56EC35: call    FormHeapFree
+0x56EC35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EC3A: mov     dword ptr [esi], 0
 0x56EC40: add     esp, 4
 0x56EC43: add     esi, 4Ch ; 'L'
 0x56EC46: sub     edi, 1
 0x56EC49: jnz     short loc_56EC32
-0x56EC4B: mov     edx, [esp+234h+var_1CC]
+0x56EC4B: mov     edx, [esp+234h+a8]
 0x56EC4F: push    edx
-0x56EC50: call    FormHeapFree
+0x56EC50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EC55: mov     esi, [esp+238h+var_18C]
 0x56EC5C: add     esp, 4
 0x56EC5F: mov     eax, [esp+234h+var_188]
 0x56EC66: push    eax
-0x56EC67: call    FormHeapFree
+0x56EC67: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EC6C: mov     ecx, [esp+238h+var_174]
 0x56EC73: push    ecx
-0x56EC74: call    FormHeapFree
+0x56EC74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EC79: mov     edx, [esp+23Ch+Src]
 0x56EC80: push    edx
-0x56EC81: call    FormHeapFree
+0x56EC81: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EC86: mov     eax, [esp+240h+var_1A8]
 0x56EC8D: push    eax
-0x56EC8E: call    FormHeapFree
+0x56EC8E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56EC93: mov     ecx, [esp+244h+var_1B0]
 0x56EC9A: push    ecx
-0x56EC9B: call    FormHeapFree
+0x56EC9B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56ECA0: add     esp, 14h
 0x56ECA3: cmp     [esp+234h+var_1B9], 0
 0x56ECA8: jz      short loc_56ECB8
 0x56ECAA: mov     edx, [esi+2Ch]
-0x56ECAD: mov     ecx, [edx+0B4h]
-0x56ECB3: call    sub_728B20
+0x56ECAD: mov     ecx, [edx+0B4h]; self
+0x56ECB3: call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x56ECB8: mov     ecx, [esp+234h+var_C]
 0x56ECBF: mov     large fs:0, ecx
 0x56ECC6: pop     ecx
@@ -1313,3 +1309,30 @@
 0x56ECCB: mov     esp, ebp
 0x56ECCD: pop     ebp
 0x56ECCE: retn
+0x9BDB30: mov     eax, [ebp-20Ch]
+0x9BDB36: push    eax
+0x9BDB37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDB3C: pop     ecx
+0x9BDB3D: retn
+0x9BDB3E: mov     eax, [ebp-20Ch]
+0x9BDB44: push    eax
+0x9BDB45: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDB4A: pop     ecx
+0x9BDB4B: retn
+0x9BDB4C: mov     eax, [ebp-20Ch]
+0x9BDB52: push    eax
+0x9BDB53: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDB58: pop     ecx
+0x9BDB59: retn
+0x9BDB5A: mov     eax, [ebp-20Ch]
+0x9BDB60: push    eax
+0x9BDB61: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BDB66: pop     ecx
+0x9BDB67: retn
+0x9BDB68: mov     edx, [esp-4+arg_4]
+0x9BDB6C: lea     eax, [edx-224h]
+0x9BDB72: mov     ecx, [edx-228h]
+0x9BDB78: xor     ecx, eax
+0x9BDB7A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDB7F: mov     eax, offset stru_AE7420
+0x9BDB84: jmp     ___CxxFrameHandler3

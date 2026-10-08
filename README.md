@@ -6,6 +6,16 @@ The goal of this project is to make the database easier to browse, search, diff,
 
 This is not original game source code. It is a structured analysis export intended for research, documentation, reverse engineering, and long-term preservation work.
 
+## OctoberPass findings
+
+[OctoberPass](Findings/OctoberPass/README.md) publishes the new decal, temporary-effect, shader-pass, serialization, and asynchronous-task findings with explicit evidence-confidence labels. It refreshes 84 selected function exports and adds current type layouts, global/vtable references, an address inventory, and Fallout comparison evidence. See its manifest for the exact scope; the original full-database graph and type catalogs remain the historical baseline.
+
+To reproduce this focused refresh while the Oblivion and Fallout databases are open:
+
+```powershell
+python scripts/export_analysis_pass.py --repository . --targets Findings/OctoberPass/targets.json
+```
+
 ## Reproducing the export
 
 The repository includes [`scripts/ida_repo_exporter.py`](scripts/ida_repo_exporter.py), a standard-library Python client for the live IDA MCP HTTP endpoint provided by `ida_multi_mcp`. It reads the currently open database and writes the structured export without opening, closing, or managing the IDA process. Keep the target database open and pass its MCP URL and expected executable name explicitly:

@@ -1,4 +1,4 @@
-0x56BB50: push    esi
+0x56BB50: push    esi; [Verified] BSTECreateTask vtable slot 21 (+0x54): releases/clears taskController_0C, pushes this task back onto the protected BSTECreateTask free-item stack via BSTECreateTaskPool_Push, then returns true.
 0x56BB51: push    edi
 0x56BB52: mov     edi, ecx
 0x56BB54: mov     esi, [edi+0Ch]
@@ -17,8 +17,8 @@
 0x56BB73: mov     ecx, esi
 0x56BB75: call    eax
 0x56BB77: mov     dword ptr [edi+0Ch], 0
-0x56BB7E: push    edi
-0x56BB7F: call    sub_56BAF0
+0x56BB7E: push    edi; task
+0x56BB7F: call    BSTECreateTaskPool_Push; [Verified] Pushes a completed BSTECreateTask back onto the shared free-item stack under unk_B3A600 critical section.
 0x56BB84: add     esp, 4
 0x56BB87: pop     edi
 0x56BB88: mov     al, 1

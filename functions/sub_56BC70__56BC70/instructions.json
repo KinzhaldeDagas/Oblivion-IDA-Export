@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56BC70",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+deltaSeconds]; Verified BSTempEffect lifetime update: adds deltaSeconds to elapsed +0x10 and returns duration +0x08 >= elapsed. Equality remains alive for that update.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x56BC77",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+deltaSeconds]; BloodOnDeath decode 2026-05-30: BSTempEffect_Update adds deltaSeconds to elapsed at +0x10 and persists while elapsed <= duration at +0x08. Longer decal lifetime directly means blood is left behind longer.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x56BC7B",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },

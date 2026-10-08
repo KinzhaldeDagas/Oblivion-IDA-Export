@@ -1,9 +1,9 @@
-0x570CA0: push    esi
+0x570CA0: push    esi; Verified: computes serialized size for base state, model path, particle transform/position/scale, and optional controller state.
 0x570CA1: mov     esi, ecx
 0x570CA3: mov     ecx, ds:0B33B00h
 0x570CA9: push    edi
 0x570CAA: xor     edi, edi
-0x570CAC: call    sub_45A170
+0x570CAC: call    TESSaveLoadGame_UseSaveGameBlocks
 0x570CB1: test    al, al
 0x570CB3: jz      short loc_570CBA
 0x570CB5: mov     edi, 6
@@ -13,7 +13,6 @@
 0x570CC5: mov     eax, [esi+1Ch]
 0x570CC8: lea     edi, [eax+1]
 0x570CCB: jmp     short loc_570CD0
-0x570CCD: align 10h
 0x570CD0: mov     cl, [eax]
 0x570CD2: add     eax, 1
 0x570CD5: test    cl, cl
@@ -53,7 +52,7 @@
 0x570D33: jz      short loc_570D75
 0x570D35: mov     eax, [esi]
 0x570D37: push    eax; a1
-0x570D38: call    TESForm_LookupByFormID
+0x570D38: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x570D3D: mov     ecx, [esi+5]
 0x570D40: mov     edx, [eax]
 0x570D42: add     esp, 4

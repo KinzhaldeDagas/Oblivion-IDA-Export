@@ -1,4 +1,4 @@
-0x67ACA0: sub     esp, 10h
+0x67ACA0: sub     esp, 10h; [Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.
 0x67ACA3: push    ebx
 0x67ACA4: push    ebp
 0x67ACA5: push    esi
@@ -15,7 +15,7 @@
 0x67ACCA: jnz     short loc_67ACD4
 0x67ACCC: mov     bl, 1
 0x67ACCE: jmp     short loc_67ACD6
-0x67ACD0: mov     esi, [esp+20h+arg_0]
+0x67ACD0: mov     esi, [esp+20h+deltaSeconds]
 0x67ACD4: xor     bl, bl
 0x67ACD6: test    byte ptr [esp+20h+var_10], 1
 0x67ACDB: jz      short loc_67ACFE
@@ -37,12 +37,12 @@
 0x67AD06: test    edi, edi
 0x67AD08: mov     bl, 1
 0x67AD0A: jz      loc_67AD9B
-0x67AD10: lea     ecx, [esp+20h+var_8]
-0x67AD14: push    ecx
-0x67AD15: mov     ecx, edi
-0x67AD17: call    sub_677C70
+0x67AD10: lea     ecx, [esp+20h+outData]
+0x67AD14: push    ecx; outData
+0x67AD15: mov     ecx, edi; this
+0x67AD17: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x67AD1C: mov     esi, [eax]
-0x67AD1E: mov     eax, [esp+20h+var_8]
+0x67AD1E: mov     eax, [esp+20h+outData]
 0x67AD22: test    eax, eax
 0x67AD24: jz      short loc_67AD45
 0x67AD26: mov     ebp, eax
@@ -64,12 +64,12 @@
 0x67AD4C: test    esi, esi
 0x67AD4E: jz      short loc_67AD86
 0x67AD50: mov     edx, [esi]
-0x67AD52: fld     [esp+20h+arg_0]
+0x67AD52: fld     [esp+20h+deltaSeconds]
 0x67AD56: mov     eax, [edx+50h]
 0x67AD59: push    ecx
 0x67AD5A: mov     ecx, esi
 0x67AD5C: fstp    [esp+24h+var_24]
-0x67AD5F: call    eax
+0x67AD5F: call    eax; BloodOnDeath decode 2026-05-30: primary temp-effect list +0x40 updates ordinary blood decal type 0, geometry decal type 1, and particle type 2 by calling virtual +0x50(effect, deltaSeconds). False return removes the effect.
 0x67AD61: test    al, al
 0x67AD63: jnz     short loc_67AD86
 0x67AD65: push    ecx
@@ -101,7 +101,7 @@
 0x67ADB6: jnz     short loc_67ADC0
 0x67ADB8: mov     bl, 1
 0x67ADBA: jmp     short loc_67ADC2
-0x67ADBC: mov     esi, [esp+20h+arg_0]
+0x67ADBC: mov     esi, [esp+20h+deltaSeconds]
 0x67ADC0: xor     bl, bl
 0x67ADC2: test    byte ptr [esp+20h+var_10], al
 0x67ADC6: jz      short loc_67ADE4
@@ -123,12 +123,12 @@
 0x67ADEE: test    edi, edi
 0x67ADF0: mov     bl, 1
 0x67ADF2: jz      loc_67AE7E
-0x67ADF8: lea     ecx, [esp+20h+var_8]
-0x67ADFC: push    ecx
-0x67ADFD: mov     ecx, edi
-0x67ADFF: call    sub_677C70
+0x67ADF8: lea     ecx, [esp+20h+outData]
+0x67ADFC: push    ecx; outData
+0x67ADFD: mov     ecx, edi; this
+0x67ADFF: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x67AE04: mov     esi, [eax]
-0x67AE06: mov     eax, [esp+20h+var_8]
+0x67AE06: mov     eax, [esp+20h+outData]
 0x67AE0A: test    eax, eax
 0x67AE0C: jz      short loc_67AE31
 0x67AE0E: mov     ebp, eax
@@ -151,12 +151,12 @@
 0x67AE38: test    esi, esi
 0x67AE3A: jz      short loc_67AE6D
 0x67AE3C: mov     edx, [esi]
-0x67AE3E: fld     [esp+20h+arg_0]
+0x67AE3E: fld     [esp+20h+deltaSeconds]
 0x67AE42: mov     eax, [edx+50h]
 0x67AE45: push    ecx
 0x67AE46: mov     ecx, esi
 0x67AE48: fstp    [esp+24h+var_24]
-0x67AE4B: call    eax
+0x67AE4B: call    eax; BloodOnDeath decode 2026-05-30: secondary temp-effect list +0x48 is for type IDs 4..6 (magic/hit effects), not ordinary blood decals.
 0x67AE4D: test    al, al
 0x67AE4F: jnz     short loc_67AE6D
 0x67AE51: push    ecx

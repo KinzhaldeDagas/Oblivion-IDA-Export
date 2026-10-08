@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56CE90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified BSTempEffectGeometryDecal constructor layout (class size 0x54). Stores decalCreationData +0x18, sourceGeometry +0x2C and its parent NiNode +0x30; initializes generated/target geometry and failure state. Stores projection point XYZ at +0x34..+0x3C, orientation vector XYZ at +0x40..+0x48, footprintScale +0x4C and randomRotation +0x50. Geometry-builder code subtracts projectionPoint XYZ from transformed source points and feeds orientationVector XYZ to the rotation-matrix builder; both vectors are now typed floats. +0x24 and +0x34..+0x3C exact caller semantics beyond their observed dataflow are commented at their access sites.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56CEBF",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+parentCell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x56CEC4",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x56CEC7",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56CEC8",
-    "line": "call    BSTempEff_constr",
+    "line": "call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x56CECF",
-    "line": "mov     dword ptr [esi], offset ??_7BSTempEffectGeometryDecal@@6B@; const BSTempEffectGeometryDecal::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7BSTempEffectGeometryDecal@@6B@; ODismemberment authority: geometry decal temp effect constructor stores source geometry, parent, direction, scale, and decal data; build/attach happens via StartOrQueueCreateTask.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x56CEE2",
-    "line": "mov     eax, [esp+24h+arg_8]",
+    "line": "mov     eax, [esp+24h+decalCreationData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x56CF1F",
-    "line": "mov     ebp, [esp+24h+arg_C]",
+    "line": "mov     ebp, [esp+24h+sourceGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,37 +595,37 @@
   },
   {
     "ea": "0x56CF99",
-    "line": "mov     eax, [esp+24h+arg_10]",
+    "line": "mov     eax, [esp+24h+projectionPointX]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x56CF9D",
-    "line": "fld     [esp+24h+arg_28]",
+    "line": "fld     [esp+24h+footprintScale]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x56CFA1",
-    "line": "mov     ecx, [esp+24h+arg_14]",
+    "line": "mov     ecx, [esp+24h+projectionPointY]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x56CFA5",
-    "line": "fstp    dword ptr [esi+4Ch]",
+    "line": "fstp    dword ptr [esi+4Ch]; BloodOnDeath decode 2026-05-30: Geometry decal stores the native fixed decal footprint argument here. Decal_AttachToGeometryRecursive passes flt_A468FC = 15.0.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x56CFA8",
-    "line": "mov     edx, [esp+24h+arg_18]",
+    "line": "mov     edx, [esp+24h+projectionPointZ]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x56CFAC",
-    "line": "fld     [esp+24h+arg_2C]",
+    "line": "fld     [esp+24h+randomRotation]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x56CFB3",
-    "line": "fstp    dword ptr [esi+50h]",
+    "line": "fstp    dword ptr [esi+50h]; BloodOnDeath decode 2026-05-30: Geometry decal stores the random rotation angle here; selector/rotation vary appearance but do not increase decal count.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x56CFB6",
-    "line": "mov     eax, [esp+24h+arg_1C]",
+    "line": "mov     eax, [esp+24h+orientationVectorX]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x56CFBD",
-    "line": "mov     ecx, [esp+24h+arg_20]",
+    "line": "mov     ecx, [esp+24h+orientationVectorY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x56CFC7",
-    "line": "mov     edx, [esp+24h+arg_24]",
+    "line": "mov     edx, [esp+24h+orientationVectorZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -748,5 +748,113 @@
     "line": "retn    30h ; '0'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BDA80",
+    "line": "mov     ecx, [ebp-10h]; self",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA83",
+    "line": "jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA88",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA8B",
+    "line": "add     ecx, 1Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA8E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA93",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA96",
+    "line": "add     ecx, 2Ch ; ','; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDA99",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDA9E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDAA1",
+    "line": "add     ecx, 30h ; '0'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDAA4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDAA9",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BDAAD",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDAB0",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDAB3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BDAB5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDABA",
+    "line": "mov     eax, offset stru_AE7390",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDABF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

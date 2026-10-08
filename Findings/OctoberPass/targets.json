@@ -1,0 +1,52 @@
+{
+  "output": "Findings/OctoberPass",
+  "baseline_commit": "da3207c4be770b8d83f3afc8066adb406c75b41d",
+  "function_patterns": [
+    "*BSTempEffect*",
+    "*BSTECreateTask*",
+    "DECAL_DATA_*",
+    "ActorProcessManager_*TempEffect*",
+    "*NiParallelUpdateTaskManager*",
+    "BSShaderLightingProperty_AddDecalData",
+    "BSShaderLightingProperty_RemoveDecalData",
+    "BSShaderProperty_AppendDecalPassesByBatch",
+    "BSShaderPPLightingProperty_BuildInheritedLightPasses",
+    "Lighting30ShaderProperty_BuildRenderPasses",
+    "GeometryDecalShaderProperty_BuildRenderPasses",
+    "NiTPointerList_RemoveByData",
+    "NiTPointerList_RemoveNode",
+    "ReturnLiteral1",
+    "ReturnLiteral3"
+  ],
+  "function_addresses": ["0x56BD40", "0x56BE40", "0x7EE440", "0x7EE4F0", "0x478300", "0x69D990", "0x6F7070", "0x7B4920"],
+  "types": [
+    "DECAL_DATA",
+    "NiTPointerListNode_DECAL_DATA_t",
+    "NiTPointerList_DecalDataLayout_t",
+    "BSTempEffect",
+    "BSTempEffectVtbl",
+    "BSTempEffectDecalLayout_t",
+    "BSTempEffectGeometryDecalLayout_t",
+    "BSTECreateTask_Layout_t",
+    "BSShaderLightingPropertyLayout_t",
+    "BSTempEffectParticle",
+    "OB_ShaderPassControl_010201A0_t"
+  ],
+  "data": [
+    {"ea": "0xA6813C", "slots": 22},
+    {"ea": "0xA681AC", "slots": 26},
+    {"ea": "0xA6822C", "slots": 26},
+    {"ea": "0xA6851C", "slots": 26},
+    {"ea": "0xA686CC", "slots": 26},
+    {"ea": "0xA95A1C", "slots": 24},
+    {"name": "bAsyncGeometryDecalCreateGate_0B3A690"},
+    {"name": "bNiParallelWaitFallback_0B3F944"},
+    {"name": "g_NiParallelUpdateTaskManager"},
+    {"name": "OB_ShaderPassControl_010201A0"}
+  ],
+  "fallout_reference": {
+    "endpoint": "http://127.0.0.1:56184/mcp",
+    "functions": ["0x8222D8B0", "0x822748B0", "0x822E68C8", "0x822E8208", "0x822E8288", "0x828CECC8"],
+    "types": ["BSShaderLightingProperty", "ExtraDecalRefs", "BGSDecalManager"]
+  }
+}

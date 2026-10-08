@@ -1,17 +1,16 @@
-char __thiscall sub_56BD80(_DWORD *this)
+// Verified base save path writes duration, elapsed and owning-cell FormID (0 when absent). Derived particle save delegates here.
+bool __thiscall BSTempEffect_SaveGame(BSTempEffect *self)
 {
-  int v2; // esi
-  size_t v4; // [esp-4h] [ebp-Ch]
-  size_t v5; // [esp-4h] [ebp-Ch]
-  int v6; // [esp+4h] [ebp-4h] BYREF
+  TESObjectCELL *parentCell; // esi
+  bool result; // al
+  unsigned int source; // [esp+4h] [ebp-4h] BYREF
 
-  LODWORD(v4) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 2, v4);
-  LODWORD(v5) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 4, v5);
-  v2 = *(this + 3);
-  v6 = 0;
-  if ( v2 )
-    v6 = *(_DWORD *)(v2 + 0xC);
-  return SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v6, 4u);
+  SaveLoad_SaveData(g_TESSaveLoadGame, &self->durationSeconds, 4u); /*0x56bd90*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &self->elapsedSeconds, 4u); /*0x56bda1*/
+  parentCell = self->parentCell; /*0x56bda6*/
+  source = 0; /*0x56bdab*/
+  if ( parentCell ) /*0x56bdb3*/
+    source = parentCell->members.super.refID; /*0x56bdb8*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, &source, 4u); /*0x56bdc9*/
+  return result; /*0x56bdce*/
 }

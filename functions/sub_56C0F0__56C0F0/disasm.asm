@@ -1,4 +1,4 @@
-0x56C0F0: push    0FFFFFFFFh
+0x56C0F0: push    0FFFFFFFFh; [Verified] DECAL_DATA_ReleaseOwnedReferences decrements/releases sourceTexture_00 and targetShaderProperty_48. Directly confirmed by its DECAL_DATA-list owner and by BSTempEffectDecal/BSTempEffectGeometryDecal destructors, which free a 0x4C payload immediately afterward.
 0x56C0F2: push    offset SEH_56C0F0
 0x56C0F7: mov     eax, large fs:0
 0x56C0FD: push    eax
@@ -54,3 +54,12 @@
 0x56C17B: pop     ebx
 0x56C17C: add     esp, 10h
 0x56C17F: retn
+0x9C7530: mov     ecx, [ebp-10h]; slot
+0x9C7533: jmp     NiPointerSlot_Release
+0x9C7538: mov     edx, [esp+arg_4]
+0x9C753C: lea     eax, [edx-10h]
+0x9C753F: mov     ecx, [edx-14h]
+0x9C7542: xor     ecx, eax
+0x9C7544: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7549: mov     eax, offset stru_AEF980
+0x9C754E: jmp     ___CxxFrameHandler3

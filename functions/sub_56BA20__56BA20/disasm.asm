@@ -1,4 +1,4 @@
-0x56BA20: push    0FFFFFFFFh
+0x56BA20: push    0FFFFFFFFh; [Verified] Grows the BSTECreateTask free-item stack and appends each available 0x10-byte task slot to it; its only caller is BSTECreateTaskPool_Pop when the pool is empty.
 0x56BA22: push    offset ??0bhkNiTriStripsShape@@QAE@XZ_SEH
 0x56BA27: mov     eax, large fs:0
 0x56BA2D: push    eax
@@ -24,7 +24,7 @@
 0x56BA5F: mov     ecx, [esp+24h+arg_0]
 0x56BA63: push    ecx
 0x56BA64: mov     ecx, eax
-0x56BA66: call    sub_56B920
+0x56BA66: call    BSTECreateTaskPool_CreateBlock; [Verified] Allocates a pool block of 0x10-byte BSTECreateTask items and initializes each with BSTECreateTask_Ctor, paired with BSTECreateTask_Dtor for array destruction.
 0x56BA6B: mov     ecx, eax
 0x56BA6D: mov     [esp+24h+var_10], ecx
 0x56BA71: jmp     short loc_56BA79
@@ -72,3 +72,15 @@
 0x56BAE7: pop     ebx
 0x56BAE8: add     esp, 10h
 0x56BAEB: retn    4
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

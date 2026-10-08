@@ -2,8 +2,8 @@ BSTempEffectParticle *__thiscall BSTempEffectParticle::`scalar deleting destruct
         BSTempEffectParticle *this,
         char a2)
 {
-  BSTempEffectParticle::~BSTempEffectParticle(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  BSTempEffectParticle_Destructor(this); /*0x5708d3*/
+  if ( (a2 & 1) != 0 ) /*0x5708dd*/
+    FormHeapFree((unsigned int)this); /*0x5708e0*/
+  return this; /*0x5708ea*/
 }

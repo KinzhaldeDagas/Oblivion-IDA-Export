@@ -1,0 +1,43 @@
+{
+  "addr": "0x822748B0",
+  "asm": "?GetDecalRefs@ExtraDataList@@QAAPAV?$BSSimpleList@PAUREF_DECAL_DATA@@@@XZ (.text @ 0x822748b0):\n822748b0  mflr r12, lr\n822748b4  stw r12, var_8(r1)\n822748b8  stwu r1, sender_sp(r1)\n822748bc  li r4, 0x57\n822748c0  bl _GetExtraData_BaseExtraList__QAAPAVBSExtraData__E_Z\n822748c4  cmplwi cr6, r3, 0\n822748c8  addi r3, r3, 0xC\n822748cc  bne cr6, loc_822748D4\n822748d0  li r3, 0\n822748d4  addi r1, r1, 0x60\n822748d8  lwz r12, var_8(r1)\n822748dc  mtlr lr, r12\n822748e0  blr lr",
+  "code": "BSExtraData *__fastcall ExtraDataList::GetDecalRefs(ExtraDataList *this)\n{\n  BSExtraData *ExtraData; // r3\n  BSExtraData *result; // r3\n  bool v3; // zf\n\n  ExtraData = BaseExtraList::GetExtraData(this, 0x57u); /*0x822748c0*/\n  v3 = ExtraData != nullptr; /*0x822748cc*/\n  result = ExtraData + 1; /*0x822748c8*/\n  if ( !v3 ) /*0x822748cc*/\n    return nullptr; /*0x822748d0*/\n  return result; /*0x822748d4*/\n}",
+  "comments": {
+    "0x822748bc": {
+      "regular": "acType"
+    }
+  },
+  "name": "?GetDecalRefs@ExtraDataList@@QAAPAV?$BSSimpleList@PAUREF_DECAL_DATA@@@@XZ",
+  "prototype": "BSExtraData *__fastcall(ExtraDataList *this)",
+  "size": "0x34",
+  "xrefs": {
+    "from": [
+      {
+        "addr": "0x822748b4",
+        "type": "code"
+      }
+    ],
+    "to": [
+      {
+        "addr": "0x82295c70",
+        "type": "code"
+      },
+      {
+        "addr": "0x822eb880",
+        "type": "code"
+      },
+      {
+        "addr": "0x82389414",
+        "type": "code"
+      },
+      {
+        "addr": "0x8238c4b8",
+        "type": "code"
+      },
+      {
+        "addr": "0x821877e8",
+        "type": "data"
+      }
+    ]
+  }
+}

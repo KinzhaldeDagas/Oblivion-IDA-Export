@@ -1,9 +1,9 @@
-0x56B8D0: push    edi
+0x56B8D0: push    edi; [Verified] BSTECreateTask vtable +0x4C Run. A nonnull taskController_0C is invoked through virtual +0x4C only while bNiParallelWaitFallback_0B3F944 is clear. That normal execution path releases/clears the controller. With fallback set, Run skips both invocation and that local release; its final vtable +0x54 ReturnToPool dispatch releases/clears any remaining reference and returns the task to the pool.
 0x56B8D1: mov     edi, ecx
 0x56B8D3: mov     ecx, [edi+0Ch]
 0x56B8D6: test    ecx, ecx
 0x56B8D8: jz      short loc_56B916
-0x56B8DA: cmp     byte ptr ds:0B3F944h, 0
+0x56B8DA: cmp     byte ptr ds:0B3F944h, 0; 3DTheft decode 2026-05-16: BSTECreateTask::Run skips the wrapped task vfunc +0x4C when byte_B3F944 is set by the manager wait helper.
 0x56B8E1: jnz     short loc_56B916
 0x56B8E3: mov     eax, [ecx]
 0x56B8E5: mov     edx, [eax+4Ch]

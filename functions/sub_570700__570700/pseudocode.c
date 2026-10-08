@@ -1,8 +1,8 @@
-NiObject *__thiscall sub_570700(NiObject *this)
+BSTempEffectParticle *__thiscall BSTempEffectParticle_DefaultInit(BSTempEffectParticle *self)
 {
-  BSTempEff_constr(this, 0, 0.0);
-  this->__vftable = (NiObjectVtbl *)&BSTempEffectParticle::`vftable';
-  *((_DWORD *)this + 6) = 0;
-  *((_DWORD *)this + 7) = 0;
-  return this;
+  BSTempEffect_Constructor(&self->base, 0, 0.0); /*0x570733*/
+  self->base.vtable = &BSTempEffectParticle::`vftable'; /*0x570738*/
+  self->particleNode = 0; /*0x570742*/
+  self->modelPath = 0; /*0x570771*/
+  return self; /*0x570774*/
 }

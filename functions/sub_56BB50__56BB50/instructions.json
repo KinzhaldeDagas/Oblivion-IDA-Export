@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56BB50",
-    "line": "push    esi",
+    "line": "push    esi; [Verified] BSTECreateTask vtable slot 21 (+0x54): releases/clears taskController_0C, pushes this task back onto the protected BSTECreateTask free-item stack via BSTECreateTaskPool_Push, then returns true.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x56BB7E",
-    "line": "push    edi",
+    "line": "push    edi; task",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56BB7F",
-    "line": "call    sub_56BAF0",
+    "line": "call    BSTECreateTaskPool_Push; [Verified] Pushes a completed BSTECreateTask back onto the shared free-item stack under unk_B3A600 critical section.",
     "mnemonic": "call",
     "size": 5
   },

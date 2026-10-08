@@ -1,4 +1,4 @@
-0x679480: sub     esp, 14h
+0x679480: sub     esp, 14h; Verified temp-effect serialized size pass. Starts at two bytes for effect count; walks manager lists +0x40 and +0x48; for each IsSaveable (+0x58) effect adds one type byte plus virtual GetSaveSize (+0x5C). This size is consumed by TESSaveLoadGame_SaveTempEffectsList.
 0x679483: push    ebx
 0x679484: push    ebp
 0x679485: push    esi
@@ -36,12 +36,12 @@
 0x6794F1: call    eax
 0x6794F3: cmp     [esp+24h+var_11], 0
 0x6794F8: jnz     short loc_67955D
-0x6794FA: lea     ecx, [esp+24h+var_8]
-0x6794FE: push    ecx
-0x6794FF: mov     ecx, esi
-0x679501: call    sub_677C70
+0x6794FA: lea     ecx, [esp+24h+outData]
+0x6794FE: push    ecx; outData
+0x6794FF: mov     ecx, esi; this
+0x679501: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x679506: mov     ebp, [eax]
-0x679508: mov     eax, [esp+24h+var_8]
+0x679508: mov     eax, [esp+24h+outData]
 0x67950C: test    eax, eax
 0x67950E: jz      short loc_67952E
 0x679510: mov     edi, eax
@@ -104,9 +104,9 @@
 0x6795B3: cmp     [esp+24h+var_11], 0
 0x6795B8: jnz     short loc_67961D
 0x6795BA: lea     ecx, [esp+24h+var_4]
-0x6795BE: push    ecx
-0x6795BF: mov     ecx, edi
-0x6795C1: call    sub_677C70
+0x6795BE: push    ecx; outData
+0x6795BF: mov     ecx, edi; this
+0x6795C1: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x6795C6: mov     ebp, [eax]
 0x6795C8: mov     eax, [esp+24h+var_4]
 0x6795CC: test    eax, eax

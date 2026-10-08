@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67A8C0",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; [Verified] Called by TESObjectCELL_Deactivate. Removes active and extended temp effects whose BSTempEffect parentCell field at +0x0C equals the unloading cell, irrespective of remaining duration, then releases the list's reference. Thus decal lifetime survives normal updates but not unloading its owning cell.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -397,25 +397,25 @@
   },
   {
     "ea": "0x67A97F",
-    "line": "lea     ecx, [esp+28h+var_C]",
+    "line": "lea     ecx, [esp+28h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67A983",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67A984",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67A986",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x67A98D",
-    "line": "mov     eax, [esp+28h+var_C]",
+    "line": "mov     eax, [esp+28h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x67A9BB",
-    "line": "jnz     short loc_67A9ED",
+    "line": "jnz     short loc_67A9ED; BloodOnDeath decode 2026-05-30: temp effects tied to this cell are removed on cell unload regardless of duration; long decal lifetime means persists while cell stays loaded/unreset, not across unload cleanup.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1033,25 +1033,25 @@
   },
   {
     "ea": "0x67AAAC",
-    "line": "lea     ecx, [esp+28h+var_C]",
+    "line": "lea     ecx, [esp+28h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67AAB0",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67AAB1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67AAB3",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x67AABA",
-    "line": "mov     eax, [esp+28h+var_C]",
+    "line": "mov     eax, [esp+28h+outData]",
     "mnemonic": "mov",
     "size": 4
   },

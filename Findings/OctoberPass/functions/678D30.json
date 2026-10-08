@@ -1,0 +1,62 @@
+{
+  "address_comment_regular": "[Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
+  "address_comment_repeatable": "",
+  "chunks": [
+    [
+      "0x678D30",
+      "0x678D84"
+    ]
+  ],
+  "folder": "sub_678D30__678D30",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 2,
+    "callers_count": 26,
+    "chunks_sha256": "7d7670a5ed0d800443a420f70f2fbcdba04c9c75dbc9bea476d61e283b0f25e3",
+    "comment_regular": "[Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
+    "comment_repeatable": "[Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
+    "data_refs_count": 0,
+    "display_name": "ActorProcessManager_RegisterTempEffect",
+    "end_ea": "0x678D84",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "ActorProcessManager_RegisterTempEffect",
+    "segment": ".text",
+    "sha256": "7d7670a5ed0d800443a420f70f2fbcdba04c9c75dbc9bea476d61e283b0f25e3",
+    "size": 84,
+    "start_ea": "0x678D30",
+    "total_chunk_size": 84,
+    "type": "void __thiscall(ActorProcessManager *self, BSTempEffect *effect)",
+    "xrefs_from_count": 35,
+    "xrefs_to_count": 26
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x678D30",
+      "regular": "[Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x678D49",
+      "regular": "BloodOnDeath decode 2026-05-30: RegisterTempEffect routes type IDs 4..6 to manager list +0x48; ordinary decals are type 0/1 and particles are type 2, so blood decals update through the primary list +0x40.",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x678D59",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x678D70",
+      "regular": "lpAddend",
+      "repeatable": ""
+    }
+  ]
+}

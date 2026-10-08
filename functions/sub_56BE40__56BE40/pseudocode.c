@@ -1,4 +1,4 @@
-void *sub_56BE40()
+BSStringT *sub_56BE40()
 {
-  return &unk_B3A688;
+  return &NiRTTI_BSTempEffectDecal; /*0x56be45*/
 }

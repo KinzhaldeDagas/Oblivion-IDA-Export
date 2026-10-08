@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5713F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x57141D",
-    "line": "fld     [esp+50h+arg_4]",
+    "line": "fld     [esp+50h+durationSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x571421",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+parentCell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x571426",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+var_54]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x571429",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57142A",
-    "line": "call    BSTempEff_constr",
+    "line": "call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x571474",
-    "line": "mov     esi, [esp+50h+arg_C]",
+    "line": "mov     esi, [esp+50h+modelPath]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x571483",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: BSTempEffectParticle loads model data through the shared ModelLoader, then either asks TES for a cached clone or clones the loaded object directly.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x571488",
-    "line": "cmp     byte ptr [esp+50h+arg_2C], 0",
+    "line": "cmp     [esp+50h+useCachedClone], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5714A0",
-    "line": "call    sub_441760",
+    "line": "call    TES_GetCachedModelClone; ODismemberment: TES cached-model lookup used by BSTempEffectParticle when useTESCachedInstance is true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x5714CF",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5714D1",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,25 +547,25 @@
   },
   {
     "ea": "0x5714F1",
-    "line": "fstp    dword ptr [ebx+8]",
+    "line": "fstp    dword ptr [ebx+8]; BloodOnDeath decode 2026-05-30: particle temp-effect duration is overwritten with the max controller span found in the cloned particle NIF tree. Visual squirt lifetime is model/controller-driven, not fDecalLifetime:Display.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5714F4",
-    "line": "fld     [esp+50h+arg_10]",
+    "line": "fld     [esp+50h+directionX]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5714F8",
-    "line": "fld     [esp+50h+arg_14]",
+    "line": "fld     [esp+50h+directionY]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5714FC",
-    "line": "fld     [esp+50h+arg_18]",
+    "line": "fld     [esp+50h+directionZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x571512",
-    "line": "fstp    [esp+50h+arg_2C]",
+    "line": "fstp    dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x571519",
-    "line": "fld     [esp+50h+arg_2C]",
+    "line": "fld     dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x571525",
-    "line": "fstp    [esp+50h+arg_2C]",
+    "line": "fstp    dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -649,25 +649,25 @@
   },
   {
     "ea": "0x571530",
-    "line": "fld     [esp+50h+arg_2C]",
+    "line": "fld     dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x571537",
-    "line": "call    sub_98598A",
+    "line": "call    sub_98598A; BloodOnDeath decode 2026-05-30: first atan2-like angle is based on horizontal length sqrt(dirX^2+dirY^2) and dirZ; stored negated as pitch for the particle model orientation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x57153C",
-    "line": "fstp    [esp+50h+arg_2C]",
+    "line": "fstp    dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x571543",
-    "line": "fld     [esp+50h+arg_2C]",
+    "line": "fld     dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -703,31 +703,31 @@
   },
   {
     "ea": "0x571558",
-    "line": "fld     [esp+58h+arg_10]",
+    "line": "fld     [esp+58h+directionX]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x57155C",
-    "line": "fld     [esp+58h+arg_14]",
+    "line": "fld     [esp+58h+directionY]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x571560",
-    "line": "call    sub_98598A",
+    "line": "call    sub_98598A; BloodOnDeath decode 2026-05-30: second atan2-like angle is horizontal yaw from normalized dirY/dirX. More outward squirt should feed a stronger horizontal direction before this constructor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x571565",
-    "line": "fstp    [esp+58h+arg_2C]",
+    "line": "fstp    dword ptr [esp+58h+useCachedClone]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x57156C",
-    "line": "fld     [esp+58h+arg_2C]",
+    "line": "fld     dword ptr [esp+58h+useCachedClone]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x57157B",
-    "line": "call    sub_7118E0",
+    "line": "call    sub_7118E0; BloodOnDeath decode 2026-05-30: builds the particle local rotation matrix from yaw, zero middle rotation, and pitch; direction is orientation-only here, no additional outward force is applied.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x571580",
-    "line": "fld     [esp+50h+arg_28]",
+    "line": "fld     [esp+50h+scale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -775,25 +775,25 @@
   },
   {
     "ea": "0x571589",
-    "line": "mov     ecx, [esp+50h+arg_1C]",
+    "line": "mov     ecx, [esp+50h+localPosX]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x57158D",
-    "line": "fstp    [esp+50h+arg_2C]",
+    "line": "fstp    dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x571594",
-    "line": "mov     edx, [esp+50h+arg_20]",
+    "line": "mov     edx, [esp+50h+unknownChildTag]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x571598",
-    "line": "fld     [esp+50h+arg_2C]",
+    "line": "fld     dword ptr [esp+50h+useCachedClone]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x5715A2",
-    "line": "mov     ecx, [esp+50h+arg_24]",
+    "line": "mov     ecx, [esp+50h+unknownChildName]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5715C3",
-    "line": "mov     ecx, [esp+50h+arg_8]",
+    "line": "mov     ecx, [esp+50h+parentNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x5715C9",
-    "line": "mov     eax, [eax+84h]",
+    "line": "mov     eax, [eax+84h]; ODismemberment: attaches the loaded/cloned particle model to the supplied NiNode parent with NiNode::AddObject. This gives a visual detached-NIF path, but ownership/lifetime remains temp-effect based.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x5715DD",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; ODismemberment: initializes properties and updates the attached temp-effect model after AddObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x5715F1",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x5715FC",
-    "line": "call    sub_570A30",
+    "line": "call    BSTempEffectParticle_AdjustTextureTransforms",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x571605",
-    "line": "call    sub_715B40",
+    "line": "call    NiObjectNET_StartControllersRecursive; ODismemberment: starts controllers recursively on the attached temp-effect model. No separate Havok world insertion has been observed here yet.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1066,5 +1066,77 @@
     "line": "retn    30h ; '0'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BDD30",
+    "line": "mov     ecx, [ebp-3Ch]; self",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD33",
+    "line": "jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDD38",
+    "line": "mov     ecx, [ebp-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD3B",
+    "line": "add     ecx, 18h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD3E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDD43",
+    "line": "mov     edx, [esp+durationSeconds]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BDD47",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD4A",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD4D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BDD4F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDD54",
+    "line": "mov     eax, offset stru_AE75AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDD59",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,12 +1,13 @@
-bool __thiscall sub_56CCE0(int this, float a2)
-{
+// [Verified] BSTempEffectGeometryDecal_Update delegates lifetime to BSTempEffect_Update and writes elapsedSeconds/durationSeconds to DECAL_DATA.fadeProgress_40; creationFailed at +0x28 forces immediate expiry.
+bool __thiscall BSTempEffectGeometryDecal_Update(BSTempEffectGeometryDecalLayout_t *this, float deltaSeconds)
+{                                               // BloodOnDeath decode 2026-05-30: geometry decal update immediately expires when the creation-failed byte at +0x28 is set.
   bool result; // al
   float v4; // [esp+Ch] [ebp+4h]
 
-  if ( *(_BYTE *)(this + 0x28) )
-    return 0;
-  result = sub_56BC70((float *)this, a2);
-  v4 = *(float *)(this + 0x10) / *(float *)(this + 8);
-  *(float *)(*(_DWORD *)(this + 0x18) + 0x40) = v4;
-  return result;
+  if ( this->creationFailed_28 ) /*0x56cce3*/
+    return 0; /*0x56cce9*/
+  result = BSTempEffect_Update(&this->base, deltaSeconds);// BloodOnDeath decode 2026-05-30: geometry decal update uses the same BSTempEffect elapsed <= duration rule as fallback decals, then writes fade progress to decal data +0x40. /*0x56ccf7*/
+  v4 = this->base.elapsedSeconds / this->base.durationSeconds; /*0x56cd06*/
+  this->decalCreationData_18->fadeProgress_40 = v4; /*0x56cd0e*/
+  return result; /*0x56cceb*/
 }

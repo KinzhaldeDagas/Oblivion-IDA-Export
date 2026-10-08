@@ -1,4 +1,4 @@
-0x56BAF0: push    offset stru_B3A600; lpCriticalSection
+0x56BAF0: push    offset unk_B3A600; [Verified] Pushes a completed BSTECreateTask back onto the shared free-item stack under unk_B3A600 critical section.
 0x56BAF5: call    dword ptr ds:0A2806Ch
 0x56BAFB: call    dword ptr ds:0A2808Ch
 0x56BB01: add     dword ptr ds:0B3A67Ch, 1
@@ -12,6 +12,6 @@
 0x56BB24: sub     dword ptr ds:0B3A67Ch, 1
 0x56BB2B: jnz     short loc_56BB37
 0x56BB2D: mov     dword ptr ds:0B3A678h, 0
-0x56BB37: push    offset stru_B3A600; lpCriticalSection
+0x56BB37: push    offset unk_B3A600; lpCriticalSection
 0x56BB3C: call    dword ptr ds:0A28074h
 0x56BB42: retn

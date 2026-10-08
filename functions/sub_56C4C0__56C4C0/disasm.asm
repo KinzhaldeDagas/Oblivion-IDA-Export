@@ -1,4 +1,4 @@
-0x56C4C0: push    0FFFFFFFFh
+0x56C4C0: push    0FFFFFFFFh; [Verified] BSTempEffectDecal_LoadGame allocates a 0x4C DECAL_DATA payload, reloads its source texture into +0, restores transform/vector/reference fields, resolves a NiProperty* at +0x48 from the saved geometry/property index, then calls BSShaderLightingProperty_AddDecalData on that property. This is the save-load re-registration path.
 0x56C4C2: push    offset SEH_56C4C0
 0x56C4C7: mov     eax, large fs:0
 0x56C4CD: push    eax
@@ -18,16 +18,16 @@
 0x56C4FB: mov     ebp, ecx
 0x56C4FD: mov     ecx, ds:0B33B00h
 0x56C503: xor     ebx, ebx
-0x56C505: mov     dword ptr [esp+15Ch+var_144], ebx
+0x56C505: mov     dword ptr [esp+15Ch+destination], ebx
 0x56C509: mov     [esp+15Ch+var_134], ebx
-0x56C50D: call    sub_45A170
+0x56C50D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x56C512: test    al, al
 0x56C514: jz      loc_56C5B7
-0x56C51A: mov     ecx, ds:0B33B00h
-0x56C520: push    4; Size
+0x56C51A: mov     ecx, ds:0B33B00h; self
+0x56C520: push    4; byteCount
 0x56C522: lea     eax, [esp+160h+Dst]
-0x56C526: push    eax; Dst
-0x56C527: call    SaveLoad_LoadData
+0x56C526: push    eax; destination
+0x56C527: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x56C52C: cmp     [esp+15Ch+Dst], 4B4F4C42h
 0x56C534: jz      short loc_56C59E
 0x56C536: mov     eax, ds:0B33B00h
@@ -36,7 +36,7 @@
 0x56C543: jz      short loc_56C582
 0x56C545: mov     ecx, [esi]
 0x56C547: push    ecx; a1
-0x56C548: call    TESForm_LookupByFormID
+0x56C548: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56C54D: mov     edx, [esi+5]
 0x56C550: movzx   ecx, byte ptr [esi+9]
 0x56C554: add     esp, 4
@@ -62,17 +62,17 @@
 0x56C591: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x56C596: call    PrintError
 0x56C59B: add     esp, 10h
-0x56C59E: mov     ecx, ds:0B33B00h
+0x56C59E: mov     ecx, ds:0B33B00h; self
 0x56C5A4: mov     eax, [ecx+14h]
-0x56C5A7: push    2; Size
-0x56C5A9: lea     edx, [esp+160h+var_144]
-0x56C5AD: push    edx; Dst
+0x56C5A7: push    2; byteCount
+0x56C5A9: lea     edx, [esp+160h+destination]
+0x56C5AD: push    edx; destination
 0x56C5AE: mov     [esp+164h+var_134], eax
-0x56C5B2: call    SaveLoad_LoadData
-0x56C5B7: mov     ecx, ebp
-0x56C5B9: call    sub_56BCA0
+0x56C5B2: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x56C5B7: mov     ecx, ebp; self
+0x56C5B9: call    BSTempEffect_LoadGame; Verified base load path reads duration, elapsed and parent-cell FormID; resolves FormID, RTTI-casts to TESObjectCELL, stores at +0x0C, and succeeds only if the cell has a NiNode.
 0x56C5BE: push    4Ch ; 'L'; Size
-0x56C5C0: mov     byte ptr [esp+160h+var_148+3], al
+0x56C5C0: mov     byte ptr [esp+160h+var_148+3], al; BloodOnDeath decode 2026-05-30: fallback decal load starts with base duration/elapsed/cell; restore fails if owning cell has no loaded NiNode.
 0x56C5C4: call    FormHeapAlloc
 0x56C5C9: add     esp, 4
 0x56C5CC: cmp     eax, ebx
@@ -83,24 +83,24 @@
 0x56C5D7: xor     eax, eax
 0x56C5D9: mov     [ebp+18h], eax
 0x56C5DC: mov     ecx, ds:0B33B00h
-0x56C5E2: lea     eax, [esp+15Ch+var_114]
+0x56C5E2: lea     eax, [esp+15Ch+path]
 0x56C5E6: push    eax; Dst
 0x56C5E7: call    sub_45A290
 0x56C5EC: test    eax, eax
 0x56C5EE: jz      short loc_56C648
-0x56C5F0: push    ebx; char
-0x56C5F1: push    ebx; char
-0x56C5F2: lea     ecx, [esp+164h+var_114]
-0x56C5F6: push    ecx; ArgList
+0x56C5F0: push    ebx; searchArchives
+0x56C5F1: push    ebx; allowMissing
+0x56C5F2: lea     ecx, [esp+164h+path]
+0x56C5F6: push    ecx; path
 0x56C5F7: mov     ecx, ds:0B333A0h
-0x56C5FD: lea     edx, [esp+168h+var_128]
-0x56C601: push    edx; int
-0x56C602: call    sub_442890
-0x56C607: mov     ecx, [ebp+18h]
-0x56C60A: push    eax
+0x56C5FD: lea     edx, [esp+168h+outTexture]
+0x56C601: push    edx; outTexture
+0x56C602: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x56C607: mov     ecx, [ebp+18h]; this
+0x56C60A: push    eax; incoming
 0x56C60B: mov     [esp+160h+var_4], ebx
-0x56C612: call    sub_55E2A0
-0x56C617: mov     eax, [esp+15Ch+var_128]
+0x56C612: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x56C617: mov     eax, [esp+15Ch+outTexture]
 0x56C61B: cmp     eax, ebx
 0x56C61D: mov     [esp+15Ch+var_4], 0FFFFFFFFh
 0x56C628: jz      short loc_56C648
@@ -121,61 +121,61 @@
 0x56C64B: cmp     [eax], ebx
 0x56C64D: jnz     short loc_56C654
 0x56C64F: mov     byte ptr [esp+160h+var_14C+3], 0
-0x56C654: mov     ecx, ds:0B33B00h
-0x56C65A: push    4; Size
+0x56C654: mov     ecx, ds:0B33B00h; self
+0x56C65A: push    4; byteCount
 0x56C65C: add     eax, 4
-0x56C65F: push    eax; Dst
-0x56C660: call    SaveLoad_LoadData
-0x56C665: mov     ecx, ds:0B33B00h
-0x56C66B: push    10h; Size
-0x56C66D: lea     eax, [esp+164h+var_128]
-0x56C671: push    eax; Dst
-0x56C672: call    SaveLoad_LoadData
+0x56C65F: push    eax; destination
+0x56C660: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x56C665: mov     ecx, ds:0B33B00h; self
+0x56C66B: push    10h; byteCount
+0x56C66D: lea     eax, [esp+164h+outTexture]
+0x56C671: push    eax; destination
+0x56C672: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x56C677: mov     ecx, [ebp+18h]
 0x56C67A: add     ecx, 8
 0x56C67D: push    ecx
-0x56C67E: lea     ecx, [esp+164h+var_128]
+0x56C67E: lea     ecx, [esp+164h+outTexture]
 0x56C682: call    sub_47C600
 0x56C687: mov     edx, [ebp+18h]
-0x56C68A: mov     ecx, ds:0B33B00h
-0x56C690: push    0Ch; Size
+0x56C68A: mov     ecx, ds:0B33B00h; self
+0x56C690: push    0Ch; byteCount
 0x56C692: add     edx, 2Ch ; ','
-0x56C695: push    edx; Dst
-0x56C696: call    SaveLoad_LoadData
+0x56C695: push    edx; destination
+0x56C696: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x56C69B: mov     eax, [ebp+18h]
-0x56C69E: mov     ecx, ds:0B33B00h
-0x56C6A4: push    4; Size
+0x56C69E: mov     ecx, ds:0B33B00h; self
+0x56C6A4: push    4; byteCount
 0x56C6A6: add     eax, 38h ; '8'
-0x56C6A9: push    eax; Dst
-0x56C6AA: call    SaveLoad_LoadData
+0x56C6A9: push    eax; destination
+0x56C6AA: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x56C6AF: mov     ecx, [ebp+18h]
 0x56C6B2: add     ecx, 3Ch ; '<'
-0x56C6B5: push    4; Size
-0x56C6B7: push    ecx; Dst
-0x56C6B8: mov     ecx, ds:0B33B00h
-0x56C6BE: call    SaveLoad_LoadFormID
+0x56C6B5: push    4; byteCount
+0x56C6B7: push    ecx; destination
+0x56C6B8: mov     ecx, ds:0B33B00h; self
+0x56C6BE: call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.
 0x56C6C3: mov     edx, [ebp+18h]
-0x56C6C6: mov     ecx, ds:0B33B00h
-0x56C6CC: push    4; Size
+0x56C6C6: mov     ecx, ds:0B33B00h; self
+0x56C6CC: push    4; byteCount
 0x56C6CE: add     edx, 40h ; '@'
-0x56C6D1: push    edx; Dst
-0x56C6D2: call    SaveLoad_LoadData
+0x56C6D1: push    edx; destination
+0x56C6D2: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x56C6D7: mov     eax, [ebp+18h]
-0x56C6DA: mov     ecx, ds:0B33B00h
-0x56C6E0: push    1; Size
+0x56C6DA: mov     ecx, ds:0B33B00h; self
+0x56C6E0: push    1; byteCount
 0x56C6E2: add     eax, 44h ; 'D'
-0x56C6E5: push    eax; Dst
-0x56C6E6: call    SaveLoad_LoadData
-0x56C6EB: push    4; Size
+0x56C6E5: push    eax; destination
+0x56C6E6: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x56C6EB: push    4; byteCount
 0x56C6ED: lea     ecx, [esp+16Ch+var_14C]
-0x56C6F1: push    ecx; Dst
-0x56C6F2: mov     ecx, ds:0B33B00h
-0x56C6F8: call    SaveLoad_LoadData
-0x56C6FD: mov     ecx, ds:0B33B00h
-0x56C703: push    4; Size
-0x56C705: lea     edx, [esp+16Ch+var_144]
-0x56C709: push    edx; Dst
-0x56C70A: call    SaveLoad_LoadData
+0x56C6F1: push    ecx; destination
+0x56C6F2: mov     ecx, ds:0B33B00h; self
+0x56C6F8: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x56C6FD: mov     ecx, ds:0B33B00h; self
+0x56C703: push    4; byteCount
+0x56C705: lea     edx, [esp+16Ch+destination]
+0x56C709: push    edx; destination
+0x56C70A: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x56C70F: mov     eax, [ebp+18h]
 0x56C712: mov     eax, [eax+3Ch]
 0x56C715: xor     edi, edi
@@ -186,7 +186,7 @@
 0x56C721: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x56C726: push    ebx; int
 0x56C727: push    eax; a1
-0x56C728: call    TESForm_LookupByFormID
+0x56C728: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56C72D: add     esp, 4
 0x56C730: push    eax; void *
 0x56C731: call    OblivionDynamicCast
@@ -197,10 +197,10 @@
 0x56C742: jz      short loc_56C749
 0x56C744: mov     ebx, [edi+3Ch]
 0x56C747: jmp     short loc_56C760
-0x56C749: mov     ecx, [ebp+0Ch]; this
+0x56C749: mov     ecx, [ebp+0Ch]; object
 0x56C74C: cmp     ecx, ebx
 0x56C74E: jz      loc_56C913
-0x56C754: call    TESObjectCELL_GetNiNode?
+0x56C754: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x56C759: mov     ebx, eax
 0x56C75B: mov     byte ptr [esp+168h+var_148], 1
 0x56C760: test    ebx, ebx
@@ -217,11 +217,11 @@
 0x56C786: add     esp, 0Ch
 0x56C789: cmp     eax, esi
 0x56C78B: jz      loc_56C822
-0x56C791: mov     ecx, ds:0B333C4h
+0x56C791: mov     ecx, ds:0B333C4h; this
 0x56C797: cmp     edi, ecx
 0x56C799: jnz     short loc_56C7BA
-0x56C79B: push    1
-0x56C79D: call    PlayerCharacter_GetPlayerNode
+0x56C79B: push    1; firstPerson
+0x56C79D: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x56C7A2: mov     edx, [esp+168h+var_148]
 0x56C7A6: push    edx
 0x56C7A7: mov     ebx, eax
@@ -269,7 +269,7 @@
 0x56C817: mov     [esp+168h+var_151], 0
 0x56C81C: jnz     loc_56C918
 0x56C822: mov     ecx, [esp+168h+var_148]
-0x56C826: mov     edx, dword ptr [esp+168h+var_144]
+0x56C826: mov     edx, dword ptr [esp+168h+destination]
 0x56C82A: push    ecx
 0x56C82B: push    1
 0x56C82D: push    edx
@@ -286,7 +286,7 @@
 0x56C84A: mov     ecx, edi
 0x56C84C: call    edx
 0x56C84E: push    eax
-0x56C84F: mov     eax, dword ptr [esp+16Ch+var_144]
+0x56C84F: mov     eax, dword ptr [esp+16Ch+destination]
 0x56C853: push    esi
 0x56C854: push    eax
 0x56C855: push    offset aCouldNotFin_15; "Could not find geometry with index %i o"...
@@ -298,7 +298,7 @@
 0x56C86C: mov     eax, [edx+0D4h]
 0x56C872: mov     esi, [ecx+0Ch]
 0x56C875: call    eax
-0x56C877: mov     ecx, dword ptr [esp+168h+var_144]
+0x56C877: mov     ecx, dword ptr [esp+168h+destination]
 0x56C87B: push    eax
 0x56C87C: push    esi
 0x56C87D: push    ecx
@@ -311,12 +311,12 @@
 0x56C891: mov     esi, eax
 0x56C893: push    4
 0x56C895: mov     ecx, esi
-0x56C897: call    NiNode_GetNiPropertyByID
+0x56C897: call    NiNode_GetNiPropertyByID;
 0x56C89C: test    eax, eax
 0x56C89E: jz      short loc_56C8D9
 0x56C8A0: push    4
 0x56C8A2: mov     ecx, esi
-0x56C8A4: call    NiNode_GetNiPropertyByID
+0x56C8A4: call    NiNode_GetNiPropertyByID;
 0x56C8A9: mov     edx, [eax]
 0x56C8AB: mov     ecx, eax
 0x56C8AD: mov     eax, [edx+54h]
@@ -325,7 +325,7 @@
 0x56C8B5: jl      short loc_56C8D9
 0x56C8B7: push    4
 0x56C8B9: mov     ecx, esi
-0x56C8BB: call    NiNode_GetNiPropertyByID
+0x56C8BB: call    NiNode_GetNiPropertyByID;
 0x56C8C0: mov     edx, [eax]
 0x56C8C2: mov     ecx, eax
 0x56C8C4: mov     eax, [edx+54h]
@@ -334,7 +334,7 @@
 0x56C8CC: jg      short loc_56C8D9
 0x56C8CE: push    4
 0x56C8D0: mov     ecx, esi
-0x56C8D2: call    NiNode_GetNiPropertyByID
+0x56C8D2: call    NiNode_GetNiPropertyByID;
 0x56C8D7: jmp     short loc_56C8DB
 0x56C8D9: xor     eax, eax
 0x56C8DB: mov     ecx, [ebp+18h]
@@ -349,7 +349,7 @@
 0x56C8F8: mov     esi, [edi+0Ch]
 0x56C8FB: mov     ecx, edi
 0x56C8FD: call    eax
-0x56C8FF: mov     ecx, dword ptr [esp+168h+var_144]
+0x56C8FF: mov     ecx, dword ptr [esp+168h+destination]
 0x56C903: push    eax
 0x56C904: push    esi
 0x56C905: push    ecx; ArgList
@@ -358,7 +358,7 @@
 0x56C910: add     esp, 10h
 0x56C913: mov     [esp+168h+var_151], 0
 0x56C918: mov     ecx, ds:0B33B00h
-0x56C91E: call    sub_45A170
+0x56C91E: call    TESSaveLoadGame_UseSaveGameBlocks
 0x56C923: test    al, al
 0x56C925: jz      loc_56CA29
 0x56C92B: mov     ecx, ds:0B33B00h
@@ -368,7 +368,7 @@
 0x56C93C: jz      loc_56C9DB
 0x56C942: mov     edx, [edi]
 0x56C944: push    edx; a1
-0x56C945: call    TESForm_LookupByFormID
+0x56C945: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56C94A: mov     ebx, [esp+16Ch+var_140]
 0x56C94E: mov     ecx, eax
 0x56C950: movzx   eax, [esp+16Ch+var_150]
@@ -445,10 +445,10 @@
 0x56CA29: mov     bl, [esp+168h+var_151]
 0x56CA2D: test    bl, bl
 0x56CA2F: mov     ebp, [ebp+18h]
-0x56CA32: jz      short loc_56CA3F
-0x56CA34: mov     ecx, [ebp+48h]
-0x56CA37: push    ebp
-0x56CA38: call    sub_7EE3E0
+0x56CA32: jz      short loc_56CA3F; BloodOnDeath decode 2026-05-30: successful fallback decal load reattaches decal data to the resolved shader property; otherwise the property ref is released.
+0x56CA34: mov     ecx, [ebp+48h]; this
+0x56CA37: push    ebp; data
+0x56CA38: call    BSShaderLightingProperty_AddDecalData; [Verified] Appends DECAL_DATA* to this BSShaderLightingProperty's list at +0x80: allocates a node through the list allocator vfunc, stores data at node+8, links at tail, and increments numItems at +0x8C. Resets the base BSShaderProperty cached render-pass state at +0x24. Called by BSTempEffectDecal_Ctor, BSTempEffectDecal_LoadGame, and BSTempEffectGeometryDecal_BuildGeneratedGeometry.
 0x56CA3D: jmp     short loc_56CA6C
 0x56CA3F: mov     esi, [ebp+48h]
 0x56CA42: add     ebp, 48h ; 'H'
@@ -480,3 +480,16 @@
 0x56CA8A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x56CA8F: add     esp, 148h
 0x56CA95: retn
+0x9BD9C0: lea     ecx, [ebp-128h]; slot
+0x9BD9C6: jmp     NiPointerSlot_Release
+0x9BD9CB: mov     edx, [esp+arg_4]
+0x9BD9CF: lea     eax, [edx-14Ch]
+0x9BD9D5: mov     ecx, [edx-150h]
+0x9BD9DB: xor     ecx, eax
+0x9BD9DD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD9E2: add     eax, 10h
+0x9BD9E5: mov     ecx, [edx-4]
+0x9BD9E8: xor     ecx, eax
+0x9BD9EA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD9EF: mov     eax, offset stru_AE72DC
+0x9BD9F4: jmp     ___CxxFrameHandler3

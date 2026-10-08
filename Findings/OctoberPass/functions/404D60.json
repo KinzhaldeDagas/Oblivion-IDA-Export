@@ -1,0 +1,80 @@
+{
+  "address_comment_regular": "[Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
+  "address_comment_repeatable": "MEF PERF 2026-09-07: Performance audit negative result: waits through WaitForSingleObject, including an infinite blocking wait after timeout/count condition. The observed body is not a busy-spin loop. No performance patch proposed without profiling and semaphore lifecycle proof.",
+  "chunks": [
+    [
+      "0x404D60",
+      "0x404DC9"
+    ]
+  ],
+  "folder": "sub_404D60__404D60",
+  "function": {
+    "analysis_pass": "OctoberPass",
+    "callees_count": 0,
+    "callers_count": 4,
+    "chunks_sha256": "c5e738356353d0c39d4b7786ff16856f52f8541076b629079798557b07a9e71e",
+    "comment_regular": "[Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
+    "comment_repeatable": "[Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.\n\nMEF PERF 2026-09-07: Performance audit negative result: waits through WaitForSingleObject, including an infinite blocking wait after timeout/count condition. The observed body is not a busy-spin loop. No performance patch proposed without profiling and semaphore lifecycle proof.",
+    "data_refs_count": 9,
+    "display_name": "NiParallelUpdateTaskManager_WaitForSignal",
+    "end_ea": "0x404DC9",
+    "evidence_confidence": "Verified",
+    "flags": 21504,
+    "has_pseudocode": true,
+    "name": "NiParallelUpdateTaskManager_WaitForSignal",
+    "segment": ".text",
+    "sha256": "c5e738356353d0c39d4b7786ff16856f52f8541076b629079798557b07a9e71e",
+    "size": 105,
+    "start_ea": "0x404D60",
+    "total_chunk_size": 105,
+    "type": "int __cdecl(DWORD dwMilliseconds)",
+    "xrefs_from_count": 48,
+    "xrefs_to_count": 4
+  },
+  "function_comment_regular": "",
+  "function_comment_repeatable": "[Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
+  "instruction_comments": [
+    {
+      "confidence": "Verified",
+      "ea": "0x404D60",
+      "regular": "[Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
+      "repeatable": "MEF PERF 2026-09-07: Performance audit negative result: waits through WaitForSingleObject, including an infinite blocking wait after timeout/count condition. The observed body is not a busy-spin loop. No performance patch proposed without profiling and semaphore lifecycle proof."
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x404D82",
+      "regular": "dwMilliseconds",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x404D83",
+      "regular": "hHandle",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x404D93",
+      "regular": "lpAddend",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x404DB4",
+      "regular": "dwMilliseconds",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x404DB6",
+      "regular": "hHandle",
+      "repeatable": ""
+    },
+    {
+      "confidence": "Unknown",
+      "ea": "0x404DC0",
+      "regular": "lpAddend",
+      "repeatable": ""
+    }
+  ]
+}

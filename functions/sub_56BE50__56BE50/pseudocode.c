@@ -1,19 +1,20 @@
-float *__thiscall sub_56BE50(
-        float *this,
-        int a2,
-        float a3,
-        int a4,
-        float *a5,
+// [Verified] BSTempEffectDecal_Ctor registers its DECAL_DATA payload with the BSShaderLightingProperty held at payload+0x48 by calling BSShaderLightingProperty_AddDecalData. The same property/payload pair is later unregistered by the destructor.
+BSTempEffectDecalLayout_t *__thiscall BSTempEffectDecal_Ctor(
+        BSTempEffectDecalLayout_t *this,
+        TESObjectCELL *parentCell,
+        float durationSeconds,
+        DECAL_DATA *decalData,
+        float *sourceData,
         float a6,
         float a7,
         float a8,
-        char a9,
+        int a9,
         int a10,
         int a11,
         int a12,
         float a13)
 {
-  float *v14; // eax
+  float *unkVector_2C; // eax
   double v15; // st7
   __int64 v17; // [esp-20h] [ebp-12Ch]
   float v18; // [esp+18h] [ebp-F4h]
@@ -23,37 +24,43 @@ float *__thiscall sub_56BE50(
   float v22[3]; // [esp+30h] [ebp-DCh] BYREF
   float v23[4]; // [esp+3Ch] [ebp-D0h] BYREF
   float v24[9]; // [esp+4Ch] [ebp-C0h] BYREF
-  float v25[9]; // [esp+70h] [ebp-9Ch] BYREF
-  float v26[9]; // [esp+94h] [ebp-78h] BYREF
+  NiMatrix33 right; // [esp+70h] [ebp-9Ch] BYREF
+  NiMatrix33 v26; // [esp+94h] [ebp-78h] BYREF
   float v27[9]; // [esp+B8h] [ebp-54h] BYREF
-  float v28[12]; // [esp+DCh] [ebp-30h] BYREF
+  NiMatrix33 out; // [esp+DCh] [ebp-30h] BYREF
+  int v29; // [esp+108h] [ebp-4h]
 
-  LODWORD(v23[3]) = this;
-  BSTempEff_constr((NiObject *)this, a2, a3);
-  v28[0xB] = 0.0;
-  *(_DWORD *)this = &BSTempEffectDecal::`vftable';
-  *((_DWORD *)this + 6) = a4;
-  sub_718A50((float *)(a4 + 8));
-  qmemcpy(v27, a5 + 0x19, sizeof(v27));
-  sub_7103C0(v27, v24);
-  sub_7107A0(v24, 1, (int)&a9, (int)v22);
-  v23[0] = a6 - a5[0x22];
-  HIDWORD(v17) = &Vector3_InitValue_;
-  LODWORD(v17) = v24;
-  v23[1] = a7 - a5[0x23];
-  v23[2] = a8 - a5[0x24];
-  sub_710580(v17, 1, (int)v23, (int)v21);
-  qmemcpy(v25, sub_6F9290(v28, v22[0], v22[1], v22[2]), sizeof(v25));
-  NiMatrix33_InitRotationTransform(v26, a13);
-  qmemcpy((void *)(*((_DWORD *)this + 6) + 8), NiMAtrix33_Multiply(v26, v28, v25), 0x24u);
-  v18 = -v21[0];
-  v14 = (float *)(*((_DWORD *)this + 6) + 0x2C);
-  v19 = -v21[1];
-  v15 = v21[2];
-  *v14 = v18;
-  v14[1] = v19;
-  v20 = -v15;
-  v14[2] = v20;
-  sub_7EE3E0(*(_DWORD **)(*((_DWORD *)this + 6) + 0x48), *((_DWORD *)this + 6));
-  return this;
+  LODWORD(v23[3]) = this; /*0x56be7f*/
+  BSTempEffect_Constructor(&this->base, parentCell, durationSeconds); /*0x56be96*/
+  v29 = 0; /*0x56bea5*/
+  this->base.vtable = &BSTempEffectDecal::`vftable'; /*0x56beb0*/
+  this->decalData_18 = decalData; /*0x56beb6*/
+  sub_718A50(decalData->rotationMatrix33_08); /*0x56beb9*/
+  qmemcpy(v27, sourceData + 0x19, sizeof(v27)); /*0x56bed4*/
+  sub_7103C0(v27, v24); /*0x56bee2*/
+  sub_7107A0(v24, 1u, (int)&a9, (int)v22); /*0x56befb*/
+  v23[0] = a6 - sourceData[0x22]; /*0x56bf17*/
+  HIDWORD(v17) = &g_zeroNiPoint3; /*0x56bf2e*/
+  LODWORD(v17) = v24; /*0x56bf33*/
+  v23[1] = a7 - sourceData[0x23]; /*0x56bf34*/
+  v23[2] = a8 - sourceData[0x24]; /*0x56bf45*/
+  sub_710580(v17, 1u, (int)v23, (int)v21); /*0x56bf49*/
+  qmemcpy(&right, sub_6F9290((float *)&out, v22[0], v22[1], v22[2]), sizeof(right)); /*0x56bf8a*/
+  NiMatrix33_InitRotationZ(&v26, a13);          // BloodOnDeath decode 2026-05-30: fallback decal applies a random rotation matrix from the final ctor arg; this is not a size/count control. /*0x56bf96*/
+  qmemcpy( /*0x56bfc1*/
+    this->decalData_18->rotationMatrix33_08,
+    NiMAtrix33_Multiply(&v26, &out, &right),
+    sizeof(this->decalData_18->rotationMatrix33_08));
+  v18 = -v21[0]; /*0x56bfcc*/
+  unkVector_2C = this->decalData_18->unkVector_2C; /*0x56bfda*/
+  v19 = -v21[1]; /*0x56bfdd*/
+  v15 = v21[2]; /*0x56bfe5*/
+  *unkVector_2C = v18; /*0x56bfe9*/
+  unkVector_2C[1] = v19; /*0x56bfed*/
+  v20 = -v15; /*0x56bff0*/
+  unkVector_2C[2] = v20; /*0x56bff8*/
+  BSShaderLightingProperty_AddDecalData( /*0x56c002*/
+    (BSShaderLightingPropertyLayout_t *)this->decalData_18->targetShaderProperty_48,
+    this->decalData_18);
+  return this; /*0x56c009*/
 }

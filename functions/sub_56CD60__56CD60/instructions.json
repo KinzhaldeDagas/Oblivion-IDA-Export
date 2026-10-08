@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x56CD60",
-    "line": "cmp     byte ptr ds:0B3A690h, 0",
+    "line": "cmp     byte ptr ds:0B3A690h, 0; [Verified] The byte bAsyncGeometryDecalCreateGate_0B3A690 selects queued versus synchronous creation: nonzero attempts to pop/submit a BSTECreateTask; zero or failed submission dispatches BSTECreateTask_ReturnToPool if needed, then calls BSTempEffectGeometryDecal::Initialize synchronously. Initialization/writers of the gate remain Unknown.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x56CD6D",
-    "line": "call    sub_56BB90",
+    "line": "call    BSTECreateTaskPool_Pop; [Verified] Pops one BSTECreateTask pointer from the protected free-item stack. Its only direct caller is BSTempEffectGeometryDecal_StartOrQueueCreateTask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x56CD80",
-    "line": "mov     ecx, ds:0B3F940h",
+    "line": "mov     ecx, ds:0B3F940h; [Verified] g_NiParallelUpdateTaskManager virtual +0x4C receives BSTECreateTask with mode 1. Successful return leaves the task queued; failure takes the task vtable +0x54 BSTECreateTask_ReturnToPool path before synchronous Initialize.",
     "mnemonic": "mov",
     "size": 6
   },

@@ -1,4 +1,5 @@
-void __thiscall sub_56BD30(_BYTE *this)
+// Verified BSTempEffect default Initialize virtual at vtable +0x4C: sets BSTempEffect.initializeCallbackDone (+0x14) true. Constructor initializes it false; destructor resets it.
+void __thiscall BSTempEffect_Initialize(BSTempEffect *self)
 {
-  *(this + 0x14) = 1;
+  self->initializeCallbackDone = 1; /*0x56bd30*/
 }

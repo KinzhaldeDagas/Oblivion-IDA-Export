@@ -1,4 +1,4 @@
-0x404D60: mov     eax, dword_B3F940
+0x404D60: mov     eax, dword ptr g_NiParallelUpdateTaskManager; [Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.
 0x404D65: test    eax, eax
 0x404D67: jz      short loc_404DC6
 0x404D69: mov     ecx, [eax+198h]
@@ -18,8 +18,8 @@
 0x404D94: call    ebx ; InterlockedDecrement
 0x404D96: cmp     eax, 1
 0x404D99: jnz     short loc_404DC3
-0x404D9B: mov     esi, dword_B3F940
-0x404DA1: mov     byte_B3F944, 1
+0x404D9B: mov     esi, dword ptr g_NiParallelUpdateTaskManager; Verified pointer, not a universal threading-enable boolean: 404D60 waits on manager+198 and adjusts counter+190; 404DD0 reads pending flag+1B0. NiRenderer_Render checks it at 40C8F7/40D059; main update checks it at 40DB4E/40DEC6. Null excludes this parallel update manager, but does not prove all IO, resource-reference, pool or external writer exclusion for a DX11 bucket transaction.
+0x404DA1: mov     bNiParallelWaitFallback_0B3F944, 1
 0x404DA8: mov     edx, [esi+198h]
 0x404DAE: add     esi, 190h
 0x404DB4: push    0FFFFFFFFh; dwMilliseconds
