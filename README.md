@@ -6,6 +6,22 @@ The goal of this project is to make the database easier to browse, search, diff,
 
 This is not original game source code. It is a structured analysis export intended for research, documentation, reverse engineering, and long-term preservation work.
 
+## Reproducing the export
+
+The repository includes [`scripts/ida_repo_exporter.py`](scripts/ida_repo_exporter.py), a standard-library Python client for the live IDA MCP HTTP endpoint provided by `ida_multi_mcp`. It reads the currently open database and writes the structured export without opening, closing, or managing the IDA process. Keep the target database open and pass its MCP URL and expected executable name explicitly:
+
+```powershell
+python scripts/ida_repo_exporter.py `
+  --endpoint http://127.0.0.1:56185/mcp `
+  --expected-binary Oblivion.exe `
+  --output . `
+  --overwrite
+```
+
+The client checks the active database path before writing. It exports functions, assembly, pseudocode, instruction/xref records, named globals, imports, segments, and local type declarations. Function batches are checkpointed to disk; rerun with `--resume` to skip already completed functions. The script refuses to replace an output directory containing `manifest.json` unless `--overwrite` is passed. Use `--limit-functions 2 --output <temporary-folder>` for a small smoke export. The endpoint defaults to the local Oblivion instance above; change it when connecting to another IDA database. The script does not export executable bytes.
+
+The exporter intentionally uses the existing repository structure and does not delete stale output directories. Compare the generated diff before committing a new database snapshot.
+
 ---
 
 ## What this repository includes
